@@ -1,0 +1,548 @@
+/* ============================================
+   完整内容轮播Banner - 每张幻灯片独立内容
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+}
+
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    background: #000;
+}
+
+/* ============================================
+   轮播容器 - 每张幻灯片完整独立
+   ============================================ */
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+    pointer-events: none;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+/* 背景图片 */
+.slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.slide-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1);
+    transition: transform 10s ease-out;
+}
+
+.carousel-slide.active .slide-background img {
+    transform: scale(1.08);
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        rgba(0, 0, 0, 0.85) 0%, 
+        rgba(0, 0, 0, 0.5) 60%, 
+        rgba(0, 0, 0, 0.2) 100%
+    );
+}
+
+/* ============================================
+   幻灯片内容层 - 每张独立
+   ============================================ */
+
+.slide-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+}
+
+/* 内容卡片容器 */
+.content-wrapper {
+    max-width: 1400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+/* 左侧文字内容 */
+.content-left {
+    flex: 1;
+    max-width: 650px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide.active .content-left {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+
+/* 标签 */
+.content-tag {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(255, 107, 53, 0.15);
+    border: 1px solid rgba(255, 107, 53, 0.3);
+    border-radius: 20px;
+    font-size: 13px;
+    color: #FF6B35;
+    font-weight: 600;
+    margin-bottom: 25px;
+    letter-spacing: 0.5px;
+}
+
+/* 主标题 */
+.content-title {
+    font-size: 58px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.content-title .highlight {
+    background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.content-title .subtitle-text {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgba(255, 107, 53, 0.8);
+    margin-top: 12px;
+    letter-spacing: 0.5px;
+}
+
+/* 描述 */
+.content-desc {
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 35px;
+}
+
+/* 能力标签列表 */
+.skill-list {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+}
+
+.skill-item {
+    padding: 8px 18px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+    background: rgba(255, 107, 53, 0.2);
+    border-color: rgba(255, 107, 53, 0.4);
+    color: #FF6B35;
+}
+
+/* 按钮组 */
+.content-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 32px;
+    background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 25px rgba(255, 107, 53, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 35px rgba(255, 107, 53, 0.5);
+}
+
+.btn-primary svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover svg {
+    transform: translateX(4px);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 32px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* 作品预览小卡片 */
+.works-preview {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.preview-item {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.preview-item:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 107, 53, 0.5);
+    box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+}
+
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 右侧图片（部分幻灯片使用） */
+.content-right {
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-slide.active .content-right {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.5s;
+}
+
+.content-right img {
+    max-width: 400px;
+    height: auto;
+    border-radius: 20px;
+}
+
+/* ============================================
+   控制元素
+   ============================================ */
+
+/* 左右箭头 */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.carousel-control:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-50%) scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.carousel-control.prev {
+    left: 35px;
+}
+
+.carousel-control.next {
+    right: 35px;
+}
+
+.carousel-control svg {
+    width: 26px;
+    height: 26px;
+    stroke-width: 2.5;
+}
+
+/* 底部指示器 */
+.carousel-indicators {
+    position: absolute;
+    bottom: 45px;
+    left: 80px;
+    display: flex;
+    gap: 14px;
+    z-index: 100;
+}
+
+.indicator {
+    width: 45px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.25);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+}
+
+.indicator.active {
+    background: #ffffff;
+    width: 70px;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.indicator:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* 暂停/播放按钮 */
+.carousel-pause {
+    position: absolute;
+    bottom: 45px;
+    right: 80px;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.carousel-pause:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.carousel-pause svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ============================================
+   响应式设计
+   ============================================ */
+
+@media (max-width: 1200px) {
+    .content-wrapper {
+        gap: 40px;
+    }
+    
+    .content-title {
+        font-size: 48px;
+    }
+    
+    .content-right img {
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .slide-content {
+        padding: 0 50px;
+    }
+    
+    .content-title {
+        font-size: 42px;
+    }
+    
+    .carousel-indicators,
+    .carousel-pause {
+        left: 50px;
+        right: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-carousel {
+        min-height: 600px;
+    }
+    
+    .slide-content {
+        padding: 0 30px;
+    }
+    
+    .slide-overlay {
+        background: linear-gradient(180deg, 
+            rgba(0, 0, 0, 0.75) 0%, 
+            rgba(0, 0, 0, 0.88) 100%
+        );
+    }
+    
+    .content-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .content-left {
+        max-width: 100%;
+    }
+    
+    .content-title {
+        font-size: 36px;
+    }
+    
+    .content-desc {
+        font-size: 16px;
+    }
+    
+    .content-right {
+        display: none;
+    }
+    
+    .carousel-control {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .carousel-control.prev {
+        left: 20px;
+    }
+    
+    .carousel-control.next {
+        right: 20px;
+    }
+    
+    .carousel-indicators {
+        left: 30px;
+        bottom: 30px;
+    }
+    
+    .carousel-pause {
+        right: 30px;
+        bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-title {
+        font-size: 28px;
+    }
+    
+    .content-desc {
+        font-size: 14px;
+    }
+    
+    .skill-list {
+        gap: 8px;
+    }
+    
+    .skill-item {
+        font-size: 12px;
+        padding: 6px 14px;
+    }
+    
+    .content-actions {
+        flex-direction: column;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .indicator {
+        width: 35px;
+        height: 3px;
+    }
+    
+    .indicator.active {
+        width: 55px;
+    }
+}

@@ -1,0 +1,56 @@
+/* 
+ * 回到顶部悬浮按钮 - 极简风格
+ * 简洁设计 · 无多余动画 · 响应式适配
+ */
+
+.back-to-top {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top svg {
+    width: 20px;
+    height: 20px;
+    fill: #333;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+    }
+    
+    .back-to-top svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+

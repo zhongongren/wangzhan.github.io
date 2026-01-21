@@ -1,0 +1,267 @@
+/* ========================================
+   Before/After 滑动对比组件
+   ======================================== */
+
+.comparison-slider {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  cursor: ew-resize;
+  user-select: none;
+}
+
+/* 容器 */
+.comparison-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+/* Before 图片 (底层) */
+.comparison-before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.comparison-before img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* After 图片 (上层,可裁剪) */
+.comparison-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  clip-path: inset(0 50% 0 0);
+  transition: clip-path 0.05s ease;
+}
+
+.comparison-after img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 标签 */
+.comparison-label {
+  position: absolute;
+  top: 20px;
+  padding: 10px 20px;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.comparison-label.before {
+  left: 20px;
+}
+
+.comparison-label.after {
+  right: 20px;
+}
+
+/* 成本标签特殊样式 */
+.comparison-label .cost {
+  display: block;
+  font-size: 1.2rem;
+  margin-top: 5px;
+  color: #FF6B35;
+}
+
+.comparison-label .savings {
+  color: #10b981;
+}
+
+/* 滑动手柄 */
+.comparison-handle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background: white;
+  transform: translateX(-50%);
+  z-index: 3;
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* 手柄圆形按钮 */
+.comparison-handle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  background: white;
+  border: 3px solid #FF6B35;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
+  cursor: ew-resize;
+}
+
+/* 手柄箭头 */
+.comparison-handle::after {
+  content: '⇄';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  color: #FF6B35;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* 悬停效果 */
+.comparison-handle::before {
+  transition: all 0.3s ease;
+}
+
+.comparison-slider:hover .comparison-handle::before {
+  width: 56px;
+  height: 56px;
+  border-color: #ff8c5a;
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+/* 拖动状态 */
+.comparison-slider.dragging .comparison-handle::before {
+  width: 56px;
+  height: 56px;
+  border-color: #ff8c5a;
+}
+
+.comparison-slider.dragging {
+  cursor: grabbing;
+}
+
+/* 底部说明文字 */
+.comparison-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 16px 16px;
+  margin-top: -5px;
+}
+
+.comparison-caption-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.comparison-caption-label {
+  font-size: 0.8rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.comparison-caption-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.comparison-caption-value.highlight {
+  color: #10b981;
+  font-size: 1.3rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .comparison-slider {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  .comparison-label {
+    top: 10px;
+    left: 10px !important;
+    right: 10px !important;
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+
+  .comparison-label .cost {
+    font-size: 1rem;
+  }
+
+  .comparison-handle::before {
+    width: 40px;
+    height: 40px;
+  }
+
+  .comparison-handle::after {
+    font-size: 1.2rem;
+  }
+
+  .comparison-caption {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}
+
+/* 动画效果 */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.comparison-slider.animate-in {
+  animation: slideIn 0.6s ease-out;
+}
+
+/* 加载状态 */
+.comparison-slider.loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.comparison-slider.loading::after {
+  content: '加载中...';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  z-index: 10;
+}

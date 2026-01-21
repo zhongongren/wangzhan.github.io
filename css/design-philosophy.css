@@ -1,0 +1,397 @@
+/* ========================================
+   设计理念区块 - 优化版
+   ======================================== */
+
+.design-philosophy-section {
+  padding: 120px 20px;
+  background: linear-gradient(180deg, #000 0%, #0a0a0a 50%, #000 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景装饰 */
+.design-philosophy-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  width: 1000px;
+  height: 1000px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.08) 0%, transparent 70%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.design-philosophy-section::after {
+  content: '';
+  position: absolute;
+  bottom: -50%;
+  left: 50%;
+  width: 1000px;
+  height: 1000px;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* 标题区域 */
+.philosophy-header {
+  text-align: center;
+  margin-bottom: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.philosophy-label {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(102, 126, 234, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.philosophy-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  line-height: 1.2;
+}
+
+.philosophy-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* 主要内容区域 */
+.philosophy-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* 三列布局 */
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 60px;
+  align-items: center;
+  min-height: 500px;
+}
+
+/* 左侧区域 */
+.philosophy-left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-end;
+  padding-right: 40px;
+}
+
+.philosophy-item {
+  text-align: right;
+  max-width: 280px;
+}
+
+.philosophy-item-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 12px;
+  position: relative;
+  display: inline-block;
+}
+
+/* 标题装饰线 */
+.philosophy-item-title::after {
+  content: '';
+  position: absolute;
+  right: -50px;
+  top: 50%;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(102, 126, 234, 0.6), transparent);
+  transform: translateY(-50%);
+}
+
+.philosophy-item-desc {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.8;
+}
+
+/* 中间核心区域 */
+.philosophy-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 60px 0;
+}
+
+.philosophy-core {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* 核心标题 */
+.philosophy-core-title {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 2;
+}
+
+/* 发光效果 */
+.philosophy-core-title::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: blur(20px);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* 关键词网格 */
+.philosophy-keywords {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.philosophy-keyword {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.philosophy-keyword::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.2), transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.5s ease;
+}
+
+.philosophy-keyword:hover::before {
+  width: 200%;
+  height: 200%;
+}
+
+.philosophy-keyword:hover {
+  border-color: rgba(102, 126, 234, 0.6);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.philosophy-keyword-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  position: relative;
+  z-index: 1;
+}
+
+/* 底部说明 */
+.philosophy-description {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  line-height: 1.8;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+/* 右侧区域 */
+.philosophy-right {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-left: 40px;
+}
+
+.philosophy-item.right {
+  text-align: left;
+}
+
+.philosophy-item.right .philosophy-item-title::after {
+  right: auto;
+  left: -50px;
+  background: linear-gradient(270deg, rgba(102, 126, 234, 0.6), transparent);
+}
+
+/* 连接线装饰 */
+.philosophy-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.philosophy-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+  height: 1px;
+  animation: lineFlow 3s ease-in-out infinite;
+}
+
+@keyframes lineFlow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scaleX(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+}
+
+/* 顶部装饰线 */
+.philosophy-decoration-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+}
+
+/* 底部装饰线 */
+.philosophy-decoration-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.3), transparent);
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  .philosophy-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    min-height: auto;
+  }
+
+  .philosophy-left,
+  .philosophy-right {
+    padding: 0;
+    align-items: center;
+  }
+
+  .philosophy-item {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .philosophy-item-title::after {
+    display: none;
+  }
+
+  .philosophy-title {
+    font-size: 2.5rem;
+  }
+
+  .philosophy-core-title {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .design-philosophy-section {
+    padding: 80px 20px;
+  }
+
+  .philosophy-header {
+    margin-bottom: 60px;
+  }
+
+  .philosophy-title {
+    font-size: 2rem;
+  }
+
+  .philosophy-subtitle {
+    font-size: 1rem;
+  }
+
+  .philosophy-core-title {
+    font-size: 1.8rem;
+  }
+
+  .philosophy-keywords {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .philosophy-left,
+  .philosophy-right {
+    gap: 30px;
+  }
+}
+
+/* 滚动触发动画 */
+.philosophy-item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.philosophy-item.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.philosophy-keyword {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.4s ease;
+}
+
+.philosophy-keyword.animate-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.philosophy-keyword:nth-child(1) { transition-delay: 0.1s; }
+.philosophy-keyword:nth-child(2) { transition-delay: 0.2s; }
+.philosophy-keyword:nth-child(3) { transition-delay: 0.3s; }
+.philosophy-keyword:nth-child(4) { transition-delay: 0.4s; }

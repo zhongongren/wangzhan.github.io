@@ -1,0 +1,277 @@
+/* ========================================
+   成功案例数字大屏组件
+   ======================================== */
+
+.stats-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 80px 0;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 数据卡片 */
+.stat-item {
+  position: relative;
+  background: rgba(255, 255, 255, 0.03);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 背景光晕效果 */
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.stat-item:hover::before {
+  opacity: 1;
+}
+
+/* 悬停效果 */
+.stat-item:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 107, 53, 0.5);
+  box-shadow: 0 12px 40px rgba(255, 107, 53, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 数字 */
+.stat-number {
+  display: block;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-number {
+  transform: scale(1.1);
+}
+
+/* 数字后缀(%, +等) */
+.stat-number::after {
+  -webkit-text-fill-color: #FF6B35;
+  background: none;
+}
+
+/* 标签 */
+.stat-label {
+  display: block;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+/* 图标 */
+.stat-icon {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+
+.stat-item:hover .stat-icon {
+  opacity: 0.6;
+  transform: scale(1.1);
+}
+
+/* 不同颜色主题 */
+.stat-item.theme-orange {
+  border-color: rgba(255, 107, 53, 0.3);
+}
+
+.stat-item.theme-orange .stat-number {
+  background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-item.theme-purple {
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.stat-item.theme-purple .stat-number {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-item.theme-green {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.stat-item.theme-green .stat-number {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.stat-item.theme-blue {
+  border-color: rgba(79, 172, 254, 0.3);
+}
+
+.stat-item.theme-blue .stat-number {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 光晕动画 */
+.stat-item.theme-purple::before {
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+}
+
+.stat-item.theme-green::before {
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+}
+
+.stat-item.theme-blue::before {
+  background: radial-gradient(circle, rgba(79, 172, 254, 0.1) 0%, transparent 70%);
+}
+
+/* 副标题 */
+.stat-subtitle {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+/* 进入动画 */
+@keyframes statFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-item {
+  animation: statFadeIn 0.6s ease-out backwards;
+}
+
+.stat-item:nth-child(1) { animation-delay: 0.1s; }
+.stat-item:nth-child(2) { animation-delay: 0.2s; }
+.stat-item:nth-child(3) { animation-delay: 0.3s; }
+.stat-item:nth-child(4) { animation-delay: 0.4s; }
+.stat-item:nth-child(5) { animation-delay: 0.5s; }
+.stat-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .stats-dashboard {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    padding: 60px 20px;
+  }
+
+  .stat-item {
+    padding: 30px 20px;
+  }
+
+  .stat-number {
+    font-size: 3rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+  }
+}
+
+/* 标题区域 */
+.stats-section {
+  padding: 100px 0 60px;
+  text-align: center;
+}
+
+.stats-section-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stats-section-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+  max-width: 800px;
+  margin: 0 auto 60px;
+  line-height: 1.8;
+}
+
+/* 分隔线 */
+.stats-divider {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+  margin: 40px auto;
+  border-radius: 2px;
+}
+
+/* 脉冲动画 */
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(255, 107, 53, 0);
+  }
+}
+
+.stat-item.pulse {
+  animation: pulse 2s infinite, statFadeIn 0.6s ease-out backwards;
+}
+
+/* 数字增长动画 */
+.stat-number.counting {
+  animation: numberGrow 1.5s ease-out;
+}
+
+@keyframes numberGrow {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

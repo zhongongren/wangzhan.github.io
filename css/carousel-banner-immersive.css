@@ -1,0 +1,498 @@
+/* ============================================
+   沉浸式轮播Banner - 文案固定不动效果
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', 'PingFang SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+}
+
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    background: #000;
+}
+
+/* ============================================
+   背景图层 - 轮播切换
+   ============================================ */
+
+.carousel-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    pointer-events: none;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* 背景图片 */
+.slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1);
+    transition: transform 12s ease-out;
+}
+
+.carousel-slide.active .slide-background img {
+    transform: scale(1.1);
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        rgba(0, 0, 0, 0.88) 0%, 
+        rgba(0, 0, 0, 0.6) 50%, 
+        rgba(0, 0, 0, 0.2) 100%
+    );
+}
+
+/* ============================================
+   固定文案层 - 始终不动
+   ============================================ */
+
+.fixed-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+    pointer-events: none;
+}
+
+.project-card {
+    max-width: 620px;
+    color: #ffffff;
+    pointer-events: auto;
+}
+
+/* 标签 */
+.project-tag {
+    display: inline-block;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 25px;
+    font-size: 14px;
+    margin-bottom: 30px;
+    color: #667eea;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(102, 126, 234, 0.25);
+}
+
+/* 标题 */
+.project-title {
+    font-size: 62px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    color: #ffffff;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* 描述 */
+.project-desc {
+    font-size: 20px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 45px;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 数据展示 */
+.project-stats {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 45px;
+}
+
+.stat-item {
+    border-left: 4px solid #667eea;
+    padding-left: 20px;
+}
+
+.stat-value {
+    font-size: 44px;
+    font-weight: 900;
+    color: #667eea;
+    display: block;
+    line-height: 1;
+    margin-bottom: 10px;
+    font-family: 'Inter', 'Arial', sans-serif;
+    text-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+}
+
+.stat-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.65);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 500;
+}
+
+/* CTA按钮 */
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 40px;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 35px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.25);
+}
+
+.project-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.35);
+    background: #f5f5f5;
+}
+
+.project-link svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-link:hover svg {
+    transform: translateX(6px);
+}
+
+/* ============================================
+   控制元素
+   ============================================ */
+
+/* 左右箭头控制 */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.carousel-control:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-50%) scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.carousel-control.prev {
+    left: 35px;
+}
+
+.carousel-control.next {
+    right: 35px;
+}
+
+.carousel-control svg {
+    width: 26px;
+    height: 26px;
+    stroke-width: 2.5;
+}
+
+/* 底部指示器 */
+.carousel-indicators {
+    position: absolute;
+    bottom: 45px;
+    left: 80px;
+    display: flex;
+    gap: 14px;
+    z-index: 20;
+}
+
+.indicator {
+    width: 45px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.25);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0;
+}
+
+.indicator.active {
+    background: #ffffff;
+    width: 70px;
+    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.3);
+}
+
+.indicator:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* 暂停/播放按钮 */
+.carousel-pause {
+    position: absolute;
+    bottom: 45px;
+    right: 80px;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.carousel-pause:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.carousel-pause svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ============================================
+   向下滚动提示
+   ============================================ */
+
+.scroll-hint {
+    position: absolute;
+    bottom: 50%;
+    right: 80px;
+    transform: translateY(50%);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.scroll-hint:hover {
+    opacity: 1;
+}
+
+.scroll-text {
+    writing-mode: vertical-rl;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.scroll-arrow {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.8);
+    animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/* ============================================
+   响应式设计
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .fixed-content {
+        padding: 0 50px;
+    }
+    
+    .project-title {
+        font-size: 52px;
+    }
+    
+    .carousel-indicators,
+    .carousel-pause {
+        left: 50px;
+        right: 50px;
+    }
+    
+    .scroll-hint {
+        right: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-carousel {
+        min-height: 600px;
+    }
+    
+    .fixed-content {
+        padding: 0 30px;
+    }
+    
+    .slide-overlay {
+        background: linear-gradient(180deg, 
+            rgba(0, 0, 0, 0.75) 0%, 
+            rgba(0, 0, 0, 0.88) 100%
+        );
+    }
+    
+    .project-card {
+        max-width: 100%;
+    }
+    
+    .project-title {
+        font-size: 38px;
+    }
+    
+    .project-desc {
+        font-size: 17px;
+        margin-bottom: 35px;
+    }
+    
+    .project-stats {
+        gap: 35px;
+    }
+    
+    .stat-value {
+        font-size: 36px;
+    }
+    
+    .stat-label {
+        font-size: 13px;
+    }
+    
+    .carousel-control {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .carousel-control.prev {
+        left: 20px;
+    }
+    
+    .carousel-control.next {
+        right: 20px;
+    }
+    
+    .carousel-indicators {
+        left: 30px;
+        bottom: 30px;
+    }
+    
+    .carousel-pause {
+        right: 30px;
+        bottom: 30px;
+    }
+    
+    .scroll-hint {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .fixed-content {
+        padding: 0 20px;
+    }
+    
+    .project-title {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+    
+    .project-desc {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+    
+    .project-stats {
+        gap: 25px;
+        flex-wrap: wrap;
+    }
+    
+    .stat-value {
+        font-size: 32px;
+    }
+    
+    .stat-label {
+        font-size: 12px;
+    }
+    
+    .project-link {
+        padding: 15px 32px;
+        font-size: 15px;
+    }
+    
+    .indicator {
+        width: 35px;
+        height: 3px;
+    }
+    
+    .indicator.active {
+        width: 55px;
+    }
+}

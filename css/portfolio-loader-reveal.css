@@ -1,0 +1,275 @@
+/* ========================================
+   作品集加载动画 - 黑色渐显版（升级版）
+   设计理念：
+   1. 展示更多作品（9-12张）
+   2. 黑色逐渐变成图片的渐显效果
+   3. 从黑色蒙版慢慢褪去，露出作品
+   4. 优雅的渐进式动画
+   ======================================== */
+
+/* 加载容器 */
+.portfolio-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1.5s ease, visibility 1.5s ease;
+}
+
+.portfolio-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 网格背景 - 4x3 = 12张作品 */
+.loader-product-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 3px;
+  background: #000;
+  z-index: 1;
+}
+
+/* 网格图片项 - 初始为纯黑色 */
+.loader-grid-item {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.loader-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;  /* 初始透明，模拟从黑色开始 */
+  filter: brightness(0.8);
+}
+
+/* 黑色遮罩层 - 从黑色逐渐消失 */
+.loader-grid-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 2;
+  opacity: 1;
+  animation: revealFromBlack 1.2s ease forwards;
+}
+
+/* 黑色逐渐消失的动画 */
+@keyframes revealFromBlack {
+  0% {
+    opacity: 1;  /* 完全黑色 */
+  }
+  100% {
+    opacity: 0;  /* 黑色消失，显示图片 */
+  }
+}
+
+/* 图片逐渐显现的动画 */
+@keyframes imageReveal {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 为每张图片设置不同的延迟，创建波浪式显现效果 */
+.loader-grid-item:nth-child(1)::before { animation-delay: 0.1s; }
+.loader-grid-item:nth-child(2)::before { animation-delay: 0.2s; }
+.loader-grid-item:nth-child(3)::before { animation-delay: 0.3s; }
+.loader-grid-item:nth-child(4)::before { animation-delay: 0.4s; }
+.loader-grid-item:nth-child(5)::before { animation-delay: 0.5s; }
+.loader-grid-item:nth-child(6)::before { animation-delay: 0.6s; }
+.loader-grid-item:nth-child(7)::before { animation-delay: 0.7s; }
+.loader-grid-item:nth-child(8)::before { animation-delay: 0.8s; }
+.loader-grid-item:nth-child(9)::before { animation-delay: 0.9s; }
+.loader-grid-item:nth-child(10)::before { animation-delay: 1.0s; }
+.loader-grid-item:nth-child(11)::before { animation-delay: 1.1s; }
+.loader-grid-item:nth-child(12)::before { animation-delay: 1.2s; }
+
+/* 图片显现动画的延迟（与黑色消失同步） */
+.loader-grid-item:nth-child(1) img { animation: imageReveal 1.2s ease 0.1s forwards; }
+.loader-grid-item:nth-child(2) img { animation: imageReveal 1.2s ease 0.2s forwards; }
+.loader-grid-item:nth-child(3) img { animation: imageReveal 1.2s ease 0.3s forwards; }
+.loader-grid-item:nth-child(4) img { animation: imageReveal 1.2s ease 0.4s forwards; }
+.loader-grid-item:nth-child(5) img { animation: imageReveal 1.2s ease 0.5s forwards; }
+.loader-grid-item:nth-child(6) img { animation: imageReveal 1.2s ease 0.6s forwards; }
+.loader-grid-item:nth-child(7) img { animation: imageReveal 1.2s ease 0.7s forwards; }
+.loader-grid-item:nth-child(8) img { animation: imageReveal 1.2s ease 0.8s forwards; }
+.loader-grid-item:nth-child(9) img { animation: imageReveal 1.2s ease 0.9s forwards; }
+.loader-grid-item:nth-child(10) img { animation: imageReveal 1.2s ease 1.0s forwards; }
+.loader-grid-item:nth-child(11) img { animation: imageReveal 1.2s ease 1.1s forwards; }
+.loader-grid-item:nth-child(12) img { animation: imageReveal 1.2s ease 1.2s forwards; }
+
+/* 中心遮罩 - 柔和径向渐变 */
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.7) 60%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 内容区 - 居中显示 */
+.loader-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 700px;
+  padding: 60px 40px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: contentFadeIn 1s ease 0.5s forwards;
+  opacity: 0;
+}
+
+@keyframes contentFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* 标题 */
+.loader-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0 0 16px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #FF6B35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+/* 副标题 */
+.loader-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 40px 0;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+/* 进度条容器 */
+.loader-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 0 16px 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 进度条填充 */
+.loader-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FF6B35 0%, #ff8c5a 100%);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+  animation: progressGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes progressGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 107, 53, 0.9);
+  }
+}
+
+/* 进度文字 */
+.loader-progress-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FF6B35;
+  letter-spacing: 0.1em;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+  /* 平板：3x4 = 12张 */
+  .loader-product-bg {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  /* 手机：2x3 = 6张 */
+  .loader-product-bg {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+  }
+  
+  .loader-content {
+    padding: 40px 30px;
+    max-width: 90%;
+  }
+  
+  .loader-title {
+    font-size: 2rem;
+  }
+  
+  .loader-subtitle {
+    font-size: 1rem;
+  }
+  
+  .loader-progress-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-title {
+    font-size: 1.6rem;
+  }
+  
+  .loader-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+  }
+  
+  .loader-content {
+    padding: 30px 20px;
+  }
+}

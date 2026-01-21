@@ -1,0 +1,395 @@
+/* ========================================
+   作品集加载动画 - 优化版（方案A）
+   设计理念：大图全屏 + 简约文字 + 杂志风格
+   ======================================== */
+
+/* 加载容器 */
+.portfolio-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.portfolio-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 产品背景图片 - 全屏 */
+.loader-product-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.loader-product-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  animation: bgZoomIn 20s ease-in-out infinite alternate;
+}
+
+@keyframes bgZoomIn {
+  0% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+/* 渐变遮罩层 - 从上到下 */
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  z-index: 2;
+}
+
+/* 内容区 - 居中 */
+.loader-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 700px;
+  padding: 40px;
+  animation: contentSlideUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+@keyframes contentSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 加载标题 */
+.loader-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 15px;
+  text-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.6),
+    0 2px 4px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  animation: titleFadeIn 0.8s ease 0.6s forwards;
+}
+
+@keyframes titleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 加载副标题 */
+.loader-subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  margin-bottom: 40px;
+  text-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  animation: subtitleFadeIn 0.8s ease 0.8s forwards;
+}
+
+@keyframes subtitleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 进度条容器 */
+.loader-progress-bar {
+  width: 100%;
+  max-width: 500px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  animation: progressBarFadeIn 0.8s ease 1s forwards;
+}
+
+@keyframes progressBarFadeIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+/* 进度条填充 - 橙色主题 */
+.loader-progress-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    #FF6B35 0%,
+    #F7931E 100%
+  );
+  border-radius: 10px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 0 20px rgba(255, 107, 53, 0.6),
+    0 0 40px rgba(255, 107, 53, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 进度条光泽效果 */
+.loader-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.5) 50%, 
+    transparent 100%
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+/* 进度百分比文字 */
+.loader-progress-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  animation: percentFadeIn 0.8s ease 1.2s forwards;
+}
+
+@keyframes percentFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 加载完成后的淡出动画 */
+.portfolio-loader.loaded .loader-content {
+  animation: contentFadeOut 0.8s ease forwards;
+}
+
+@keyframes contentFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+}
+
+.portfolio-loader.loaded .loader-product-bg img {
+  animation: bgFadeOut 1s ease forwards;
+}
+
+@keyframes bgFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   响应式设计
+   ======================================== */
+
+/* 平板设备 */
+@media (max-width: 1024px) {
+  .loader-content {
+    padding: 40px 50px;
+    max-width: 600px;
+  }
+  
+  .loader-title {
+    font-size: 40px;
+  }
+  
+  .loader-subtitle {
+    font-size: 16px;
+  }
+  
+  .loader-progress-bar {
+    max-width: 400px;
+  }
+}
+
+/* 平板竖屏 */
+@media (max-width: 768px) {
+  .loader-content {
+    padding: 40px;
+    max-width: 100%;
+  }
+  
+  .loader-title {
+    font-size: 36px;
+    margin-bottom: 12px;
+  }
+  
+  .loader-subtitle {
+    font-size: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .loader-progress-bar {
+    max-width: 350px;
+    height: 3px;
+  }
+  
+  .loader-progress-text {
+    font-size: 13px;
+  }
+}
+
+/* 手机设备 */
+@media (max-width: 480px) {
+  .loader-content {
+    padding: 30px;
+  }
+  
+  .loader-title {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  .loader-subtitle {
+    font-size: 14px;
+    margin-bottom: 25px;
+    line-height: 1.5;
+  }
+  
+  .loader-progress-bar {
+    max-width: 100%;
+    height: 2px;
+  }
+  
+  .loader-progress-text {
+    font-size: 12px;
+  }
+  
+  .loader-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.7) 50%,
+      rgba(0, 0, 0, 0.9) 100%
+    );
+  }
+}
+
+/* 无障碍 - 减少动画 */
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-loader,
+  .loader-product-bg img,
+  .loader-content,
+  .loader-title,
+  .loader-subtitle,
+  .loader-progress-bar,
+  .loader-progress-text,
+  .loader-progress-fill {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .loader-product-bg img {
+    transform: scale(1.05);
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .loader-title {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  }
+  
+  .loader-subtitle {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(0, 0, 0, 1);
+  }
+  
+  .loader-progress-bar {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid #ffffff;
+  }
+  
+  .loader-progress-fill {
+    background: #FF6B35;
+  }
+  
+  .loader-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.9) 100%
+    );
+  }
+}

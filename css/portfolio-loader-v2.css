@@ -1,0 +1,599 @@
+/* ========================================
+   作品集加载动画 V2.0 - 优化版
+   优化重点：视觉冲击力、动画流畅度、品牌感
+   ======================================== */
+
+/* 加载容器 */
+.portfolio-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.portfolio-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 背景轮播容器 */
+.loader-bg-carousel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* 背景图片 - 增强过渡效果 */
+.loader-bg-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loader-bg-slide.active {
+  opacity: 1;
+}
+
+.loader-bg-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.35) blur(0px);
+  transform: scale(1.05);
+  transition: transform 8s ease-out, filter 1.2s ease;
+}
+
+.loader-bg-slide.active img {
+  filter: brightness(0.45) blur(0px);
+  transform: scale(1);
+}
+
+/* 优化遮罩层 - 更强的层次感 */
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%),
+    linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.9) 100%);
+  z-index: 2;
+}
+
+/* 内容容器 - 优化动画 */
+.loader-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 1000px;
+  padding: 0 40px;
+  animation: contentFadeIn 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 顶部小标签 - 新增 */
+.loader-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 20px;
+  color: #FF6B35;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: badgeFadeIn 0.8s ease 0.5s both;
+}
+
+@keyframes badgeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loader-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #FF6B35;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #FF6B35;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
+}
+
+/* 姓名标题 - 增强效果 */
+.loader-name {
+  font-size: 5rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 25px;
+  letter-spacing: 0.08em;
+  text-shadow: 
+    0 0 30px rgba(255, 107, 53, 0.3),
+    0 4px 20px rgba(0, 0, 0, 0.9);
+  animation: nameAppear 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.7s both;
+  position: relative;
+  background: linear-gradient(135deg, #ffffff 0%, #ffd4c4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes nameAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+    letter-spacing: 0.3em;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    letter-spacing: 0.08em;
+  }
+}
+
+.loader-name::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+  opacity: 0;
+  animation: underlineFadeIn 0.8s ease 1.5s both;
+}
+
+@keyframes underlineFadeIn {
+  from {
+    opacity: 0;
+    width: 0;
+  }
+  to {
+    opacity: 1;
+    width: 60px;
+  }
+}
+
+/* 技能标签容器 - 优化布局 */
+.loader-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 35px;
+  min-height: 50px;
+  padding: 0 20px;
+}
+
+/* 技能标签 - 增强设计 */
+.skill-tag {
+  padding: 10px 22px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  opacity: 0;
+  transform: scale(0.7) translateY(30px);
+  transition: all 0.3s ease;
+  animation: skillTagAppear 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes skillTagAppear {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.skill-tag:nth-child(1) { animation-delay: 1.1s; }
+.skill-tag:nth-child(2) { animation-delay: 1.25s; }
+.skill-tag:nth-child(3) { animation-delay: 1.4s; }
+.skill-tag:nth-child(4) { animation-delay: 1.55s; }
+.skill-tag:nth-child(5) { animation-delay: 1.7s; }
+
+/* 高亮标签 - 更强的视觉效果 */
+.skill-tag.highlight {
+  background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 
+    0 4px 20px rgba(255, 107, 53, 0.4),
+    0 0 30px rgba(255, 107, 53, 0.2);
+  font-weight: 700;
+}
+
+.skill-tag.highlight::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.8s ease;
+}
+
+.skill-tag.highlight:nth-child(1)::before { animation: shimmer 2s ease 2s infinite; }
+.skill-tag.highlight:nth-child(3)::before { animation: shimmer 2s ease 2.5s infinite; }
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  50%, 100% { left: 200%; }
+}
+
+/* Slogan文案 - 增强视觉层次 */
+.loader-slogan {
+  font-size: 2rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.5;
+  margin-bottom: 25px;
+  letter-spacing: 0.03em;
+  opacity: 0;
+  animation: sloganAppear 1s ease 2s both;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes sloganAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loader-slogan .highlight {
+  color: #FF6B35;
+  font-weight: 700;
+  text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+  position: relative;
+}
+
+/* 副标题 - 优化设计 */
+.loader-subtitle {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 50px;
+  opacity: 0;
+  animation: subtitleAppear 0.8s ease 2.4s both;
+  letter-spacing: 0.05em;
+}
+
+@keyframes subtitleAppear {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loader-subtitle strong {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+}
+
+/* 进度条容器 - 增强设计 */
+.loader-progress-bar {
+  width: 100%;
+  max-width: 500px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 
+    inset 0 1px 3px rgba(0, 0, 0, 0.3),
+    0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* 进度条填充 - 优化动画 */
+.loader-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, 
+    #FF6B35 0%, 
+    #F7931E 25%, 
+    #FFB84D 50%, 
+    #F7931E 75%, 
+    #FF6B35 100%
+  );
+  background-size: 200% 100%;
+  border-radius: 10px;
+  animation: 
+    progressFill 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+    progressGlow 1.8s ease infinite;
+  box-shadow: 
+    0 0 20px rgba(255, 107, 53, 0.6),
+    0 0 40px rgba(255, 107, 53, 0.3);
+  position: relative;
+}
+
+.loader-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6));
+  filter: blur(4px);
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes progressGlow {
+  0%, 100% {
+    background-position: 0% 0%;
+    filter: brightness(1);
+  }
+  50% {
+    background-position: 100% 0%;
+    filter: brightness(1.2);
+  }
+}
+
+/* 进度百分比 - 优化设计 */
+.loader-progress-text {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  color: #FF6B35;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+  animation: progressTextGlow 1.5s ease infinite;
+}
+
+@keyframes progressTextGlow {
+  0%, 100% {
+    opacity: 0.8;
+    text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 20px rgba(255, 107, 53, 0.8);
+  }
+}
+
+/* 滚动提示 - 优化设计 */
+.loader-scroll-hint {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  animation: scrollHintAppear 1s ease 2.8s both;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+@keyframes scrollHintAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.scroll-hint-text {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.scroll-hint-icon {
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgba(255, 107, 53, 0.4);
+  border-radius: 13px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.2);
+}
+
+.scroll-hint-icon::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: #FF6B35;
+  border-radius: 2px;
+  animation: scrollDot 1.8s ease infinite;
+  box-shadow: 0 0 8px rgba(255, 107, 53, 0.8);
+}
+
+@keyframes scrollDot {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(22px);
+  }
+}
+
+/* 响应式 - 平板 */
+@media (max-width: 1024px) {
+  .loader-name {
+    font-size: 4rem;
+  }
+  
+  .loader-slogan {
+    font-size: 1.7rem;
+  }
+  
+  .skill-tag {
+    font-size: 0.9rem;
+    padding: 9px 20px;
+  }
+  
+  .loader-content {
+    padding: 0 30px;
+  }
+}
+
+/* 响应式 - 移动端 */
+@media (max-width: 768px) {
+  .loader-name {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .loader-badge {
+    font-size: 0.75rem;
+    padding: 6px 16px;
+    margin-bottom: 25px;
+  }
+  
+  .loader-skills {
+    gap: 8px;
+    min-height: auto;
+    margin-bottom: 30px;
+  }
+  
+  .skill-tag {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
+  
+  .loader-slogan {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+  
+  .loader-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 40px;
+  }
+  
+  .loader-progress-bar {
+    max-width: 350px;
+  }
+  
+  .loader-scroll-hint {
+    bottom: 35px;
+  }
+  
+  .loader-content {
+    padding: 0 24px;
+  }
+}
+
+/* 小屏手机 */
+@media (max-width: 480px) {
+  .loader-name {
+    font-size: 2.2rem;
+  }
+  
+  .loader-slogan {
+    font-size: 1.1rem;
+  }
+  
+  .skill-tag {
+    font-size: 0.75rem;
+    padding: 7px 14px;
+  }
+  
+  .loader-progress-bar {
+    max-width: 280px;
+  }
+}
+
+/* 减少动画（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-loader *,
+  .portfolio-loader *::before,
+  .portfolio-loader *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 加载完成淡出效果增强 */
+.portfolio-loader.loaded .loader-content {
+  animation: contentFadeOut 0.8s ease forwards;
+}
+
+@keyframes contentFadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+}

@@ -1,0 +1,427 @@
+/* ============================================
+   轮播Banner - 方案1：极简左对齐样式
+   ============================================ */
+
+.hero-carousel {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 700px;
+    overflow: hidden;
+    background: #000;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    pointer-events: none;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 2;
+}
+
+/* 背景图片 */
+.slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1);
+    transition: transform 10s ease-out;
+}
+
+.carousel-slide.active .slide-background img {
+    transform: scale(1.08);
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        rgba(0, 0, 0, 0.85) 0%, 
+        rgba(0, 0, 0, 0.6) 50%, 
+        rgba(0, 0, 0, 0.3) 100%
+    );
+}
+
+/* 内容区域 - 固定位置不随轮播移动 */
+.slide-content {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+    pointer-events: none;
+}
+
+/* 项目卡片 - 固定在左侧，不产生位移动画 */
+.project-card {
+    max-width: 600px;
+    color: #ffffff;
+    pointer-events: auto;
+}
+
+/* 文案内容元素 - 每个元素单独淡入淡出 */
+.project-card > * {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+/* 当幻灯片激活时，文案内容淡入 */
+.carousel-slide.active ~ .slide-content .project-card > * {
+    opacity: 1;
+    transition-delay: 0.4s;
+}
+
+/* 为不同元素设置不同的延迟，产生层次感 */
+.carousel-slide.active ~ .slide-content .project-tag {
+    transition-delay: 0.3s;
+}
+
+.carousel-slide.active ~ .slide-content .project-title {
+    transition-delay: 0.4s;
+}
+
+.carousel-slide.active ~ .slide-content .project-desc {
+    transition-delay: 0.5s;
+}
+
+.carousel-slide.active ~ .slide-content .project-stats {
+    transition-delay: 0.6s;
+}
+
+.carousel-slide.active ~ .slide-content .project-link {
+    transition-delay: 0.7s;
+}
+
+/* 标签 */
+.project-tag {
+    display: inline-block;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    font-size: 14px;
+    margin-bottom: 30px;
+    color: #667eea;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+/* 标题 */
+.project-title {
+    font-size: 58px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+/* 描述 */
+.project-desc {
+    font-size: 20px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 40px;
+}
+
+/* 数据展示 */
+.project-stats {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.stat-item {
+    border-left: 3px solid #667eea;
+    padding-left: 18px;
+}
+
+.stat-value {
+    font-size: 42px;
+    font-weight: 800;
+    color: #667eea;
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+    font-family: 'Inter', 'Arial', sans-serif;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* CTA按钮 */
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 36px;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+}
+
+.project-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.3);
+    background: #f0f0f0;
+}
+
+.project-link svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+    transition: transform 0.3s ease;
+}
+
+.project-link:hover svg {
+    transform: translateX(5px);
+}
+
+/* 左右箭头控制 */
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.carousel-control:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-control.prev {
+    left: 30px;
+}
+
+.carousel-control.next {
+    right: 30px;
+}
+
+.carousel-control svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5;
+}
+
+/* 底部指示器 */
+.carousel-indicators {
+    position: absolute;
+    bottom: 40px;
+    left: 80px;
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+}
+
+.indicator {
+    width: 40px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.indicator.active {
+    background: #ffffff;
+    width: 60px;
+}
+
+.indicator:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* 暂停/播放按钮 */
+.carousel-pause {
+    position: absolute;
+    bottom: 40px;
+    right: 80px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.carousel-pause:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.carousel-pause svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .slide-content {
+        padding: 0 40px;
+    }
+    
+    .project-title {
+        font-size: 48px;
+    }
+    
+    .carousel-indicators,
+    .carousel-pause {
+        left: 40px;
+        right: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-carousel {
+        min-height: 600px;
+    }
+    
+    .slide-content {
+        padding: 0 20px;
+    }
+    
+    .slide-overlay {
+        background: linear-gradient(180deg, 
+            rgba(0, 0, 0, 0.7) 0%, 
+            rgba(0, 0, 0, 0.85) 100%
+        );
+    }
+    
+    .project-card {
+        max-width: 100%;
+    }
+    
+    .project-title {
+        font-size: 36px;
+    }
+    
+    .project-desc {
+        font-size: 16px;
+    }
+    
+    .project-stats {
+        gap: 30px;
+    }
+    
+    .stat-value {
+        font-size: 32px;
+    }
+    
+    .stat-label {
+        font-size: 12px;
+    }
+    
+    .carousel-control {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .carousel-control.prev {
+        left: 15px;
+    }
+    
+    .carousel-control.next {
+        right: 15px;
+    }
+    
+    .carousel-indicators {
+        left: 20px;
+        bottom: 20px;
+    }
+    
+    .carousel-pause {
+        right: 20px;
+        bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-title {
+        font-size: 28px;
+    }
+    
+    .project-desc {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+    
+    .project-stats {
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .stat-value {
+        font-size: 28px;
+    }
+    
+    .indicator {
+        width: 30px;
+        height: 3px;
+    }
+    
+    .indicator.active {
+        width: 45px;
+    }
+}

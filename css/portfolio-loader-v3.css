@@ -1,0 +1,310 @@
+/* ========================================
+   作品集加载动画 V3.0 - 图片拼贴版
+   设计理念：用作品说话，Slogan切换
+   ======================================== */
+
+/* 加载容器 */
+.portfolio-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.portfolio-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 图片拼贴背景网格 */
+.loader-gallery-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0;
+  z-index: 1;
+  opacity: 0;
+  animation: gridFadeIn 1s ease 0.2s forwards;
+}
+
+@keyframes gridFadeIn {
+  to { opacity: 1; }
+}
+
+/* 图片单元格 */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6) grayscale(0);
+  transform: scale(1.2);
+  transition: all 0.8s ease;
+}
+
+/* 随机动画延迟 */
+.gallery-item:nth-child(1) { animation: itemFadeIn 1s ease 0.1s both; }
+.gallery-item:nth-child(2) { animation: itemFadeIn 1s ease 0.2s both; }
+.gallery-item:nth-child(3) { animation: itemFadeIn 1s ease 0.15s both; }
+.gallery-item:nth-child(4) { animation: itemFadeIn 1s ease 0.3s both; }
+.gallery-item:nth-child(5) { animation: itemFadeIn 1s ease 0.25s both; }
+.gallery-item:nth-child(6) { animation: itemFadeIn 1s ease 0.35s both; }
+.gallery-item:nth-child(7) { animation: itemFadeIn 1s ease 0.2s both; }
+.gallery-item:nth-child(8) { animation: itemFadeIn 1s ease 0.4s both; }
+.gallery-item:nth-child(9) { animation: itemFadeIn 1s ease 0.3s both; }
+.gallery-item:nth-child(10) { animation: itemFadeIn 1s ease 0.45s both; }
+.gallery-item:nth-child(11) { animation: itemFadeIn 1s ease 0.35s both; }
+.gallery-item:nth-child(12) { animation: itemFadeIn 1s ease 0.5s both; }
+
+@keyframes itemFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.gallery-item img {
+  animation: imageZoom 15s ease-in-out infinite alternate;
+}
+
+@keyframes imageZoom {
+  0% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* 高亮某些图片 */
+.gallery-item.highlight img {
+  filter: brightness(0.5) grayscale(0);
+}
+
+/* 遮罩层 - 适度遮罩 */
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at center, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+  z-index: 2;
+}
+
+/* 内容容器 - 极简 */
+.loader-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 40px;
+  animation: contentFadeIn 1s ease 0.8s both;
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 加载标题 - 横排 */
+.loader-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  margin-bottom: 15px;
+  opacity: 0;
+  animation: titleFadeIn 0.8s ease 1s forwards;
+}
+
+@keyframes titleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 加载副标题 - 横排 */
+.loader-subtitle {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+  margin-bottom: 50px;
+  opacity: 0;
+  animation: subtitleFadeIn 0.8s ease 1.2s forwards;
+}
+
+@keyframes subtitleFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式 - 标题 */
+@media (max-width: 768px) {
+  .loader-title {
+    font-size: 24px;
+  }
+  
+  .loader-subtitle {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-title {
+    font-size: 20px;
+  }
+  
+  .loader-subtitle {
+    font-size: 13px;
+    margin-bottom: 35px;
+  }
+}
+
+/* 旧的Slogan相关样式已移除 */
+
+/* 进度条 - 简化版 */
+.loader-progress-bar {
+  width: 100%;
+  max-width: 500px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.loader-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FF6B35, #F7931E);
+  border-radius: 10px;
+  animation: progressFill 2.5s ease-out forwards;
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.6);
+}
+
+@keyframes progressFill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* 进度百分比 */
+.loader-progress-text {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+
+/* 响应式 - 平板 */
+@media (max-width: 1024px) {
+  .loader-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 响应式 - 移动端 (已在前面定义标题响应式) */
+@media (max-width: 768px) {
+  .loader-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .loader-progress-bar {
+    max-width: 400px;
+  }
+  
+  .loader-progress-bar {
+    max-width: 350px;
+  }
+  
+  .loader-content {
+    padding: 0 24px;
+  }
+}
+
+/* 小屏手机 */
+@media (max-width: 480px) {
+  .loader-progress-bar {
+    max-width: 280px;
+  }
+  
+  .loader-content {
+    padding: 0 20px;
+  }
+}
+
+/* 加载完成淡出 */
+.portfolio-loader.loaded .loader-content {
+  animation: contentFadeOut 0.8s ease forwards;
+}
+
+@keyframes contentFadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+.portfolio-loader.loaded .loader-gallery-grid {
+  animation: gridFadeOut 0.8s ease forwards;
+}
+
+@keyframes gridFadeOut {
+  to {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+
+/* 减少动画（用户偏好） */
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-loader *,
+  .portfolio-loader *::before,
+  .portfolio-loader *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

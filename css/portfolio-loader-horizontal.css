@@ -1,0 +1,210 @@
+/* ========================================
+   作品集加载动画 - 横排克制版
+   设计理念：极简文案，横排呈现
+   ======================================== */
+
+/* 加载容器 */
+.portfolio-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.portfolio-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 图片拼贴背景网格 */
+.loader-gallery-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 0;
+  z-index: 1;
+  opacity: 0;
+  animation: gridFadeIn 1s ease 0.2s forwards;
+}
+
+@keyframes gridFadeIn {
+  to { opacity: 1; }
+}
+
+/* 图片单元格 */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.3) grayscale(0.2);
+  transform: scale(1.2);
+  transition: all 0.8s ease;
+}
+
+/* 随机动画延迟 */
+.gallery-item:nth-child(1) { animation: itemFadeIn 1s ease 0.1s both; }
+.gallery-item:nth-child(2) { animation: itemFadeIn 1s ease 0.2s both; }
+.gallery-item:nth-child(3) { animation: itemFadeIn 1s ease 0.15s both; }
+.gallery-item:nth-child(4) { animation: itemFadeIn 1s ease 0.3s both; }
+.gallery-item:nth-child(5) { animation: itemFadeIn 1s ease 0.25s both; }
+.gallery-item:nth-child(6) { animation: itemFadeIn 1s ease 0.35s both; }
+.gallery-item:nth-child(7) { animation: itemFadeIn 1s ease 0.2s both; }
+.gallery-item:nth-child(8) { animation: itemFadeIn 1s ease 0.4s both; }
+.gallery-item:nth-child(9) { animation: itemFadeIn 1s ease 0.3s both; }
+.gallery-item:nth-child(10) { animation: itemFadeIn 1s ease 0.45s both; }
+.gallery-item:nth-child(11) { animation: itemFadeIn 1s ease 0.35s both; }
+.gallery-item:nth-child(12) { animation: itemFadeIn 1s ease 0.5s both; }
+
+@keyframes itemFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.gallery-item img {
+  animation: imageZoom 15s ease-in-out infinite alternate;
+}
+
+@keyframes imageZoom {
+  0% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* 遮罩层 */
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.9) 100%);
+  z-index: 2;
+}
+
+/* 内容容器 - 横排克制版 */
+.loader-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 1200px;
+  width: 90%;
+  padding: 0 40px;
+  animation: contentFadeIn 1s ease 0.8s both;
+}
+
+@keyframes contentFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 横排文案 - 一行显示 */
+.slogan-horizontal {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.6;
+  letter-spacing: 0.5em;
+  text-align: center;
+  margin-bottom: 60px;
+  opacity: 0;
+  animation: textFadeIn 1.2s ease 1s forwards;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    letter-spacing: 1em;
+  }
+  to {
+    opacity: 1;
+    letter-spacing: 0.5em;
+  }
+}
+
+/* 进度条容器 */
+.loader-progress-bar {
+  width: 100%;
+  max-width: 400px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin: 0 auto 20px;
+  overflow: hidden;
+}
+
+/* 进度条填充 */
+.loader-progress-fill {
+  height: 100%;
+  background: #ffffff;
+  width: 0;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* 进度文字 */
+.loader-progress-text {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.2em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .slogan-horizontal {
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    white-space: normal;
+    line-height: 1.8;
+  }
+  
+  .loader-progress-bar {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slogan-horizontal {
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+  }
+  
+  .loader-content {
+    padding: 0 20px;
+  }
+}

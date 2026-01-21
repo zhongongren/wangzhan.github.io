@@ -1,0 +1,229 @@
+/* ========================================
+   作品集加载动画 - 极简版
+   设计理念：简洁优雅，4张代表作从黑色渐显
+   ======================================== */
+
+/* 加载容器 */
+.portfolio-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.portfolio-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 背景图片容器 - 只显示4张代表作 */
+.loader-product-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;
+  z-index: 1;
+}
+
+/* 只显示第1层 - 4张代表作 */
+.loader-layer-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0;
+  z-index: 1;
+}
+
+/* 隐藏其他层 */
+.loader-layer-2,
+.loader-layer-3,
+.loader-layer-4 {
+  display: none;
+}
+
+/* 图片项 */
+.loader-grid-item {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.loader-grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  /* 初始状态：完全黑色 */
+  filter: brightness(0);
+  animation: imageFadeIn 1.2s ease forwards;
+}
+
+/* 图片从黑色逐渐显示的动画 */
+@keyframes imageFadeIn {
+  0% {
+    filter: brightness(0);
+  }
+  100% {
+    filter: brightness(0.5);
+  }
+}
+
+/* 4张图片依次显示，间隔更短 */
+.loader-layer-1 .loader-grid-item:nth-child(1) img { 
+  animation-delay: 0.1s;
+}
+.loader-layer-1 .loader-grid-item:nth-child(2) img { 
+  animation-delay: 0.3s;
+}
+.loader-layer-1 .loader-grid-item:nth-child(3) img { 
+  animation-delay: 0.5s;
+}
+.loader-layer-1 .loader-grid-item:nth-child(4) img { 
+  animation-delay: 0.7s;
+}
+
+/* 中心遮罩 - 强化中心区域 */
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.4) 40%,
+    rgba(0, 0, 0, 0.8) 80%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* 内容区 - 居中显示 */
+.loader-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 600px;
+  padding: 50px 40px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(40px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  animation: contentFadeIn 1s ease 0.3s forwards;
+  opacity: 0;
+}
+
+@keyframes contentFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* 标题 */
+.loader-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0 0 12px 0;
+  background: linear-gradient(135deg, #ffffff 0%, #FF6B35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+/* 副标题 */
+.loader-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 0 35px 0;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+/* 进度条容器 */
+.loader-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 0 12px 0;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* 进度条填充 */
+.loader-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #FF6B35 0%, #ff8c5a 100%);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+}
+
+/* 进度文字 */
+.loader-progress-text {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #FF6B35;
+  letter-spacing: 0.08em;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .loader-content {
+    padding: 40px 30px;
+    max-width: 90%;
+  }
+  
+  .loader-title {
+    font-size: 2rem;
+  }
+  
+  .loader-subtitle {
+    font-size: 1rem;
+  }
+  
+  .loader-progress-text {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-title {
+    font-size: 1.6rem;
+  }
+  
+  .loader-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 28px;
+  }
+  
+  .loader-content {
+    padding: 35px 25px;
+  }
+}

@@ -1,0 +1,203 @@
+/* ========================================
+   承接段落区块 - 简洁优雅版
+   ======================================== */
+
+.transition-section {
+  padding: 100px 20px;
+  background: linear-gradient(180deg, #000 0%, #0f0f0f 50%, #000 100%);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* 背景装饰 */
+.transition-section::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.08) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* 内容容器 */
+.transition-content {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* 标签 */
+.transition-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 107, 53, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+  padding: 8px 24px;
+  border: 1px solid rgba(255, 107, 53, 0.3);
+  border-radius: 30px;
+  background: rgba(255, 107, 53, 0.05);
+}
+
+/* 主文字 */
+.transition-text {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.8;
+  color: white;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* 高亮文字 */
+.transition-text .highlight {
+  background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 900;
+  position: relative;
+}
+
+.transition-text .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+  border-radius: 2px;
+}
+
+/* 副标题 */
+.transition-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.8;
+  max-width: 700px;
+  margin: 0 auto 40px;
+}
+
+/* 数据标签 */
+.transition-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+.transition-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.transition-stat-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.transition-stat-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 装饰线 */
+.transition-divider {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FF6B35, transparent);
+  margin: 40px auto;
+  border-radius: 2px;
+}
+
+/* 滚动提示 */
+.transition-scroll-hint {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.5;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.transition-scroll-hint-text {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.transition-scroll-hint-icon {
+  font-size: 1.5rem;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .transition-section {
+    padding: 80px 20px;
+  }
+
+  .transition-text {
+    font-size: 1.5rem;
+  }
+
+  .transition-subtitle {
+    font-size: 1rem;
+  }
+
+  .transition-stats {
+    gap: 30px;
+  }
+
+  .transition-stat-number {
+    font-size: 2rem;
+  }
+
+  .transition-stat-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* 进入动画 */
+.transition-section {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.8s ease-out 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
