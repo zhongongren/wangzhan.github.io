@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黑金AI智能晾衣架 | 详情页设计故事 - Nano Banana Pro场景生成</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: #0a0a0a;
+            padding: 0;
+            line-height: 1.8;
+            color: #e0e0e0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 0;
+            box-shadow: none;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+            color: white;
+            padding: 120px 60px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 2px;
+        }
+        
+        .header .subtitle {
+            font-size: 24px;
+            opacity: 0.95;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 20px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .content {
+            padding: 80px 60px;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe6a7 100%);
+            border-left: 6px solid #ff9800;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin: 0 0 60px 0;
+            box-shadow: 0 4px 15px rgba(255, 152, 0, 0.2);
+        }
+        
+        .warning-box strong {
+            color: #e65100;
+            font-size: 18px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box p {
+            color: #5d4037;
+            line-height: 1.8;
+            margin: 0;
+        }
+        
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 40px;
+            color: #1a1a2e;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid #FF6B35;
+            font-weight: 700;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 120px;
+            height: 4px;
+            background: #FF6B35;
+        }
+        
+        .info-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 40px;
+            border-radius: 16px;
+            margin: 30px 0;
+            border-left: 6px solid #FF6B35;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+        
+        .info-card h3 {
+            color: #1a1a2e;
+            font-size: 26px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .info-card li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            font-size: 17px;
+            color: #495057;
+        }
+        
+        .info-card li:before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: #FF6B35;
+            font-weight: bold;
+            font-size: 24px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin: 40px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .highlight-box h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .highlight-box li {
+            margin-bottom: 18px;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+        
+        .tech-innovation-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 50px;
+            border-radius: 20px;
+            margin: 50px 0;
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
+        }
+        
+        .tech-innovation-box h3 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .image-item {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            background: white;
+        }
+        
+        .image-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .image-caption {
+            padding: 20px;
+            background: #f8f9fa;
+            text-align: center;
+            font-size: 16px;
+            color: #495057;
+            font-weight: 500;
+        }
+        
+        .image-caption strong {
+            color: #FF6B35;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+        
+        .ai-section {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 60px;
+            border-radius: 20px;
+            margin: 50px 0;
+            color: white;
+        }
+        
+        .ai-section h2 {
+            font-size: 42px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 800;
+        }
+        
+        .comparison-table {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 18px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .comparison-table td {
+            color: #495057;
+            font-size: 15px;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .gif-showcase {
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .gif-showcase img {
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .gif-label {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #FF6B35;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .content {
+                padding: 40px 30px;
+            }
+            
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="detail-nav">
+        <div class="detail-nav-container">
+            <a href="portfolio.html" class="nav-back">← 返回作品集</a>
+            <a href="index.html" class="nav-logo">3D Designer</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>🏠 黑金晾衣架详情页设计</h1>
+                <p class="subtitle">AI智能场景生成 × 电商视觉革命</p>
+                <div class="tech-badge">
+                    🤖 Nano Banana Pro + 豆包智能体技术应用
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="warning-box">
+                <strong>⚠️ 图片链接有效期提示</strong>
+                <p>本HTML文件中的图片链接有效期为1小时。建议下载后立即查看，或将页面完整保存（Ctrl+S选择"网页，全部"）以永久保存所有内容。</p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">📋 项目核心信息</h2>
+                <div class="info-card">
+                    <h3>基本参数</h3>
+                    <ul>
+                        <li><strong>产品名称：</strong>黑金AI智能电动晾衣架</li>
+                        <li><strong>设计类型：</strong>电商详情页全案设计（18页）</li>
+                        <li><strong>核心创新：</strong>Nano Banana Pro + 豆包智能体 AI场景生成</li>
+                        <li><strong>设计周期：</strong>3天（传统流程需14天）</li>
+                        <li><strong>效率提升：</strong>78% ↑</li>
+                        <li><strong>成本降低：</strong>70% ↓</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>产品核心卖点</h3>
+                    <ul>
+                        <li>🌞 <strong>AI追光晾晒：</strong>智能升降 + 自动追踪阳光</li>
+                        <li>💡 <strong>48W超亮照明：</strong>夜间晾晒无忧</li>
+                        <li>🔋 <strong>静音直流电机：</strong>低噪音运行</li>
+                        <li>📱 <strong>智能家居互联：</strong>App远程控制</li>
+                        <li>🏆 <strong>10年质保：</strong>78+衣物承载能力</li>
+                        <li>⚡ <strong>对比传统：</strong>干衣速度提升3倍</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">🎯 设计挑战</h2>
+                <div class="highlight-box">
+                    <h3>三大核心难题</h3>
+                    <ul>
+                        <li>🔹 <strong>场景一致性困境：</strong>传统电商图片拍摄成本高、周期长，且难以保证多场景下产品形态、材质、光影的统一性</li>
+                        <li>🔹 <strong>ComfyUI复杂度：</strong>节点式工作流学习成本高，需要专业技术人员操作，不适合快速迭代</li>
+                        <li>🔹 <strong>差异化表达：</strong>在同质化的晾衣架市场中，如何通过视觉设计突出"AI追光"科技感？</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">🚀 技术创新突破</h2>
+                
+                <div class="tech-innovation-box">
+                    <h3>💥 AI工具革命：Nano Banana Pro + 豆包智能体</h3>
+                    
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>对比维度</th>
+                                    <th>ComfyUI (鸿雁E11)</th>
+                                    <th>Nano Banana Pro (本项目)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>学习成本</strong></td>
+                                    <td>需掌握节点逻辑、工作流搭建</td>
+                                    <td>✅ 自然语言对话即可</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>场景丰富度</strong></td>
+                                    <td>4个固定场景</td>
+                                    <td>✅ 8+个多样化场景</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>产品一致性</strong></td>
+                                    <td>需手动调参保证</td>
+                                    <td>✅ AI自动保持形态/材质/光影统一</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>迭代速度</strong></td>
+                                    <td>每次修改需重跑全流程</td>
+                                    <td>✅ 对话式即时调整</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>生成时间</strong></td>
+                                    <td>3-5天（包括学习和调试）</td>
+                                    <td>✅ 3小时完成8个场景</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div style="margin-top: 40px; background: rgba(255,255,255,0.2); padding: 30px; border-radius: 12px;">
+                        <h4 style="font-size: 24px; margin-bottom: 20px; text-align: center;">💡 核心技术认知</h4>
+                        <p style="font-size: 18px; line-height: 2; text-align: center; font-weight: 500;">
+                            "<strong>没有一个模型适用于所有项目</strong>"<br><br>
+                            ✓ ComfyUI适合：极简美学 + 固定场景（如开关面板）<br>
+                            ✓ Nano Banana Pro适合：多场景 + 高一致性需求（如家居产品）<br>
+                            ✓ <strong>设计师需构建AI模型选型能力</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">🖼️ 设计模块展示（前7页：产品核心卖点）</h2>
+                
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/LwJnMxU9" alt="页面1">
+                        <div class="image-caption">
+                            <strong>第1页</strong>
+                            用户需求洞察：风干、晒齐、功能、品质四大核心诉求
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/WkJyuiMm" alt="GIF动效">
+                        <div class="image-caption">
+                            <strong>第2页 - GIF动效</strong>
+                            AI智能升降追光系统动态演示（19MB高清动效）
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/hWQz5fVX" alt="页面3">
+                        <div class="image-caption">
+                            <strong>第3页</strong>
+                            智能控制系统：App互联 + 78+衣物容量
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/oYAcvZd5" alt="页面4">
+                        <div class="image-caption">
+                            <strong>第4页</strong>
+                            对比优势：AI自动追光 vs 传统固定晾晒
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ai-section">
+                <h2>🤖 AI生成场景模块（第7-14页）</h2>
+                <p style="text-align: center; font-size: 20px; margin-bottom: 40px; opacity: 0.95;">
+                    以下8个场景全部由<strong>Nano Banana Pro + 豆包智能体</strong>生成<br>
+                    展示产品在不同家居环境中的自然融入效果
+                </p>
+                
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/GRGSO3Mb" alt="AI场景1">
+                        <div class="image-caption">
+                            <strong>AI场景1</strong>
+                            现代阳台场景：自然光影 + 产品无缝融入
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/9EGrhp4d" alt="AI场景2">
+                        <div class="image-caption">
+                            <strong>AI场景2</strong>
+                            现代厨房/室内：产品形态高度一致
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/byaNkyIk" alt="AI场景3">
+                        <div class="image-caption">
+                            <strong>AI场景3</strong>
+                            海景阳台：现代功能美学 + 光影自然过渡
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/tNAsdKa4" alt="AI场景4">
+                        <div class="image-caption">
+                            <strong>AI场景4</strong>
+                            温馨客厅：暖色调家居场景融合
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/OwhK1GF6" alt="AI场景5">
+                        <div class="image-caption">
+                            <strong>AI场景5</strong>
+                            多角度场景验证：产品结构稳定性测试
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/Q3uiayi2" alt="AI场景6">
+                        <div class="image-caption">
+                            <strong>AI场景6</strong>
+                            细节特写：材质光影高度还原
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/1ncNp2Ry" alt="AI场景7">
+                        <div class="image-caption">
+                            <strong>AI场景7</strong>
+                            应用场景扩展：展示产品适配性
+                        </div>
+                    </div>
+                    
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/iz5hr9VC" alt="AI场景8">
+                        <div class="image-caption">
+                            <strong>AI场景8</strong>
+                            综合场景汇总：产品全方位展示
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 50px; background: rgba(255,255,255,0.15); padding: 30px; border-radius: 12px; backdrop-filter: blur(10px);">
+                    <h3 style="font-size: 24px; margin-bottom: 20px; text-align: center;">✨ AI生成优势总结</h3>
+                    <ul style="list-style: none; padding: 0; font-size: 17px; line-height: 2;">
+                        <li>✅ <strong>产品一致性：</strong>8个场景中晾衣架的形态、材质、尺寸完全统一</li>
+                        <li>✅ <strong>光影自然：</strong>自动匹配不同时间段和空间的光照环境</li>
+                        <li>✅ <strong>场景多样化：</strong>涵盖阳台、客厅、厨房等多种家居场景</li>
+                        <li>✅ <strong>成本控制：</strong>节省实景拍摄费用约70%</li>
+                        <li>✅ <strong>迭代灵活：</strong>可快速调整场景风格和产品展示角度</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">📊 商业成果与数据表现</h2>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">78%</div>
+                        <div class="stat-label">设计效率提升</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">70%</div>
+                        <div class="stat-label">成本降低</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3天</div>
+                        <div class="stat-label">vs 传统14天</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">8+</div>
+                        <div class="stat-label">AI生成场景数量</div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 50px;">
+                    <h3>🎖️ 项目核心价值</h3>
+                    <ul>
+                        <li>✅ <strong>技术创新：</strong>首次将Nano Banana Pro应用于电商详情页，突破ComfyUI学习门槛</li>
+                        <li>✅ <strong>效率革命：</strong>AI场景生成缩短设计周期78%，3天完成传统14天工作量</li>
+                        <li>✅ <strong>品质保证：</strong>8个场景产品形态高度一致，光影自然融合，媲美专业摄影</li>
+                        <li>✅ <strong>成本优化：</strong>节省实景拍摄成本70%，提升ROI</li>
+                        <li>✅ <strong>可复制性：</strong>建立AI辅助电商设计的标准化流程，可快速应用于其他项目</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">🤔 设计反思与迭代方向</h2>
+                
+                <div class="info-card">
+                    <h3>✅ 成功经验</h3>
+                    <ul>
+                        <li>Nano Banana Pro在多场景生成中表现出色，产品一致性远超ComfyUI</li>
+                        <li>豆包智能体的自然语言交互大幅降低了AI工具的使用门槛</li>
+                        <li>8个场景覆盖了目标用户的主要使用场景，提升了用户代入感</li>
+                        <li>GIF动效有效展示了"AI追光"核心功能，提升转化率</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🔄 可优化方向</h3>
+                    <ul>
+                        <li><strong>真人场景融合：</strong>可增加家庭成员使用晾衣架的生活化场景，增强情感共鸣</li>
+                        <li><strong>动效扩展：</strong>将更多功能点制作成GIF/视频，如App控制演示、智能升降过程</li>
+                        <li><strong>对比实验：</strong>增加使用前后的对比场景（如传统晾晒vs AI追光晾晒）</li>
+                        <li><strong>用户证言：</strong>补充真实用户评价和使用反馈，增强信任感</li>
+                        <li><strong>技术细节：</strong>可视化展示AI追光算法原理，强化科技感</li>
+                    </ul>
+                </div>
+                
+                <div class="info-card">
+                    <h3>💡 技术延展思考</h3>
+                    <ul>
+                        <li><strong>模型组合策略：</strong>探索ComfyUI + Nano Banana Pro混合使用的可能性</li>
+                        <li><strong>工作流优化：</strong>建立AI场景生成的标准化SOP，提升团队协作效率</li>
+                        <li><strong>数据驱动：</strong>通过A/B测试验证不同AI生成场景对转化率的影响</li>
+                        <li><strong>成本模型：</strong>建立AI辅助设计的成本核算模型，为商业决策提供依据</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #FF6B35 0%, #ff8c5a 100%); padding: 60px; border-radius: 20px; color: white; text-align: center; margin-top: 60px;">
+                <h2 style="font-size: 36px; margin-bottom: 20px; font-weight: 800;">🚀 项目总结</h2>
+                <p style="font-size: 20px; line-height: 2; opacity: 0.95;">
+                    本项目成功验证了<strong>Nano Banana Pro + 豆包智能体</strong>在电商视觉设计中的实用价值，<br>
+                    为AI辅助设计提供了可落地的解决方案。<br><br>
+                    <strong>核心成就：</strong>在保证品质的前提下，将设计效率提升78%，成本降低70%，<br>
+                    证明了"设计师+AI工具"的协作模式是电商视觉设计的未来趋势。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <footer style="background: #0a0a0a; padding: 40px 0; text-align: center; color: rgba(255,255,255,0.6);">
+        <div style="max-width: 1400px; margin: 0 auto; padding: 0 60px;">
+            <div style="display: flex; gap: 30px; justify-content: center; margin-bottom: 20px;">
+                <a href="portfolio.html" style="color: #FF6B35; text-decoration: none; font-weight: 600;">← 返回作品集</a>
+                <a href="index.html" style="color: rgba(255,255,255,0.6); text-decoration: none;">首页</a>
+                <a href="lone-warrior-chair-detail.html" style="color: rgba(255,255,255,0.6); text-decoration: none;">孤勇者案例</a>
+                <a href="renegade-chair-detail.html" style="color: rgba(255,255,255,0.6); text-decoration: none;">逆袭者案例</a>
+                <a href="hongyan-switch-detail.html" style="color: rgba(255,255,255,0.6); text-decoration: none;">鸿雁E11案例</a>
+            </div>
+            <p style="font-size: 0.9rem;">&copy; 2024 3D视觉设计师 | Nano Banana Pro AI工作流先行者</p>
+        </div>
+    </footer>
+</body>
+</html>

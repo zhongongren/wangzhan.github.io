@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>玄星X2详情页 - 恒林家居人体工学椅 | 如坐云端的自由支撑</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            color: #a0a0a0;
+            margin-bottom: 20px;
+        }
+        
+        .header .tags {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: rgba(245, 175, 25, 0.2);
+            color: #f5af19;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid rgba(245, 175, 25, 0.3);
+        }
+        
+        .data-highlight {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(245, 175, 25, 0.1) 0%, rgba(241, 39, 17, 0.1) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(245, 175, 25, 0.2);
+        }
+        
+        .data-card {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .data-card .number {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .data-card .label {
+            font-size: 14px;
+            color: #a0a0a0;
+        }
+        
+        .featured-works {
+            margin-bottom: 50px;
+        }
+        
+        .featured-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .featured-subtitle {
+            font-size: 16px;
+            color: #a0a0a0;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+        
+        .featured-grid {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .featured-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(245, 175, 25, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .featured-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(245, 175, 25, 0.4);
+            border-color: #f5af19;
+        }
+        
+        .featured-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        
+        .featured-item:hover img {
+            transform: scale(1.03);
+        }
+        
+        .featured-caption {
+            padding: 25px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%);
+        }
+        
+        .featured-caption h3 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        
+        .featured-caption p {
+            font-size: 15px;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+        
+        .featured-caption .highlight {
+            color: #f5af19;
+            font-weight: 600;
+        }
+        
+        .view-more-btn {
+            text-align: center;
+            margin: 45px 0 50px 0;
+        }
+        
+        .view-more-btn button {
+            background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+            color: #fff;
+            border: none;
+            padding: 15px 45px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(245, 175, 25, 0.4);
+        }
+        
+        .view-more-btn button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 175, 25, 0.6);
+        }
+        
+        .section {
+            margin-bottom: 45px;
+        }
+        
+        .section-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 5px solid #f5af19;
+        }
+        
+        .visual-card {
+            background: linear-gradient(135deg, rgba(245, 175, 25, 0.15) 0%, rgba(241, 39, 17, 0.15) 100%);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(245, 175, 25, 0.3);
+        }
+        
+        .visual-card-title {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .visual-card-icon {
+            font-size: 56px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .comparison-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .comparison-side {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-side.bad {
+            border-color: #f12711;
+        }
+        
+        .comparison-side.good {
+            border-color: #4ade80;
+        }
+        
+        .comparison-side h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            text-align: center;
+            padding: 8px;
+            border-radius: 10px;
+        }
+        
+        .comparison-side.bad h4 {
+            background: rgba(241, 39, 17, 0.2);
+            color: #f12711;
+        }
+        
+        .comparison-side.good h4 {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+        }
+        
+        .comparison-side p {
+            color: #c0c0c0;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin: 30px 0;
+        }
+        
+        .process-step {
+            background: rgba(245, 175, 25, 0.1);
+            padding: 25px 15px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(245, 175, 25, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+            border-color: #f5af19;
+            background: rgba(245, 175, 25, 0.2);
+        }
+        
+        .process-step .step-number {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .process-step .step-title {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .process-step .step-desc {
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .feature-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #f5af19;
+        }
+        
+        .feature-card .icon {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card h4 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .feature-card .stat {
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .feature-card p {
+            color: #a0a0a0;
+            font-size: 13px;
+            text-align: center;
+            line-height: 1.5;
+        }
+        
+        .quote-box {
+            background: linear-gradient(135deg, rgba(245, 175, 25, 0.1) 0%, rgba(241, 39, 17, 0.1) 100%);
+            border-left: 5px solid #f5af19;
+            padding: 20px 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .quote-box .quote-text {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .quote-box .quote-author {
+            font-size: 12px;
+            color: #a0a0a0;
+            text-align: right;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 20px;
+            margin: 30px 0 40px 0;
+        }
+        
+        .image-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 35px rgba(245, 175, 25, 0.3);
+            border-color: #f5af19;
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-card .caption {
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .image-card .caption h4 {
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        
+        .image-card .caption p {
+            font-size: 13px;
+            color: #a0a0a0;
+            line-height: 1.5;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 45px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #888;
+        }
+        
+        .footer p {
+            font-size: 13px;
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 1200px) {
+            .image-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            .process-flow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 28px;
+            }
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            .process-flow {
+                grid-template-columns: 1fr;
+            }
+            .comparison-visual {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            position: relative;
+            margin: 2% auto;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close:hover {
+            background: rgba(241, 39, 17, 0.8);
+        }
+        
+        .hidden-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>玄星X2 · 人体工学椅</h1>
+            <div class="subtitle">恒林家居 | 如坐云端的自由软支撑体验</div>
+            <div class="tags">
+                <span class="tag">六维调节系统</span>
+                <span class="tag">自由软支撑</span>
+                <span class="tag">适配160-190cm</span>
+                <span class="tag">承重200kg</span>
+                <span class="tag">恒林家居品质</span>
+            </div>
+        </div>
+
+        <div class="data-highlight">
+            <div class="data-card">
+                <div class="number">6维</div>
+                <div class="label">腰部调节系统</div>
+            </div>
+            <div class="data-card">
+                <div class="number">360°</div>
+                <div class="label">双轴旋转扶手</div>
+            </div>
+            <div class="data-card">
+                <div class="number">200kg</div>
+                <div class="label">最大承重</div>
+            </div>
+            <div class="data-card">
+                <div class="number">3D</div>
+                <div class="label">可旋转头枕</div>
+            </div>
+        </div>
+
+        <div class="featured-works">
+            <h2 class="featured-title">✨ 核心设计亮点</h2>
+            <p class="featured-subtitle">5大核心功能展示玄星X2的人体工学创新</p>
+            
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_01.jpg" alt="首屏设计">
+                    <div class="featured-caption">
+                        <h3>首屏设计：如坐云端的自由支撑</h3>
+                        <p><span class="highlight">核心卖点：</span>蓝天白云场景营造轻松氛围，强调"自由软支撑"的舒适体验，适配160-190cm身高人群</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_02.jpg" alt="调节系统">
+                    <div class="featured-caption">
+                        <h3>六档随心调节：个性化定制体验</h3>
+                        <p><span class="highlight">设计亮点：</span>坐深可调、3D头枕旋转、360°双轴扶手、六维弹力腰枕，满足不同使用场景需求</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_03.jpg" alt="腰部支撑">
+                    <div class="featured-caption">
+                        <h3>玄星软腰枕：六维精准支撑</h3>
+                        <p><span class="highlight">技术核心：</span>前后3cm、上下5cm调节，配合倾斜微调，为腰部提供全方位定制化支撑</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_08.jpg" alt="材质工艺">
+                    <div class="featured-caption">
+                        <h3>材质工艺：品质细节一览</h3>
+                        <p><span class="highlight">品质保证：</span>精选材质配合精湛工艺，每一个细节都体现恒林家居的品质追求</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_16.jpg" alt="品牌信任">
+                    <div class="featured-caption">
+                        <h3>品牌背书：恒林家居品质保障</h3>
+                        <p><span class="highlight">信任建立：</span>恒林家居多年行业积累，为每一位用户提供值得信赖的人体工学解决方案</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="view-more-btn">
+            <button onclick="showFullGallery()">查看完整16屏设计详解 ↓</button>
+        </div>
+
+        <div id="fullContent" class="hidden-content">
+            
+            <div class="section">
+                <h2 class="section-title">01 产品核心优势</h2>
+                
+                <div class="visual-card">
+                    <div class="visual-card-icon">☁️</div>
+                    <h3 class="visual-card-title">自由软支撑 · 如坐云端</h3>
+                    <div class="quote-box">
+                        <div class="quote-text">
+                            玄星X2采用创新的"自由软支撑"技术，<strong>让每一次坐下都像躺在云端</strong>。无论是长时间办公还是休闲放松，都能获得最舒适的支撑体验。
+                        </div>
+                        <div class="quote-author">—— 产品设计理念</div>
+                    </div>
+                </div>
+
+                <div class="comparison-visual">
+                    <div class="comparison-side bad">
+                        <h4>❌ 传统办公椅问题</h4>
+                        <p>• 固定支撑无法适应体型<br>
+                        • 长时间久坐腰部酸痛<br>
+                        • 调节功能有限不够灵活<br>
+                        • 舒适度和支撑力难兼顾</p>
+                    </div>
+                    <div class="comparison-side good">
+                        <h4>✓ 玄星X2解决方案</h4>
+                        <p>• 六维腰部调节系统<br>
+                        • 软弹力支撑舒适护腰<br>
+                        • 全方位个性化调节<br>
+                        • 160-190cm人群完美适配</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">02 六大核心功能</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="icon">🎯</div>
+                        <h4>六维弹力软腰枕</h4>
+                        <div class="stat">6维调节</div>
+                        <p>前后3cm、上下5cm<br>倾斜微调，全方位定制</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="icon">🔄</div>
+                        <h4>360°双轴扶手</h4>
+                        <div class="stat">全向旋转</div>
+                        <p>上下、前后、角度<br>三维立体调节</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="icon">💺</div>
+                        <h4>坐深可调节</h4>
+                        <div class="stat">6档调整</div>
+                        <p>适配不同腿长<br>大小腿90°舒适坐姿</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="icon">🎧</div>
+                        <h4>3D旋转头枕</h4>
+                        <div class="stat">3D自由</div>
+                        <p>上下、前后、角度<br>颈部全方位支撑</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="icon">⚖️</div>
+                        <h4>承重200kg</h4>
+                        <div class="stat">超强承载</div>
+                        <p>加固椅架设计<br>稳固安全</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="icon">📏</div>
+                        <h4>适配160-190cm</h4>
+                        <div class="stat">广泛适配</div>
+                        <p>覆盖绝大多数<br>成年人身高范围</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">03 设计理念</h2>
+                
+                <div class="process-flow">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <div class="step-title">人体工学</div>
+                        <div class="step-desc">科学曲线设计</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <div class="step-title">个性调节</div>
+                        <div class="step-desc">多维度自由定制</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <div class="step-title">软性支撑</div>
+                        <div class="step-desc">舒适与支撑兼顾</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <div class="step-title">品质工艺</div>
+                        <div class="step-desc">恒林家居标准</div>
+                    </div>
+                </div>
+
+                <div class="visual-card">
+                    <div class="visual-card-icon">🎨</div>
+                    <h3 class="visual-card-title">设计哲学</h3>
+                    <div class="quote-box">
+                        <div class="quote-text">
+                            玄星X2的设计围绕"<strong>如坐云端</strong>"的核心理念展开。我们不仅追求功能性，更注重使用者的感受体验。通过六维调节系统和软弹力支撑技术，让每一位用户都能找到属于自己的最舒适坐姿。
+                        </div>
+                        <div class="quote-author">—— 恒林家居设计团队</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">04 完整16屏设计展示</h2>
+                
+                <div class="image-gallery">
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_01.jpg" alt="第1屏">
+                        <div class="caption">
+                            <h4>第1屏 - 首屏视觉</h4>
+                            <p>如坐云端的自由支撑</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_02.jpg" alt="第2屏">
+                        <div class="caption">
+                            <h4>第2屏 - 调节系统</h4>
+                            <p>六档随心调节</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_03.jpg" alt="第3屏">
+                        <div class="caption">
+                            <h4>第3屏 - 腰部支撑</h4>
+                            <p>六维弹力软腰枕</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_04.jpg" alt="第4屏">
+                        <div class="caption">
+                            <h4>第4屏 - 功能详解</h4>
+                            <p>核心功能展示</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_05.jpg" alt="第5屏">
+                        <div class="caption">
+                            <h4>第5屏 - 细节展示</h4>
+                            <p>工艺细节特写</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_06.jpg" alt="第6屏">
+                        <div class="caption">
+                            <h4>第6屏 - 使用场景</h4>
+                            <p>多场景应用</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_07.jpg" alt="第7屏">
+                        <div class="caption">
+                            <h4>第7屏 - 材质工艺</h4>
+                            <p>精选材质展示</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_08.jpg" alt="第8屏">
+                        <div class="caption">
+                            <h4>第8屏 - 品质细节</h4>
+                            <p>细节品质把控</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_09.jpg" alt="第9屏">
+                        <div class="caption">
+                            <h4>第9屏 - 技术参数</h4>
+                            <p>产品规格说明</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_10.jpg" alt="第10屏">
+                        <div class="caption">
+                            <h4>第10屏 - 功能演示</h4>
+                            <p>调节功能演示</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_11.jpg" alt="第11屏">
+                        <div class="caption">
+                            <h4>第11屏 - 对比优势</h4>
+                            <p>产品对比分析</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_12.jpg" alt="第12屏">
+                        <div class="caption">
+                            <h4>第12屏 - 用户评价</h4>
+                            <p>真实用户反馈</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_13.jpg" alt="第13屏">
+                        <div class="caption">
+                            <h4>第13屏 - 品牌故事</h4>
+                            <p>恒林家居介绍</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_14.jpg" alt="第14屏">
+                        <div class="caption">
+                            <h4>第14屏 - 售后服务</h4>
+                            <p>完善服务体系</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_15.jpg" alt="第15屏">
+                        <div class="caption">
+                            <h4>第15屏 - 购买引导</h4>
+                            <p>优惠信息展示</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal(this)">
+                        <img src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_16.jpg" alt="第16屏">
+                        <div class="caption">
+                            <h4>第16屏 - 品牌背书</h4>
+                            <p>恒林家居品质保证</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">05 产品规格</h2>
+                
+                <div class="visual-card">
+                    <h3 class="visual-card-title">技术参数</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="icon">📐</div>
+                            <h4>适配身高</h4>
+                            <p>160-190cm<br>覆盖绝大多数人群</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon">⚖️</div>
+                            <h4>最大承重</h4>
+                            <p>200kg以下<br>稳固安全</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon">🔧</div>
+                            <h4>调节系统</h4>
+                            <p>六维腰部调节<br>360°扶手旋转</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="icon">🏢</div>
+                            <h4>品牌保障</h4>
+                            <p>恒林家居出品<br>品质可靠</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>© 2024 恒林家居 · 玄星X2人体工学椅</p>
+            <p>自由软支撑 · 如坐云端的舒适体验</p>
+        </div>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="放大图片">
+        </div>
+    </div>
+
+    <script>
+        function showFullGallery() {
+            document.getElementById('fullContent').style.display = 'block';
+            event.target.style.display = 'none';
+            
+            // 平滑滚动到内容区域
+            setTimeout(() => {
+                document.getElementById('fullContent').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+
+        function openModal(element) {
+            const img = element.querySelector('img');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            modal.style.display = 'block';
+            modalImg.src = img.src;
+            
+            // 禁止body滚动
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.style.display = 'none';
+            
+            // 恢复body滚动
+            document.body.style.overflow = 'auto';
+        }
+
+        // 点击模态框背景关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

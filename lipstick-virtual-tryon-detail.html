@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例3：口红虚拟试色 - AI多场景展示解决方案</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 36px;
+            color: #f5576c;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #f5576c;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h3 {
+            font-size: 28px;
+            color: #f093fb;
+            margin: 40px 0 25px 0;
+            padding-left: 20px;
+            border-left: 5px solid #f093fb;
+        }
+        
+        .case-section {
+            background: #fff5f8;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.1);
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .image-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.3);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .image-caption {
+            padding: 20px;
+            background: white;
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            border-left: 5px solid #f5576c;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #f5576c;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background: #fff5f8;
+        }
+        
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 15px 0;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        .icon {
+            font-size: 32px;
+        }
+        
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💄 案例3：口红虚拟试色</h1>
+            <p class="subtitle">AI多场景展示解决方案</p>
+        </header>
+        
+        <div class="content">
+            <div class="highlight-box">
+                <h2><span class="icon">💡</span> 核心价值</h2>
+                <p style="font-size: 20px; line-height: 2; margin-top: 20px;">
+                    通过AI虚拟试色技术，将单一的口红产品图转化为多场景真实上唇效果展示，帮助美妆品牌突破线上试色局限，
+                    让消费者直观感受不同口红在各种妆容场景中的实际效果，大幅提升购买决策效率，降低因色号选择错误导致的退货率。
+                </p>
+            </div>
+
+            <h2><span class="icon">📊</span> 行业痛点分析</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">78%</div>
+                    <div class="stat-label">用户因无法试色而犹豫购买</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">52%</div>
+                    <div class="stat-label">退货率（色号不符/不适合肤色）</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8-15万</div>
+                    <div class="stat-label">传统多场景拍摄成本（元）</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20天</div>
+                    <div class="stat-label">传统多模特拍摄周期</div>
+                </div>
+            </div>
+
+            <h2><span class="icon">✨</span> 真实案例展示</h2>
+
+            <!-- 案例1：经典正红色 -->
+            <div class="case-section">
+                <h3>案例 1️⃣：经典正红色 - 气场王者</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/bAZtnKSg?token=Z0FBQUFBQnBYZGU1NExwbnVGOVZzY1dhNFFkUWt1NUdJc0R1Q1ZVLXlHYm84SGdGeUR4Y2g5cV9DbVQ3SFVZeElnTTJzTThDTjhjZFB5MzE2WmY4VkhUbWhaQWVZNU1XcWhkV1VvZW81QXpWVGdfeFRMY1dVbmlTd01kVUN4Z25YQllMR0djTlgzLVMyOFp6VlowVnpjc3FVMlk4TVhDa2Mwa0luSHhwX004WVJkUVZoUTR0NnRRVVJKeFRsSkpvZ2c3M2tUOUxxUkFIT1FqejdvVjY2N1g4OGt0TEJZczlNeXc0UE1KRVIxbVBrZG50RFFFUkhEM1FQNHZud1dEeTJIcy1nVXZsVldpZEVlMzcyaVc3ZDQzZHZueFZpMmlCS2c9PQ" alt="经典正红色-图1">
+                        <div class="image-caption">图1：职场通勤/约会晚宴/派对聚会/日常休闲妆</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/I6hq03KT?token=Z0FBQUFBQnBYZGU1WkVSaXEtdmFPMFZITUlBNG44R3FkS05NSDhIb2VGM0RZT2RXUy1WbjQwb1g0ZjFWZ3pYYm1ja3oxcUhBa3RVZDRkMGNsQ3FNOTVSWkxjWXY2dzVfUk1KeFZJZk1ua0ZGU1RfNHVKUkV4T1lzOFhoWkFnUjROWlpCN2VIdGNwMFYteUh4bDBmUkQyUTZuLXdTUWYtRXl0WV9VdWI4ajVzR1JoX2NaOGdOTEV5WkFqNE5aamRXWjhnak90VHJYUmI2aXc5MXF0M1V3TkZORENMdTV5ajUtb0duenRoeFZCeHZ1RHpSMDFjQWpJSzlmd2h1UGVZdjI0THRqcmwwX01VVHVvVTQ2RmZPMmZQQVJPVGpNcFRZMHc9PQ" alt="经典正红色-图2">
+                        <div class="image-caption">图2：婚礼场合/年会盛典/时尚街拍/摄影棚妆容</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用场合：</strong>重要会议、约会、派对、婚礼<br>
+                    <strong>风格特点：</strong>经典、气场强、正式、显白<br>
+                    <strong>核心卖点：</strong>百搭色号、显气色、持久不脱色
+                </p>
+            </div>
+
+            <!-- 案例2：温柔豆沙色 -->
+            <div class="case-section">
+                <h3>案例 2️⃣：温柔豆沙色 - 日常百搭</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/ZAHZrmDd?token=Z0FBQUFBQnBYZGU1LUwxMGNmY2N6WmdRVnBwalJ5VHpZalRlQUtsQ0NTTHhrZ2VGZ2k4OVAwbkxFWXk2RDlOTHFtbE5aamMwcVhwVUpXWkhwZ1RNMk1WSmszOHhmVEZnX2x1S1lyZnlNNmpjbU9YRGhuMzhVRHBVclM5eUgwcVVUcVBCczM5WUZ0VTFzM3ZPRFptdF9veXhDV1otaEZkeE1WeDhKMGtLY1ZtUFFDT3c1NmFtZEdzU0lRLWtieEoxQXRQMXRKTWlLeGlrbUtrUmwybUNERjB1ekRydlBHeW4wbFFyM0t4ZGQ2ckh1bHNhRGJfMkphUUwwXzlaM20wMEdmeUxwZEdDbXFacnBIeEpHVkx3SmhZRUlJaTB4aGZnMmc9PQ" alt="温柔豆沙色-图1">
+                        <div class="image-caption">图1：清新自然/甜美可爱/温柔淑女/校园学生妆</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/yzbHvxZa?token=Z0FBQUFBQnBYZGU1UncwNlVjOVFJY2ZMbkFqYko5bW9oMEhCekE5YnpJZ2RWY2FENmdoUy1ZRnN5SDJ4bUl5bGlad3V2ZFNoNy1BcWU5ZEhNWE5UeVp4VU01SklIQXdtRnpJc3dLNHBqLTRvY2EwZm1wWTZQR0tzUkhCdEFFbkJUVUo3c3ZDTEV0NWpsZVJBWEdrTnNVeHBNcXQxY2NvYk5FTWpwRzE1YW4wWFZGZmhkR1dadWpOcHVSSVJHd2steDdYZ2plZjJnN2NDLV9JamQ1M1NTT0N5QUlIWUtKM25yTk9PeEpVd09kNXFlbkZCcUNkazNYNnNwLWxQTk9DNTZVUEdtZEVHZFZwVWstb1NvYTFCQ0xCbU55V3dQdEdlZ1E9PQ" alt="温柔豆沙色-图2">
+                        <div class="image-caption">图2：约会咖啡厅/闺蜜下午茶/轻奢购物/艺术展览妆</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用场合：</strong>日常通勤、校园、约会、下午茶<br>
+                    <strong>风格特点：</strong>温柔、自然、少女感、减龄<br>
+                    <strong>核心卖点：</strong>显白显嫩、不挑肤色、日常百搭
+                </p>
+            </div>
+
+            <!-- 案例3：活力橘红色 -->
+            <div class="case-section">
+                <h3>案例 3️⃣：活力橘红色 - 元气满满</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/VoytQRgg?token=Z0FBQUFBQnBYZGU1TXJFZFhPSE82VjdDMDk1b21PZGx3M2tjdjY0b0lJVHhRVmtpNGF5VlFzdUFvUTVOeG44NnRFWmVnQjVBZWd6TThBQzZQSkpWbmRDSksyeFpXbzJacTZiVlhBTFB5clFIMzB1TzR6eE44ZzJEWS13YzB6Nm9WQmk4M0hNVlVwMkpaRzBPZmdDekJoNEtGT29yUnFOSnAyek9yRmJJWG1ZSU9vbE8xc0FiY1Y0UEdOT2xNcEpUYVJnQlJLUkF0bHNuaWZCZHQ0V2RaZ1dNazdGVEVjcG14U1ViV2xoUkJxQkJJQ3lhYkV2QklnR3VxNE82MHJfZTNyUWhJZnVuMEc5cFpCRlFnUmRRRFVlSm9ucUZkQmRRTlE9PQ" alt="活力橘红色-图1">
+                        <div class="image-caption">图1：活力运动/音乐节潮流/夏日海滩/派对狂欢妆</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/EOnCVQ57?token=Z0FBQUFBQnBYZGU1SWZRRjgzdUlMT2xDNTB2am82V1c2RVJwU184WDFuLW9Cb3JLRXJ5M3BfeUxjVEU1VkJCbEEyMFVUd2FYRm1LODRNZ09adm11MklYSGtzUmFGaXdkdVlwZzFpSnA2X19US0ZOa0xsZVVlSGdzOTZQTUVSdVFRSzJpbUZmc1hrd3BGdnVZZmhiSlJsOTEybUZRVDhqM0lfRkZEeno0bzhDeWpfNlM1VkZ6OWhic2NTVE9meVlkZWZ2M0J0QzFXR0xBNVhseDJDVzBTX2ZkOUo3UFdSRUZPTW1mRV8xXzEwZVFuR3BaM09pcW5zclV4OVR1Wk9iQzI3UHNqX3VaZVB6UFM2TkRNeVlvaWp2dk04T3RENFNFOWc9PQ" alt="活力橘红色-图2">
+                        <div class="image-caption">图2：街头潮拍/电音派对/度假旅行/创意工作室妆</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用场合：</strong>音乐节、海滩、运动、派对<br>
+                    <strong>风格特点：</strong>活力、青春、夏日、潮流<br>
+                    <strong>核心卖点：</strong>提亮肤色、显活力、夏日必备
+                </p>
+            </div>
+
+            <!-- 案例4：复古枫叶色 -->
+            <div class="case-section">
+                <h3>案例 4️⃣：复古枫叶色 - 秋冬氛围</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/fZVOyv0Y?token=Z0FBQUFBQnBYZGU1dHVJRG1haHphb3E2OWZWZ2xEOXlyQWNuTWg4bkpjNTgwd2oxdExvY09UaDRDdTBXbUQ1X2RSaDM0andWVTFBallPRjFYQ0szZDZEWldVXzZNQ2ZWa2I5WmE1czh3VHVVcjFLYU9ndVI4RGNWN3hlTmJYdURjNzljYmRLV0pGLWx4bjVCeGNKVGRIWW5SRnp2SkJfWDZCX0t3dGJHblByei0zRHJnd1JiZ3NzWmx5bHBKZllxd2doV0FGQ0JBMFFmX0NyVGlyd0tUWVFzWi1ERUFPb29iUE5fSWxuVFpJUWZvN19QdG9NNVY5cGM1UURhY0V6ck5DTk40WW1KVGl3Y3pSdy14OGpkLTBlYVVxekE0RW1wS1E9PQ" alt="复古枫叶色-图1">
+                        <div class="image-caption">图1：复古名媛/秋冬氛围/红酒晚宴/文艺咖啡馆妆</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/z6L8in2V?token=Z0FBQUFBQnBYZGU1a29UVVRDaUpqRjk2cFFlRE0tR292aUMxMG9sRWFfakYwLTB4c0lDbFB3NkhKX0xsT2U2bzc2SWJmbHdNNVlFbGZhUUV0VERteDRVZVFWNjZIdWpLVkc5YTF2aHhYRUxxWTFNRUQ4YVRvMXQzS09RYjZNN0x1VnJZLTZUT1ZnSmcyOGRWZjByMDUzWHVRb1lGUUwxUmNWU0xBeVlZdTZvYUZDQjllcVJ4ZW80UVlPLWxjMkRsVlhKV0ROaTZ3QzRNYUFIR3NwMUZJNDJNT1NPbEZab1VjSUViV0lRNGk2TUxRMFVzMnV2ZGF5MDVpMEpxcWh2bkQ0Q3V3WllxYlhSWlcyMk55M0E5dEFKcTJ5My11bVBfZGc9PQ" alt="复古枫叶色-图2">
+                        <div class="image-caption">图2：书店阅读/博物馆参观/歌剧院/高级餐厅妆</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用场合：</strong>秋冬季节、晚宴、文艺活动、高级场合<br>
+                    <strong>风格特点：</strong>复古、优雅、知性、有质感<br>
+                    <strong>核心卖点：</strong>秋冬必备、显成熟、高级感
+                </p>
+            </div>
+
+            <!-- 案例5：气质玫瑰色 -->
+            <div class="case-section">
+                <h3>案例 5️⃣：气质玫瑰色 - 优雅高贵</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/rUCXXWbI?token=Z0FBQUFBQnBYZGU1TzQtR1JrTlhYSTFyS09OV0hxR2pneS1Gd3diMVNDV1BtNHpfMWdldkx4YkRwMjdjUGRjUzZ2Z3ZadGV5aG5KTzBtSy1peFBBQWg1MGQzSlZvMHR5NWJvcjZSb0I3bVpXcTRsODZseldTVHp6dTlVVGFISUMxeVhxUEd5YVVROFpMMFVFMzNKa2xEVlFlQ2ZXXzVObTYyYWZvdWJkbW1URTl3MXhuMnBzcmpuMU5YOE9hZUxoU1BoQTc3c2Vpa2NoLXhlMC13Y1pZdTdYZ3dkRVNPcHRIR2JlS095d2VTZkoydlJwSDk2Z0hhZ1ZsZ2hHcC1lYWZsZzdWeTVrNkxNTnFLYS16YU5fRl9ub1U3RjZTZ3M2emc9PQ" alt="气质玫瑰色-图1">
+                        <div class="image-caption">图1：优雅商务/高端会议/品牌发布会/社交酒会妆</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/1NngJdOg?token=Z0FBQUFBQnBYZGU1Q0N1QUVKVU5VYWd6dHR6VkFFbGVDVmxMbFlUNDhCYVRTaU5zUnJRdkd0M3ZDaEtPVWszWkVhdFFJOUFJNWRkb3Y0TUJ1bk9wVDdCWEFteGlVQUthOTY2NmNReGdra0VHX0pqeXRNN0EyalhIaEJFQnBMeENYbHZMVWxNUVBwV3cxd0ZXMjhaMmhydnNjZmlOQm05YVZLcmV6eVdmZ1FuNmNjRVBsM082aEpFeXRBQ01zYVF5VGZEWTRGZ2p1cWJ1U1ZNNUFlWDN5NzBvNS1lUzBGMkxGWTdoYS1nV25LV3h6SHRSYkNMYmk4aWlsbGU1NmpXbUFrV2U0MTVnQWZPcC1zZ0ExUG1vY3NLbmxLZE94eXVGN3c9PQ" alt="气质玫瑰色-图2">
+                        <div class="image-caption">图2：奢华晚宴/名媛下午茶/高尔夫俱乐部/艺术沙龙妆</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用场合：</strong>商务场合、高端会议、社交活动、晚宴<br>
+                    <strong>风格特点：</strong>优雅、高贵、知性、专业<br>
+                    <strong>核心卖点：</strong>显气质、职场必备、高级感强
+                </p>
+            </div>
+
+            <h2><span class="icon">⚖️</span> 传统方案 vs AI方案对比</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>对比维度</th>
+                        <th>传统多模特拍摄方案</th>
+                        <th>AI虚拟试色方案</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>成本</strong></td>
+                        <td>单色号8-15万元（模特、摄影师、化妆师、场地）</td>
+                        <td><strong style="color: #f5576c;">每色号仅需300-800元</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>周期</strong></td>
+                        <td>20-30天（模特档期、拍摄、后期）</td>
+                        <td><strong style="color: #f5576c;">10分钟生成</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>模特多样性</strong></td>
+                        <td>2-3个模特（成本限制）</td>
+                        <td><strong style="color: #f5576c;">无限模特、肤色、场景</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>场景灵活性</strong></td>
+                        <td>1-2个场景（拍摄限制）</td>
+                        <td><strong style="color: #f5576c;">8种场景，随时切换</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>新品上市</strong></td>
+                        <td>需提前1-2个月准备素材</td>
+                        <td><strong style="color: #f5576c;">与产品同步上线</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>退货率</strong></td>
+                        <td>50-52%（无法试色，仅凭想象）</td>
+                        <td><strong style="color: #f5576c;">18-22%（多场景真实展示）</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2><span class="icon">💰</span> 商业价值</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">98%↓</div>
+                    <div class="stat-label">成本节省</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99%↓</div>
+                    <div class="stat-label">时间节省</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">210%↑</div>
+                    <div class="stat-label">转化率提升</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">62%↓</div>
+                    <div class="stat-label">退货率降低</div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 50px;">
+                <h2><span class="icon">🎯</span> 适用场景</h2>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li><strong>美妆电商：</strong>天猫、京东、抖音等平台商品详情页展示</li>
+                    <li><strong>品牌官网：</strong>提升产品页面吸引力和转化率</li>
+                    <li><strong>社交营销：</strong>小红书、抖音等美妆种草内容制作</li>
+                    <li><strong>直播带货：</strong>快速展示多色号效果，提升直播转化</li>
+                    <li><strong>新品发布：</strong>快速生成全色号展示素材</li>
+                    <li><strong>营销活动：</strong>节日、季节主题场景定制</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h2><span class="icon">💄</span> 口红行业特殊痛点</h2>
+                <ol style="font-size: 18px; line-height: 2;">
+                    <li><strong>色号多样复杂：</strong>一个系列动辄30-50个色号，传统拍摄成本天文数字</li>
+                    <li><strong>肤色适配难题：</strong>同一色号在不同肤色上效果差异巨大</li>
+                    <li><strong>场景需求多样：</strong>需展示日常、职场、派对等多种场景效果</li>
+                    <li><strong>快速上新压力：</strong>美妆行业上新速度快，传统拍摄跟不上节奏</li>
+                    <li><strong>退货率居高不下：</strong>用户"买家秀"与"卖家秀"差距导致大量退货</li>
+                    <li><strong>试色成本高：</strong>线下试色需大量柜台和BA人力成本</li>
+                </ol>
+                <p style="margin-top: 20px; font-size: 18px; color: #f5576c; font-weight: 600;">
+                    💡 AI虚拟试色技术完美解决以上所有痛点，让口红展示不再受物理条件限制！
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

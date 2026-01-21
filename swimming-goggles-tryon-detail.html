@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例2：泳镜虚拟试戴 - AI多场景展示解决方案</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            padding: 40px 20px;
+            padding-top: 100px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 36px;
+            color: #38f9d7;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #38f9d7;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h3 {
+            font-size: 28px;
+            color: #43e97b;
+            margin: 40px 0 25px 0;
+            padding-left: 20px;
+            border-left: 5px solid #43e97b;
+        }
+        
+        .case-section {
+            background: #f0fff4;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(67, 233, 123, 0.1);
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .image-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(56, 249, 215, 0.3);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .image-caption {
+            padding: 20px;
+            background: white;
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%);
+            border-left: 5px solid #38f9d7;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #38f9d7;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f0fff4;
+        }
+        
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 15px 0;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        .icon {
+            font-size: 32px;
+        }
+        
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">陈群超</a>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="index.html#about">关于</a>
+                <a href="portfolio.html">作品集</a>
+                <a href="index.html#contact">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🏊 案例2：泳镜虚拟试戴</h1>
+            <p class="subtitle">AI多场景展示解决方案</p>
+        </header>
+        
+        <div class="content">
+            <div class="highlight-box">
+                <h2><span class="icon">💡</span> 核心价值</h2>
+                <p style="font-size: 20px; line-height: 2; margin-top: 20px;">
+                    通过AI虚拟试戴技术，将泳镜产品从单一平铺图转化为真实水上场景佩戴展示，帮助游泳装备品牌突破传统展示限制，
+                    让消费者直观感受不同泳镜在各种游泳场景中的实际效果，大幅提升购买信心，减少犹豫时间。
+                </p>
+            </div>
+
+            <h2><span class="icon">📊</span> 行业痛点分析</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">72%</div>
+                    <div class="stat-label">用户因无法预判效果而犹豫</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">38%</div>
+                    <div class="stat-label">退货率（不合适/漏水）</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5-8万</div>
+                    <div class="stat-label">水下拍摄单款成本（元）</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20天</div>
+                    <div class="stat-label">传统水下拍摄周期</div>
+                </div>
+            </div>
+
+            <h2><span class="icon">✨</span> 真实案例展示</h2>
+
+            <!-- 案例1：专业泳镜 -->
+            <div class="case-section">
+                <h3>案例 1️⃣：专业泳镜 - 竞技之选</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/oMguIZek?token=Z0FBQUFBQnBYYzlDblpNR0l1WHo0ZHV1ZnFlS0NCSHBHMFZSV3VNUFZZRk5LOWVEY0tudDdNZ0hfRGZtaE5zRU1uNVZZTmVONUhlbi1SanFRSkxLQ28wSnhhNzVBQm5PT0gxVTZhLTRvSU5FdFoyY1ZUd0FwV2J0UGtJRVZBMS1DUmtLazlzNmZ2VXpMRWNnSjZ4MlJXT0FXUmNXNWZSU2dpOE95aHNtV1FFTDl3aVRHWG5YRWZkTGxkLVJsdnJjNE0xcG1SUTV1V2VnNktHVHV5Vnotb3VPVU9BNGhZV1dqcGdYRkVSTy1VYy1QcGJNM3BhQ2hWYXVQTDktVUlocmt2eThGSXo5OERNQlkwamcxWTJiYUZROXlkNEhBOVAwTWc9PQ" alt="专业泳镜-图1">
+                        <div class="image-caption">图1：海滩开放水域/铁人三项竞赛/度假酒店泳池/儿童游泳课程</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/QazWmGJb?token=Z0FBQUFBQnBYYzlDeXA2Umg0akRMbGtseTVfam5QQnBPS3FhYWZuS0NnaVlTRE9KZXpqTktJVkEteWVzY21QdlRfdWF4LWdzVnh1TmVmSTg4SE5QdXRLQXhGRXk5QnhSbXlvSnlVZjR4d1hONWhXazVlcjR2RlMzWEdmejA0TGRtcmVEejdFWThYUTZLWHJVZ25qRDk3d3hWODVIbnBSd1dRb21ZdUxpM3FzUGpzaWVZV0ttOGFoRkIyTW5tdVNNUS1HSXdWQ0VhQ2d3TVp3MnJlVF84WDZ1b21PT1BTemc0Q0o1X3hvenUxSUo0aG5mYTJvWXJpbUIzWUdPVEs1aDl3VFlUamtCdGlJVGYzdnVYeDJvTXphTHRESzd5QkR6bXc9PQ" alt="专业泳镜-图2">
+                        <div class="image-caption">图2：多场景展示效果</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用人群：</strong>专业运动员、铁三爱好者、泳池常客、游泳教练<br>
+                    <strong>场景特点：</strong>竞技、训练、开放水域、专业赛事<br>
+                    <strong>核心卖点：</strong>防雾、防水、舒适贴合、高清视野
+                </p>
+            </div>
+
+            <!-- 案例2：儿童泳镜 -->
+            <div class="case-section">
+                <h3>案例 2️⃣：儿童泳镜 - 快乐成长</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/6sE5dVR7?token=Z0FBQUFBQnBYZEJfTjhuTjNhbVl0S3hpTHpvRE5rcTVFQ2cwbVpYRzlSN3ZBTEdLM01jSmNYaXRiWmk3akRmY24yZlo0cFF2aVFtdEFzUnZmdE9pcHBGMno4VWh0dllfUjJRQVpFMnRhZ0F5bDdtUWN4ajVVei1hWHhrb0RoblQ3X0R5NXl4OE9LVS1sbV9raHFpaEt2U0lCR3hyT3FadWVnQTdmVGpFSnpiemdPdHN5ZjdIRWRIcktqSTctUUxEM3phdk1YckJnRHdQRUx4RXkzbk5IbXAwWFp3UXN0MFJiem5FZUNCbVQzQkYxbzhBcnBQdnVxc255aXBsemExLW5kaTBKVnJuT003S29DZ3Y4WWVJbHNIdFA3MDJtZUJYeGc9PQ" alt="儿童泳镜-图1">
+                        <div class="image-caption">图1：游泳俱乐部/夏令营泳池/湖泊游泳/水下探索</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/bVDLcw1a?token=Z0FBQUFBQnBYZEJfWmlBbFFzS1NGX1N3MHI0ajh6bjBnUGc1d0Y5NXh0MzlzVW8tdDVYZ0ZGNXNibnNQQkE1VFlZZ0E3a01heUZnOGdGNlJhV0dVQUVMdTFDRWdUdWxaR21jcnlEOEk5YkotQjVBZUMyQ0pwYmgyTEtpQk1pdzRlMUoxd3lMeUJ1Y3FsRTgwVEFmcEUzeXdwUURoOEdSbjdxZHA1Rnk3RFlHUEIxSVZOam1pWXhYVEJsc0ZwQ1RqWWVGdUYyZFJBR3V2VDFKTnFBbV8tVDVRYTZjYkVScmFFZ0J4c1RmZlhydUFnM0x2dmUxNU1wZWs0bjZQS1RIQXhfa1Q5QkplRko1N1lpTG5MRm1mSGRYckcxbFF3TWFyY3c9PQ" alt="儿童泳镜-图2">
+                        <div class="image-caption">图2：多场景展示效果</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用人群：</strong>儿童学员、游泳初学者、夏令营小朋友<br>
+                    <strong>场景特点：</strong>培训、娱乐、夏令营、家庭活动<br>
+                    <strong>核心卖点：</strong>柔软舒适、卡通设计、防漏水、护眼
+                </p>
+            </div>
+
+            <h2><span class="icon">⚖️</span> 传统方案 vs AI方案对比</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>对比维度</th>
+                        <th>传统水下拍摄方案</th>
+                        <th>AI虚拟试戴方案</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>成本</strong></td>
+                        <td>单款5-8万元（水下摄影师、专业设备、场地租赁）</td>
+                        <td><strong style="color: #38f9d7;">每款仅需200-500元</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>周期</strong></td>
+                        <td>20-40天（场地预约、设备调试、水下拍摄）</td>
+                        <td><strong style="color: #38f9d7;">10分钟生成</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>场景灵活性</strong></td>
+                        <td>1-2个场景（成本高昂，难以更换）</td>
+                        <td><strong style="color: #38f9d7;">无限场景，秒级切换</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>拍摄难度</strong></td>
+                        <td>需专业水下摄影师，设备昂贵，安全风险高</td>
+                        <td><strong style="color: #38f9d7;">零拍摄难度，AI自动生成</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>季节限制</strong></td>
+                        <td>受季节、天气、水温影响</td>
+                        <td><strong style="color: #38f9d7;">全年无限制</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>退货率</strong></td>
+                        <td>35-38%（无法预判实际效果）</td>
+                        <td><strong style="color: #38f9d7;">12-15%（场景真实展示）</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2><span class="icon">💰</span> 商业价值</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">97%↓</div>
+                    <div class="stat-label">成本节省</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">99%↓</div>
+                    <div class="stat-label">时间节省</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">165%↑</div>
+                    <div class="stat-label">转化率提升</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">62%↓</div>
+                    <div class="stat-label">退货率降低</div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 50px;">
+                <h2><span class="icon">🎯</span> 适用场景</h2>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li><strong>运动电商：</strong>迪卡侬、Keep等运动品类详情页</li>
+                    <li><strong>品牌官网：</strong>游泳装备品牌产品展示</li>
+                    <li><strong>社交营销：</strong>小红书、抖音等运动种草内容</li>
+                    <li><strong>游泳培训：</strong>游泳培训机构装备推荐</li>
+                    <li><strong>赛事营销：</strong>铁人三项、游泳比赛场景营销</li>
+                    <li><strong>儿童市场：</strong>亲子游泳、儿童培训装备展示</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <h2><span class="icon">🌊</span> 泳镜行业特殊痛点</h2>
+                <ol style="font-size: 18px; line-height: 2;">
+                    <li><strong>水下拍摄成本极高：</strong>需要专业水下摄影团队和设备，单次拍摄成本动辄数万元</li>
+                    <li><strong>安全风险：</strong>模特水下拍摄存在安全隐患，需配备专业救生员</li>
+                    <li><strong>季节限制：</strong>室外水域拍摄受季节、天气严重影响</li>
+                    <li><strong>效果难把控：</strong>水下光线、水质清晰度影响拍摄质量</li>
+                    <li><strong>场景单一：</strong>传统方案只能拍摄1-2个场景，无法展示多样使用环境</li>
+                    <li><strong>迭代困难：</strong>产品更新后需重新拍摄，周期长、成本高</li>
+                </ol>
+                <p style="margin-top: 20px; font-size: 18px; color: #38f9d7; font-weight: 600;">
+                    💡 AI虚拟试戴技术完美解决以上所有痛点，让泳镜展示不再受物理条件限制！
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

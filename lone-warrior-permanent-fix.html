@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孤勇者详情页 - 电商详情页设计案例 | 转化率提升42%</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* 头部标题区 */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .header .subtitle {
+            font-size: 24px;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+        
+        .header .tags {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        /* 核心数据展示区 */
+        .data-highlight {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .data-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .data-card .number {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .data-card .label {
+            font-size: 16px;
+            color: #a0a0a0;
+        }
+        
+        /* 精选作品展示区 */
+        .featured-works {
+            margin-bottom: 80px;
+        }
+        
+        .featured-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .featured-subtitle {
+            font-size: 18px;
+            color: #a0a0a0;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .featured-grid {
+            display: grid;
+            gap: 40px;
+        }
+        
+        .featured-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .featured-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.4);
+            border-color: #667eea;
+        }
+        
+        .featured-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        
+        .featured-item:hover img {
+            transform: scale(1.03);
+        }
+        
+        .featured-caption {
+            padding: 30px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%);
+        }
+        
+        .featured-caption h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .featured-caption p {
+            font-size: 16px;
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+        
+        .featured-caption .highlight {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        /* 图片展示区 - 优化留白 */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 25px;
+            margin: 40px 0 60px 0; /* 减少底部margin */
+        }
+        
+        .image-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 0; /* 移除额外底部间距 */
+        }
+        
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-card .caption {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .image-card .caption h4 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .image-card .caption p {
+            font-size: 14px;
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+        
+        /* 章节标题 */
+        .section {
+            margin-bottom: 60px; /* 减少章节间距 */
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 5px solid #667eea;
+        }
+        
+        /* 页脚优化 */
+        .footer {
+            text-align: center;
+            margin-top: 60px; /* 减少顶部间距 */
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #888;
+        }
+        
+        .footer p {
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.6;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .image-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            position: relative;
+            margin: 2% auto;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close:hover {
+            background: rgba(245, 87, 108, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>孤勇者 · 办公椅详情页设计</h1>
+            <div class="subtitle">基于用户调研的电商详情页优化实战案例</div>
+            <div class="tags">
+                <span class="tag">电商视觉设计</span>
+                <span class="tag">用户体验优化</span>
+                <span class="tag">转化率提升42%</span>
+                <span class="tag">竞品分析</span>
+                <span class="tag">数据驱动设计</span>
+            </div>
+        </div>
+
+        <!-- 核心数据展示 -->
+        <div class="data-highlight">
+            <div class="data-card">
+                <div class="number">+42%</div>
+                <div class="label">详情页转化率提升</div>
+            </div>
+            <div class="data-card">
+                <div class="number">+68%</div>
+                <div class="label">页面停留时长增长</div>
+            </div>
+            <div class="data-card">
+                <div class="number">-35%</div>
+                <div class="label">跳出率下降</div>
+            </div>
+            <div class="data-card">
+                <div class="number">20+</div>
+                <div class="label">用户深度访谈</div>
+            </div>
+        </div>
+
+        <!-- 精选作品展示 -->
+        <div class="featured-works">
+            <h2 class="featured-title">✨ 精选设计作品</h2>
+            <p class="featured-subtitle">核心页面展示完整设计思路</p>
+            
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_01.jpg" alt="首屏设计">
+                    <div class="featured-caption">
+                        <h3>首屏设计：150°大仰角场景化呈现</h3>
+                        <p><span class="highlight">核心策略：</span>用"商务舱随时在身边"替代技术术语，真人躺姿直击痛点</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_03.jpg" alt="痛点场景">
+                    <div class="featured-caption">
+                        <h3>痛点场景：长时间开会腰部压力无处释放</h3>
+                        <p><span class="highlight">设计亮点：</span>插画+场景化文案，85%商务人士最关心"会议中能随时躺下缓解"</p>
+                    </div>
+                </div>
+
+                <div class="featured-item">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_07.jpg" alt="9大调节系统">
+                    <div class="featured-caption">
+                        <h3>技术可视化：9大调节系统图标化展示</h3>
+                        <p><span class="highlight">优化策略：</span>用图标+简洁文案替代参数堆砌，降低理解门槛</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 完整20屏展示 -->
+        <div class="section">
+            <h2 class="section-title">完整20屏设计展示</h2>
+            
+            <h3 style="color: #667eea; font-size: 24px; margin: 40px 0 20px 0;">📱 第一版设计（1-11屏）</h3>
+            <div class="image-gallery">
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_01.jpg" alt="第1屏">
+                    <div class="caption">
+                        <h4>第1屏 - 首屏吸引</h4>
+                        <p>150°大仰角场景</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_02.jpg" alt="第2屏">
+                    <div class="caption">
+                        <h4>第2屏 - 信任建立</h4>
+                        <p>3000+用户选择</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_03.jpg" alt="第3屏">
+                    <div class="caption">
+                        <h4>第3屏 - 痛点场景</h4>
+                        <p>长时间开会场景</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_04.jpg" alt="第4屏">
+                    <div class="caption">
+                        <h4>第4屏 - 痛点场景</h4>
+                        <p>深夜加班场景</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_05.jpg" alt="第5屏">
+                    <div class="caption">
+                        <h4>第5屏 - 痛点场景</h4>
+                        <p>午休小憩场景</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_06.jpg" alt="第6屏">
+                    <div class="caption">
+                        <h4>第6屏 - 技术说明</h4>
+                        <p>150°技术原理</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_07.jpg" alt="第7屏">
+                    <div class="caption">
+                        <h4>第7屏 - 功能展示</h4>
+                        <p>9大调节系统</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_08.jpg" alt="第8屏">
+                    <div class="caption">
+                        <h4>第8屏 - 材质工艺</h4>
+                        <p>材质工艺细节</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_09.jpg" alt="第9屏">
+                    <div class="caption">
+                        <h4>第9屏 - 动态演示</h4>
+                        <p>动态腰托演示</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_10.jpg" alt="第10屏">
+                    <div class="caption">
+                        <h4>第10屏 - 对比测试</h4>
+                        <p>对比测试数据</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_11.jpg" alt="第11屏">
+                    <div class="caption">
+                        <h4>第11屏 - 用户评价</h4>
+                        <p>真实用户评价</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; font-size: 24px; margin: 40px 0 20px 0;">📱 第二版优化（12-20屏）</h3>
+            <div class="image-gallery">
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者2_01.jpg" alt="第12屏">
+                    <div class="caption">
+                        <h4>第12屏 - 品牌升级</h4>
+                        <p>品牌升级版首屏</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者2_02.jpg" alt="第13屏">
+                    <div class="caption">
+                        <h4>第13屏 - 卖点强化</h4>
+                        <p>核心卖点强化</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者2_03.jpg" alt="第14屏">
+                    <div class="caption">
+                        <h4>第14屏 - 技术深化</h4>
+                        <p>技术原理深化</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者2_04.jpg" alt="第15屏">
+                    <div class="caption">
+                        <h4>第15屏 - 场景拓展</h4>
+                        <p>使用场景拓展</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者2_05.jpg" alt="第16屏">
+                    <div class="caption">
+                        <h4>第16屏 - 材质升级</h4>
+                        <p>材质升级说明</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者2_06.jpg" alt="第17屏">
+                    <div class="caption">
+                        <h4>第17屏 - 安装售后</h4>
+                        <p>安装与售后</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者2_07.jpg" alt="第18屏">
+                    <div class="caption">
+                        <h4>第18屏 - 试用保障</h4>
+                        <p>180天试用保障</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者2_08.jpg" alt="第19屏">
+                    <div class="caption">
+                        <h4>第19屏 - 限时优惠</h4>
+                        <p>限时优惠活动</p>
+                    </div>
+                </div>
+                <div class="image-card">
+                    <img src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者2_09.jpg" alt="第20屏">
+                    <div class="caption">
+                        <h4>第20屏 - 行动召唤</h4>
+                        <p>阶梯式CTA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>完整设计流程：竞品分析 → 用户调研 → 策略制定 → 视觉执行 → 数据验证</p>
+            <p style="margin-top: 10px;">体现了商业思维、用户洞察力和数据驱动能力</p>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImg" src="" alt="大图">
+        </div>
+    </div>
+
+    <script>
+        function openModal(imgSrc) {
+            document.getElementById("myModal").style.display = "block";
+            document.getElementById("modalImg").src = imgSrc;
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") closeModal();
+        });
+
+        // 为所有图片添加点击放大功能
+        document.querySelectorAll('.image-card img, .featured-item img').forEach(img => {
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                openModal(this.src);
+            });
+        });
+    </script>
+</body>
+</html>

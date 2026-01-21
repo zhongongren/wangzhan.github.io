@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载页面背景方案对比 - 6个优秀风格</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .intro {
+            text-align: center;
+            color: #999;
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+        
+        .styles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .style-card {
+            background: #111;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #222;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .style-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+        
+        .preview {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .preview-label {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(102, 126, 234, 0.9);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        .style-info {
+            padding: 25px;
+        }
+        
+        .style-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        
+        .style-desc {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .feature-tag {
+            background: rgba(102, 126, 234, 0.15);
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        /* ========== 方案1: 极简模糊背景 ========== */
+        .style1-bg {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            filter: blur(80px);
+            transform: scale(1.2);
+        }
+        
+        .style1-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+        }
+        
+        .style1-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .style1-subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 30px;
+        }
+        
+        .style1-bar {
+            width: 100%;
+            height: 3px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .style1-fill {
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, #fff, rgba(255,255,255,0.6));
+            animation: progress1 2s ease-in-out infinite;
+        }
+        
+        @keyframes progress1 {
+            0%, 100% { width: 60%; }
+            50% { width: 85%; }
+        }
+        
+        /* ========== 方案2: 单图毛玻璃 ========== */
+        .style2-bg {
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('https://www.genspark.ai/api/files/s/lrUrtKQF') center/cover no-repeat;
+            backdrop-filter: blur(20px);
+        }
+        
+        .style2-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+            background: rgba(0,0,0,0.5);
+            padding: 40px 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* ========== 方案3: 双色分割 ========== */
+        .style3-bg {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f0f0f 0%, #0f0f0f 50%, #1a1a2e 50%, #1a1a2e 100%);
+            position: relative;
+        }
+        
+        .style3-accent {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            background: #667eea;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.6;
+            animation: pulse3 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse3 {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.3); }
+        }
+        
+        .style3-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+        }
+        
+        /* ========== 方案4: 网格展示 (当前方案优化版) ========== */
+        .style4-bg {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2px;
+            background: #000;
+        }
+        
+        .style4-item {
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.5);
+            transition: all 0.5s ease;
+        }
+        
+        .style4-item:hover {
+            filter: brightness(0.8);
+        }
+        
+        .style4-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+        
+        .style4-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+            z-index: 2;
+        }
+        
+        /* ========== 方案5: 动态粒子 ========== */
+        .style5-bg {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at top, #1a1a2e, #0f0f0f);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .style5-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .style5-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: float5 10s ease-in-out infinite;
+        }
+        
+        @keyframes float5 {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-300px) translateX(50px); opacity: 0; }
+        }
+        
+        .style5-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+            z-index: 2;
+        }
+        
+        /* ========== 方案6: 大图虚化 ========== */
+        .style6-bg {
+            width: 100%;
+            height: 100%;
+            background: url('https://www.genspark.ai/api/files/s/lrUrtKQF') center/cover no-repeat;
+            position: relative;
+        }
+        
+        .style6-blur {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(15px) saturate(180%);
+        }
+        
+        .style6-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+            z-index: 2;
+        }
+        
+        /* 通用加载样式 */
+        .common-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .common-subtitle {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 25px;
+        }
+        
+        .common-bar {
+            width: 100%;
+            height: 2px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .common-fill {
+            width: 65%;
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+        
+        .recommendation {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .recommendation h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .recommendation p {
+            color: #aaa;
+            line-height: 1.8;
+        }
+        
+        @media (max-width: 768px) {
+            .styles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 加载页面背景方案对比</h1>
+        <p class="intro">
+            参考优秀作品集网站的加载页面设计，为您准备了6个风格方案<br>
+            点击卡片可查看大图效果，选择您喜欢的风格
+        </p>
+        
+        <div class="styles-grid">
+            <!-- 方案1: 极简模糊背景 -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">推荐 ⭐</div>
+                    <div class="style1-bg"></div>
+                    <div class="style1-content">
+                        <div class="style1-title">作品集加载中...</div>
+                        <div class="style1-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="style1-bar">
+                            <div class="style1-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案1: 极简模糊渐变</div>
+                    <div class="style-desc">
+                        使用大幅模糊的渐变色背景，营造柔和高级感。这是最流行的现代加载页面风格，适合追求极简主义和专业感的作品集。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">✨ 极简主义</span>
+                        <span class="feature-tag">🎨 渐变美学</span>
+                        <span class="feature-tag">⚡ 加载快</span>
+                        <span class="feature-tag">📱 响应式</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案2: 单图毛玻璃 -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">优雅</div>
+                    <div class="style2-bg"></div>
+                    <div class="style2-content">
+                        <div class="common-title">作品集加载中...</div>
+                        <div class="common-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="common-bar">
+                            <div class="common-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案2: 单图毛玻璃效果</div>
+                    <div class="style-desc">
+                        使用您的代表作品图作为背景，添加毛玻璃模糊和深色遮罩。让观众一开始就能感受到作品氛围，同时保持文字清晰可读。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">🖼️ 突出作品</span>
+                        <span class="feature-tag">🌫️ 毛玻璃</span>
+                        <span class="feature-tag">💎 优雅</span>
+                        <span class="feature-tag">🎯 聚焦</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案3: 双色分割 -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">创意</div>
+                    <div class="style3-bg">
+                        <div class="style3-accent"></div>
+                    </div>
+                    <div class="style3-content">
+                        <div class="common-title">作品集加载中...</div>
+                        <div class="common-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="common-bar">
+                            <div class="common-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案3: 双色分割设计</div>
+                    <div class="style-desc">
+                        对角线分割的双色背景，配合呼吸动画的光晕点缀。极简但不单调，展现设计师的创意思维和对构图的把控能力。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">🎨 双色美学</span>
+                        <span class="feature-tag">✨ 动态光效</span>
+                        <span class="feature-tag">🎭 有个性</span>
+                        <span class="feature-tag">⚡ 轻量</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案4: 网格展示 (优化版) -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">当前方案</div>
+                    <div class="style4-bg">
+                        <div class="style4-item" style="background-image: url('https://www.genspark.ai/api/files/s/lrUrtKQF')"></div>
+                        <div class="style4-item" style="background-image: url('https://www.genspark.ai/api/files/s/wkfp3D7S')"></div>
+                        <div class="style4-item" style="background-image: url('https://www.genspark.ai/api/files/s/cvwgMTXe')"></div>
+                        <div class="style4-item" style="background-image: url('https://www.genspark.ai/api/files/s/UkBEYfaF')"></div>
+                        <div class="style4-item" style="background-image: url('https://www.genspark.ai/api/files/s/RsdS9NmR')"></div>
+                        <div class="style4-item" style="background-image: url('https://www.genspark.ai/api/files/s/qPcauPyY')"></div>
+                    </div>
+                    <div class="style4-overlay"></div>
+                    <div class="style4-content">
+                        <div class="common-title">作品集加载中...</div>
+                        <div class="common-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="common-bar">
+                            <div class="common-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案4: 网格展示(优化版)</div>
+                    <div class="style-desc">
+                        <strong>改进当前方案：</strong>从4x3改为3x2网格，减少图片数量；提高图片亮度；加强径向遮罩；减少图片动画。让作品清晰可见的同时，文字更加突出。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">📸 展示作品</span>
+                        <span class="feature-tag">🔧 已优化</span>
+                        <span class="feature-tag">⚖️ 平衡性</span>
+                        <span class="feature-tag">💼 专业</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案5: 动态粒子 -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">科技感</div>
+                    <div class="style5-bg">
+                        <div class="style5-particles">
+                            <div class="style5-particle" style="left: 10%; animation-delay: 0s;"></div>
+                            <div class="style5-particle" style="left: 30%; animation-delay: 2s;"></div>
+                            <div class="style5-particle" style="left: 50%; animation-delay: 1s;"></div>
+                            <div class="style5-particle" style="left: 70%; animation-delay: 3s;"></div>
+                            <div class="style5-particle" style="left: 90%; animation-delay: 1.5s;"></div>
+                        </div>
+                    </div>
+                    <div class="style5-content">
+                        <div class="common-title">作品集加载中...</div>
+                        <div class="common-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="common-bar">
+                            <div class="common-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案5: 动态粒子背景</div>
+                    <div class="style-desc">
+                        暗色渐变背景配合上升的粒子动画，营造科技感和未来感。适合想要展现创新精神和技术实力的设计师。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">🚀 科技感</span>
+                        <span class="feature-tag">✨ 动态效果</span>
+                        <span class="feature-tag">🌌 未来感</span>
+                        <span class="feature-tag">🎪 有趣</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案6: 大图虚化 -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">大气</div>
+                    <div class="style6-bg">
+                        <div class="style6-blur"></div>
+                    </div>
+                    <div class="style6-content">
+                        <div class="common-title">作品集加载中...</div>
+                        <div class="common-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="common-bar">
+                            <div class="common-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案6: 大图虚化背景</div>
+                    <div class="style-desc">
+                        使用一张最具代表性的作品图作为全屏背景，通过强虚化和深色遮罩处理。大气、有冲击力，让人一眼记住你的风格。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">🎯 视觉冲击</span>
+                        <span class="feature-tag">🖼️ 代表作</span>
+                        <span class="feature-tag">💪 大气</span>
+                        <span class="feature-tag">🎨 艺术感</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="recommendation">
+            <h2>💡 我的推荐</h2>
+            <p>
+                <strong>如果追求极简专业：</strong>选择方案1(极简模糊渐变)或方案3(双色分割)<br>
+                <strong>如果想突出作品：</strong>选择方案2(单图毛玻璃)或方案6(大图虚化)<br>
+                <strong>如果要科技感：</strong>选择方案5(动态粒子)<br>
+                <strong>如果优化当前：</strong>选择方案4(网格优化版) - 更少图片、更清晰<br><br>
+                <em>个人最推荐：方案1 或 方案2，既优雅又专业，加载速度快</em>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

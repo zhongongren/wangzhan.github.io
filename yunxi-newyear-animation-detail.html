@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云犀新年IP动画 - 节日营销视觉设计 | 杭州星犀科技</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 15px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .project-meta {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            display: inline-block;
+        }
+        
+        .project-meta span:first-child {
+            color: #FF6B35;
+            font-weight: 600;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 50%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 20px;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .tech-badge {
+            background: rgba(255, 107, 53, 0.2);
+            color: #ff6b35;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .video-section {
+            margin: 40px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 56.25%; /* 16:9 比例 */
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+        
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain; /* 保持比例，自动添加黑边 */
+        }
+        
+        .section {
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        .section p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #c0c0c0;
+            margin-bottom: 20px;
+        }
+        
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .highlight-card {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+        
+        .highlight-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+        
+        .highlight-desc {
+            font-size: 16px;
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .back-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* 图片点击放大模态框 */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .image-modal.active {
+            display: flex;
+        }
+        
+        .image-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+        
+        .image-modal-close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            z-index: 10000;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .subtitle {
+                font-size: 16px;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .section h2 {
+                font-size: 24px;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .image-modal-close {
+                top: 20px;
+                right: 20px;
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <div class="project-meta">
+                <span>杭州星犀科技有限公司</span>
+                <span style="margin: 0 12px; color: #666;">|</span>
+                <span>2024.01</span>
+                <span style="margin: 0 12px; color: #666;">|</span>
+                <span>智能硬件 / AI摄像头</span>
+            </div>
+            <h1>云犀 · 新年IP动画 | 节日营销视觉设计</h1>
+            <div class="subtitle">品牌IP形象 × 新年祝福 × 情感化营销传播</div>
+            <div class="tech-stack">
+                <div class="tech-badge">🎨 IP形象设计</div>
+                <div class="tech-badge">🎬 动画制作</div>
+                <div class="tech-badge">🎉 节日营销</div>
+                <div class="tech-badge">💝 品牌传播</div>
+            </div>
+        </div>
+
+        <!-- 亮点展示图片 -->
+        <div class="section">
+            <h2>🎨 设计亮点展示</h2>
+            <div class="image-gallery" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 30px 0;">
+                <div class="gallery-item" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+                    <img src="https://www.genspark.ai/api/files/s/Y02yVCqy" alt="云犀IP标准三视图 - 正面侧面背面" style="width: 100%; height: auto; display: block; cursor: pointer;" onclick="openImageModal(this.src)">
+                    <div style="padding: 15px; background: rgba(255, 255, 255, 0.05);">
+                        <h4 style="color: #ff6b35; margin-bottom: 8px;">🎨 云犀IP角色 · 标准三视图</h4>
+                        <p style="color: #a0a0a0; font-size: 14px;">正面视图 · 侧面视图 · 背面视图 · T-Pose标准站姿 · 3D建模参考</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+                    <img src="https://www.genspark.ai/api/files/s/2lk7wI0T" alt="云犀新年IP动画关键帧-中文版" style="width: 100%; height: auto; display: block; cursor: pointer;" onclick="openImageModal(this.src)">
+                    <div style="padding: 15px; background: rgba(255, 255, 255, 0.05);">
+                        <h4 style="color: #ff6b35; margin-bottom: 8px;">🎬 动画关键帧设计分镜</h4>
+                        <p style="color: #a0a0a0; font-size: 14px;">中文标注 · 三大动作序列 · 动作过渡说明 · 技术参数</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" style="border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease;">
+                    <img src="https://www.genspark.ai/api/files/s/arovokLr" alt="云犀新年场景氛围设计" style="width: 100%; height: auto; display: block; cursor: pointer;" onclick="openImageModal(this.src)">
+                    <div style="padding: 15px; background: rgba(255, 255, 255, 0.05);">
+                        <h4 style="color: #ff6b35; margin-bottom: 8px;">🏮 新年场景氛围设计</h4>
+                        <p style="color: #a0a0a0; font-size: 14px;">云犀IP居中展示 · 传统门楼背景 · 对联红包灯笼 · 新年祝福氛围</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 视频展示 -->
+        <div class="video-section">
+            <h2 style="text-align: center; color: #ff6b35; margin-bottom: 30px;">🎬 新年祝福动画</h2>
+            <div class="video-container">
+                <video controls playsinline webkit-playsinline>
+                    <source src="https://www.genspark.ai/api/aidrive/download/files/云犀视频加动画/祝福动画.mp4?stream=true" type="video/mp4">
+                    您的浏览器不支持视频播放。
+                </video>
+            </div>
+        </div>
+
+        <!-- 项目背景 -->
+        <div class="section">
+            <h2>📋 项目背景</h2>
+            <p>
+                在新春佳节来临之际，云犀品牌希望通过<strong style="color: #ff6b35;">原创IP动画</strong>的形式，
+                向用户传递新年祝福，增强品牌亲和力和情感连接。
+            </p>
+            <p>
+                项目目标是打造一个<strong style="color: #ff6b35;">温馨、有趣、易于传播</strong>的新年祝福动画，
+                让云犀品牌在节日营销中脱颖而出，提升品牌好感度和用户粘性。
+            </p>
+        </div>
+
+        <!-- 核心亮点 -->
+        <div class="section">
+            <h2>✨ 核心设计亮点</h2>
+            <div class="highlights">
+                <div class="highlight-card">
+                    <div class="highlight-icon">🎨</div>
+                    <div class="highlight-title">品牌IP形象</div>
+                    <div class="highlight-desc">结合云犀品牌特色，打造专属IP形象，增强品牌识别度和记忆点</div>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-icon">🎉</div>
+                    <div class="highlight-title">节日氛围营造</div>
+                    <div class="highlight-desc">运用新年元素（红包、灯笼、烟花等），营造浓厚的节日气氛</div>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-icon">💝</div>
+                    <div class="highlight-title">情感化表达</div>
+                    <div class="highlight-desc">通过温馨的祝福文案和动画细节，传递品牌温度和人文关怀</div>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-icon">📱</div>
+                    <div class="highlight-title">社交传播优化</div>
+                    <div class="highlight-desc">适配多平台分享，易于在微信、微博等社交媒体传播扩散</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 设计策略 -->
+        <div class="section">
+            <h2>🎯 设计策略</h2>
+            <p><strong style="color: #ff6b35;">1. IP形象塑造</strong></p>
+            <p>• 结合云犀品牌调性，设计可爱、亲和的IP角色<br>
+               • 赋予IP角色鲜明的性格特征和情感表达<br>
+               • 为未来的系列化营销奠定基础</p>
+            
+            <p><strong style="color: #ff6b35;">2. 动画叙事</strong></p>
+            <p>• 简洁清晰的故事线，3-5秒内抓住注意力<br>
+               • 节奏明快，符合短视频传播特点<br>
+               • 结尾留下深刻印象，强化品牌记忆</p>
+            
+            <p><strong style="color: #ff6b35;">3. 视觉风格</strong></p>
+            <p>• 色彩明快温暖，以红、金为主色调<br>
+               • 动画流畅自然，细节精致<br>
+               • 整体风格现代简约，符合年轻用户审美</p>
+        </div>
+
+        <!-- 项目价值 -->
+        <div class="section">
+            <h2>💎 项目价值</h2>
+            <p>
+                <strong style="color: #ff6b35;">品牌形象提升：</strong>
+                通过原创IP动画，展现品牌的创意能力和人文关怀，提升品牌好感度。
+            </p>
+            <p>
+                <strong style="color: #ff6b35;">情感化营销：</strong>
+                在节日场景中与用户建立情感连接，增强用户对品牌的认同感和忠诚度。
+            </p>
+            <p>
+                <strong style="color: #ff6b35;">社交传播：</strong>
+                优质的动画内容易于在社交媒体传播，扩大品牌影响力和用户触达。
+            </p>
+            <p>
+                <strong style="color: #ff6b35;">IP资产积累：</strong>
+                建立品牌专属IP形象，为后续的营销活动和内容创作提供素材基础。
+            </p>
+        </div>
+
+        <!-- 返回链接 -->
+        <div style="text-align: center;">
+            <a href="index.html" class="back-link">← 返回首页</a>
+            <a href="portfolio.html" class="back-link" style="margin-left: 20px;">查看更多作品 →</a>
+        </div>
+    </div>
+
+    <!-- 图片放大模态框 -->
+    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+        <span class="image-modal-close">&times;</span>
+        <img id="modalImage" src="" alt="放大图片">
+    </div>
+
+    <script>
+        // 图片点击放大功能
+        function openImageModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.classList.add('active');
+            modalImg.src = src;
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
+</body>
+</html>

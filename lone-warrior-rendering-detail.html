@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孤勇者办公椅 - 三维渲染质感展示</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        /* 头部区域 */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 40px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        h1 {
+            font-size: 4em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+        .subtitle {
+            font-size: 1.5em;
+            color: #a8b2d1;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        .tech-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            margin: 5px;
+            font-weight: 600;
+        }
+        
+        /* 核心技术栈 */
+        .tech-stack {
+            background: rgba(100, 255, 218, 0.1);
+            border: 2px solid #64ffda;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 50px 0;
+        }
+        .tech-stack h2 {
+            color: #64ffda;
+            font-size: 2em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .tech-item {
+            background: rgba(0,0,0,0.3);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #64ffda;
+            transition: all 0.3s ease;
+        }
+        .tech-item:hover {
+            transform: translateX(10px);
+            background: rgba(100, 255, 218, 0.1);
+        }
+        .tech-item strong {
+            color: #64ffda;
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .tech-item p {
+            color: #ccd6f6;
+            font-size: 0.95em;
+            line-height: 1.6;
+            text-indent: 0;
+        }
+        
+        /* 渲染图展示 */
+        .renders-section {
+            margin: 60px 0;
+        }
+        .section-title {
+            font-size: 2.5em;
+            color: #ffd93d;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 800;
+        }
+        
+        .render-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin: 40px 0;
+        }
+        
+        .render-item {
+            background: rgba(0,0,0,0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 2px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+        }
+        .render-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(100, 255, 218, 0.3);
+            border-color: #64ffda;
+        }
+        
+        .render-img-wrapper {
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+        }
+        .render-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .render-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .render-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+            padding: 30px 25px 20px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        .render-item:hover .render-overlay {
+            transform: translateY(0);
+        }
+        .render-overlay-title {
+            color: #64ffda;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .render-overlay-desc {
+            color: #a8b2d1;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        .render-caption {
+            padding: 30px;
+            background: rgba(0,0,0,0.7);
+        }
+        .render-caption strong {
+            color: #64ffda;
+            display: block;
+            font-size: 1.4em;
+            margin-bottom: 12px;
+        }
+        .render-caption p {
+            color: #ccd6f6;
+            font-size: 1.05em;
+            line-height: 1.7;
+            margin: 10px 0;
+            text-indent: 0;
+        }
+        .tech-highlight {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            margin: 5px 3px;
+            font-weight: 600;
+        }
+        
+        /* 材质技术细节 */
+        .material-breakdown {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 60px 0;
+            border: 2px solid rgba(255, 217, 61, 0.3);
+        }
+        .material-breakdown h2 {
+            color: #ffd93d;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .material-card {
+            background: rgba(0,0,0,0.4);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 217, 61, 0.3);
+            transition: all 0.3s ease;
+        }
+        .material-card:hover {
+            border-color: #ffd93d;
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(255, 217, 61, 0.2);
+        }
+        .material-card h3 {
+            color: #ffd93d;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            border: none;
+            padding: 0;
+        }
+        .material-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .material-card li {
+            color: #ccd6f6;
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .material-card li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ffd93d;
+        }
+        
+        /* 大图预览 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 100px rgba(100, 255, 218, 0.5);
+        }
+        .close-modal {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-size: 60px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 200;
+        }
+        .close-modal:hover {
+            color: #64ffda;
+            transform: rotate(90deg) scale(1.2);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .render-gallery {
+                grid-template-columns: 1fr;
+            }
+            .close-modal {
+                right: 20px;
+                top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>孤勇者办公椅</h1>
+            <p class="subtitle">三维渲染质感能力展示</p>
+            <div style="margin-top: 20px;">
+                <span class="tech-badge">Cinema 4D R25</span>
+                <span class="tech-badge">OctaneRender</span>
+                <span class="tech-badge">PBR材质</span>
+                <span class="tech-badge">照片级渲染</span>
+            </div>
+        </div>
+
+        <!-- 核心技术栈 -->
+        <div class="tech-stack">
+            <h2>🔧 核心渲染技术</h2>
+            <div class="tech-grid">
+                <div class="tech-item">
+                    <strong>渲染引擎</strong>
+                    <p>OctaneRender 路径追踪渲染器，基于物理的光线追踪技术，实现照片级真实感</p>
+                </div>
+                <div class="tech-item">
+                    <strong>材质系统</strong>
+                    <p>PBR物理材质：网布Glossy+Diffuse混合（粗糙度0.35-0.45），金属IOR 1.45（铝合金），塑料哑光表面</p>
+                </div>
+                <div class="tech-item">
+                    <strong>灯光布局</strong>
+                    <p>三点布光系统：Key Light 120°侧上方 + Fill Light 80°侧面 + Rim Light背光，模拟摄影棚专业布光</p>
+                </div>
+                <div class="tech-item">
+                    <strong>环境光遮蔽</strong>
+                    <p>AO节点增强关节处、网布与框架交界处阴影，深度控制0.2-0.3，让产品"嵌入"环境</p>
+                </div>
+                <div class="tech-item">
+                    <strong>景深控制</strong>
+                    <p>F2.8浅景深，焦点跟随主体移动，营造电影级画面质感</p>
+                </div>
+                <div class="tech-item">
+                    <strong>渲染优化</strong>
+                    <p>OC降噪器（Denoise）减少采样数，在保证质量前提下提速40%，单帧渲染2分钟内</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 渲染图展示 -->
+        <div class="renders-section">
+            <h2 class="section-title">📸 渲染质感展示</h2>
+            
+            <div class="render-gallery">
+                <!-- 渲染图1 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/TwXYw9qA')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/TwXYw9qA" alt="渲染1">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">整体质感渲染</div>
+                            <div class="render-overlay-desc">展示网布材质的透气质感与金属框架的冷硬光泽</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图1: 产品主视觉渲染</strong>
+                        <p>重点展现网布材质的<span class="tech-highlight">半哑光质感</span>和<span class="tech-highlight">透气孔洞结构</span>。通过PBR材质系统精确控制粗糙度，让网布在光线下呈现柔和的漫反射。</p>
+                        <p>金属框架使用<span class="tech-highlight">IOR 1.45</span>模拟铝合金材质，配合<span class="tech-highlight">Specular 0.8</span>强度，既有金属质感又不过度反光。</p>
+                    </div>
+                </div>
+
+                <!-- 渲染图2 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/QiyGAjKF')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/QiyGAjKF" alt="渲染2">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">后仰状态渲染</div>
+                            <div class="render-overlay-desc">展示不同角度下材质的光影变化</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图2: 动态角度质感</strong>
+                        <p>150°后仰状态下，网布材质随着角度变化呈现不同的<span class="tech-highlight">光影层次</span>。背光位置的<span class="tech-highlight">Rim Light</span>让网布边缘产生柔和的轮廓光，增强立体感。</p>
+                        <p>塑料连接件使用<span class="tech-highlight">哑光材质</span>（粗糙度0.6-0.7），与金属、网布形成材质对比。</p>
+                    </div>
+                </div>
+
+                <!-- 渲染图3 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/vKl0vwDY')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/vKl0vwDY" alt="渲染3">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">功能拆解渲染</div>
+                            <div class="render-overlay-desc">清晰展示各部件的材质细节</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图3: 材质细节渲染</strong>
+                        <p>多材质共存的渲染挑战：网布的<span class="tech-highlight">半透明性</span>、金属的<span class="tech-highlight">高反射</span>、塑料的<span class="tech-highlight">柔和漫反射</span>，通过OC的路径追踪精确计算光线在不同材质间的反弹。</p>
+                        <p>使用<span class="tech-highlight">环境光遮蔽（AO）</span>增强关节处阴影，让复杂结构的立体感更强。</p>
+                    </div>
+                </div>
+
+                <!-- 渲染图4 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/OiwjSjO8')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/OiwjSjO8" alt="渲染4">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">侧面质感渲染</div>
+                            <div class="render-overlay-desc">展示材质在不同光线下的表现</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图4: 光影层次渲染</strong>
+                        <p>侧光照射下，网布的<span class="tech-highlight">纹理凹凸</span>通过Normal Map呈现。金属框架的<span class="tech-highlight">高光条带</span>精确还原了真实金属的菲涅耳反射。</p>
+                        <p>背景使用<span class="tech-highlight">HDRI环境贴图</span>，让产品反射出柔和的环境光，增强真实感。</p>
+                    </div>
+                </div>
+
+                <!-- 渲染图5 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/uSeXwwFT')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/uSeXwwFT" alt="渲染5">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">整体氛围渲染</div>
+                            <div class="render-overlay-desc">照片级质感的最终呈现</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图5: 照片级质感</strong>
+                        <p>完整的三点布光+全局光照（GI），让产品呈现<span class="tech-highlight">摄影棚拍摄</span>的专业质感。地面的<span class="tech-highlight">镜面反射</span>（反射强度0.3）增加画面的视觉丰富度。</p>
+                        <p>OC的<span class="tech-highlight">路径追踪</span>让阴影边缘柔和自然，颜色溢出真实，无需后期PS即可达到照片级效果。</p>
+                    </div>
+                </div>
+
+                <!-- 渲染图6 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/0imUN7M4')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/0imUN7M4" alt="渲染6">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">材质特写渲染</div>
+                            <div class="render-overlay-desc">网布纹理的微观质感</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图6: 网布材质特写</strong>
+                        <p>近距离展示网布的<span class="tech-highlight">编织纹理</span>和<span class="tech-highlight">弹性质感</span>。通过Displacement贴图模拟网孔的真实凹凸，配合<span class="tech-highlight">SSS次表面散射</span>让光线部分穿透网布。</p>
+                        <p>这种微观级别的材质细节，是照片级渲染的关键。</p>
+                    </div>
+                </div>
+
+                <!-- 渲染图7 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/LghMqKrN')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/LghMqKrN" alt="渲染7">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">完整产品渲染</div>
+                            <div class="render-overlay-desc">展示整体造型与质感</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图7: 产品全景渲染</strong>
+                        <p>35mm广角镜头下的产品全貌。<span class="tech-highlight">景深F2.8</span>让前景清晰、背景柔和虚化，模拟单反相机的拍摄效果。</p>
+                        <p>色彩校正采用<span class="tech-highlight">电影级调色</span>：中性灰背景、低饱和度色调、柔和的色彩过渡。</p>
+                    </div>
+                </div>
+
+                <!-- 渲染图8 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/5z1qeucb')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/5z1qeucb" alt="渲染8">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">细节质感渲染</div>
+                            <div class="render-overlay-desc">展示精细化建模与渲染</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图8: 局部细节渲染</strong>
+                        <p>扶手、调节旋钮等小部件的<span class="tech-highlight">精细建模</span>。金属旋钮的<span class="tech-highlight">拉丝纹理</span>通过Anisotropy（各向异性）材质实现，呈现真实的金属加工痕迹。</p>
+                        <p>塑料按钮的<span class="tech-highlight">微妙磨砂感</span>（粗糙度0.4）与金属形成质感对比。</p>
+                    </div>
+                </div>
+
+                <!-- 渲染图9 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/rnZt97CD')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/rnZt97CD" alt="渲染9">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">光影艺术渲染</div>
+                            <div class="render-overlay-desc">展示渲染的艺术性</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图9: 光影造型渲染</strong>
+                        <p>利用<span class="tech-highlight">戏剧性布光</span>营造视觉冲击力。强侧光+深色背景，让产品轮廓清晰锐利，网布材质在暗部呈现<span class="tech-highlight">丰富的灰度层次</span>。</p>
+                        <p>这种布光方式常用于汽车广告摄影，展现产品的力量感和高级感。</p>
+                    </div>
+                </div>
+
+                <!-- 渲染图10 -->
+                <div class="render-item" onclick="openModal('https://www.genspark.ai/api/files/s/LVRvVtxy')">
+                    <div class="render-img-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/LVRvVtxy" alt="渲染10">
+                        <div class="render-overlay">
+                            <div class="render-overlay-title">品牌质感渲染</div>
+                            <div class="render-overlay-desc">展示品牌视觉的渲染呈现</div>
+                        </div>
+                    </div>
+                    <div class="render-caption">
+                        <strong>图10: 品牌标识渲染</strong>
+                        <p>Logo的<span class="tech-highlight">金属质感</span>（IOR 1.5 + 高光强度0.9）与纯白背景形成强对比。使用<span class="tech-highlight">对称构图</span>和<span class="tech-highlight">居中布光</span>，强化品牌的专业感和权威感。</p>
+                        <p>这种简洁的渲染风格，适用于品牌视觉识别系统（VI）。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 材质技术细节 -->
+        <div class="material-breakdown">
+            <h2>🎨 材质技术拆解</h2>
+            <div class="material-grid">
+                <div class="material-card">
+                    <h3>网布材质</h3>
+                    <ul>
+                        <li>Glossy+Diffuse混合节点</li>
+                        <li>粗糙度: 0.35-0.45（半哑光）</li>
+                        <li>Normal Map: 模拟编织凹凸</li>
+                        <li>SSS次表面散射: 0.1（轻微透光）</li>
+                        <li>颜色: 中性灰 #D0D0D0</li>
+                    </ul>
+                </div>
+                <div class="material-card">
+                    <h3>金属框架</h3>
+                    <ul>
+                        <li>Metallic金属材质</li>
+                        <li>IOR: 1.45（铝合金）</li>
+                        <li>Specular: 0.8（反射强度）</li>
+                        <li>粗糙度: 0.15-0.25（抛光表面）</li>
+                        <li>Anisotropy: 0.3（拉丝纹理）</li>
+                    </ul>
+                </div>
+                <div class="material-card">
+                    <h3>塑料部件</h3>
+                    <ul>
+                        <li>Diffuse漫反射材质</li>
+                        <li>粗糙度: 0.6-0.7（哑光）</li>
+                        <li>IOR: 1.4（塑料折射率）</li>
+                        <li>轻微Fresnel边缘反射</li>
+                        <li>颜色: 深灰/黑色</li>
+                    </ul>
+                </div>
+                <div class="material-card">
+                    <h3>灯光系统</h3>
+                    <ul>
+                        <li>Key Light: 5500K色温，强度1.2</li>
+                        <li>Fill Light: 柔光，强度0.5</li>
+                        <li>Rim Light: 背光，强度0.8</li>
+                        <li>HDRI环境光: 室内摄影棚贴图</li>
+                        <li>全局光照（GI）: 2次反弹</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 大图预览模态框 -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        function openModal(imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            
+            if (imageSrc) {
+                modal.classList.add('active');
+                modalImg.src = imageSrc;
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+        }
+
+        // ESC键关闭
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // 阻止图片点击冒泡
+        document.querySelector('.modal-content').addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    </script>
+</body>
+</html>

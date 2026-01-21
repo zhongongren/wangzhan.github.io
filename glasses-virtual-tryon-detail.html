@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例1：眼镜虚拟试戴 - AI多场景展示解决方案</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 20px;
+            padding-top: 100px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 60px 40px;
+        }
+        
+        h2 {
+            font-size: 36px;
+            color: #667eea;
+            margin: 50px 0 30px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        h3 {
+            font-size: 28px;
+            color: #764ba2;
+            margin: 40px 0 25px 0;
+            padding-left: 20px;
+            border-left: 5px solid #764ba2;
+        }
+        
+        .case-section {
+            background: #f8f9ff;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .image-item {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .image-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+        
+        .image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .image-caption {
+            padding: 20px;
+            background: white;
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f8f9ff;
+        }
+        
+        ul, ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 15px 0;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        
+        .icon {
+            font-size: 32px;
+        }
+        
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 32px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">陈群超</a>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="index.html#about">关于</a>
+                <a href="portfolio.html">作品集</a>
+                <a href="index.html#contact">联系</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>🕶️ 案例1：眼镜虚拟试戴</h1>
+            <p class="subtitle">AI多场景展示解决方案</p>
+        </header>
+        
+        <div class="content">
+            <div class="highlight-box">
+                <h2><span class="icon">💡</span> 核心价值</h2>
+                <p style="font-size: 20px; line-height: 2; margin-top: 20px;">
+                    通过AI虚拟试戴技术，将单一的产品平铺图转化为多场景真实佩戴效果展示，帮助眼镜品牌突破线上展示局限，
+                    让消费者直观感受不同眼镜在各种生活场景中的实际效果，大幅提升购买转化率，降低退货率。
+                </p>
+            </div>
+
+            <h2><span class="icon">📊</span> 行业痛点分析</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">68%</div>
+                    <div class="stat-label">用户因无法试戴而放弃购买</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">45%</div>
+                    <div class="stat-label">退货率（不合适/不好看）</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3-5万</div>
+                    <div class="stat-label">传统拍摄单款成本（元）</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15天</div>
+                    <div class="stat-label">传统拍摄周期</div>
+                </div>
+            </div>
+
+            <h2><span class="icon">✨</span> 真实案例展示</h2>
+
+            <!-- 案例1：黑框眼镜 -->
+            <div class="case-section">
+                <h3>案例 1️⃣：黑框眼镜 - 百搭经典</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/G47iA39G?token=Z0FBQUFBQnBYYzlDUXVTOUZmbWUzMnBLOGdPTmpuQVNTczItakw0cjFNQmVoUmFrN3VsSVhQY21DVGd6NHZ3dG5sZUdtTk91Mnk3TXRxeUYwX2NpTi1MZG11MWZTN3dqcXhMRWtnYU42S1F1eVhpcEdxS1B5VTlrZFFGWGNFMFMwZHV2d19rdFhFNXNsY0FXbHpHTXVKZW9MWnhvaTFQeE1RX09vamdVeUZzaFZiUWljTmt2d0NSLTRvVW0tWGFGVVBxRGUzbEZqZkkwbVcwQWFEbDRIYk90WkRkaGVibTZmOGFMTU9HQ014SmV0TlhaNU1jUVBFMW1fV0RGeVNlQXlmQ1lWb1FOYnNucnM4UVhpZ3lsQ0d6QWhuMTFwNUxVR0E9PQ" alt="黑框眼镜-图1">
+                        <div class="image-caption">图1：商务职场/文艺咖啡/学术书香/时尚街拍风</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/aV1xKKxc?token=Z0FBQUFBQnBYYzlDVlEyNFRlb19hZzdHUk9GZnRZcGg1VFpPWXlkSzA3UEcySDF4MDlzeU1IdV9FcGJqbmEyRW5fTUNPZmIxMW9vZzRuajFSZHZ6ZS05cUgtT3FpQlF5aGFiZmFFRDluUlN3M0lXREtOb3pZSjVJdHo2R2J3dzVBVk5VekpGeUF6S0UwMU9WV2FCN2xhd094TkQwRDZCX1d6U0txajJoTUx3UGhPTTUwMGpZMmxXODJ3WHJkZkItOUtjSmgyaTZOSHVOd2F2OHV3aGxRNV94SFRfajd0MENhRUNUM3ZiTklDSUYxOTZqZXZyRGFUbW9DaFlDVlBOZkJaZVVuTEF2TVBId2xVYXVIUENGRU0xNjMtN0NOeHNuVlE9PQ" alt="黑框眼镜-图2">
+                        <div class="image-caption">图2：多场景展示效果</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用场景：</strong>办公室、图书馆、咖啡厅、街头拍照<br>
+                    <strong>风格特点：</strong>知性、专业、文艺、百搭
+                </p>
+            </div>
+
+            <!-- 案例2：复古圆框眼镜 -->
+            <div class="case-section">
+                <h3>案例 2️⃣：复古圆框眼镜 - 文艺范儿</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/syU8m1Jc?token=Z0FBQUFBQnBYYzlDTy10aUV1Q2Vuc2RxLVJWeUo2VHVmQkEtRHQwNmQyTE5NeHFhdS1mWDZUVldFWUlzVnVGV2YwTzJtMHgyWkFYU250dHphS21ya1JrYmpvZUNTd2Z4WU5kLUh2OHVyeEhiWVNSeDlWT3I0eU5odXViWE5BTkxrVXpubHhQUDVxa2xPNk5JUUpidHk1UG5qRjJRV0kxS1VjY2FyUHVQOUtXYkxscGZPU0xnMEJsaDUwZmlUVUI1LXFBVldIZGs5cjRidWFHQjdXdnNkNjJvUnB5d0NKT1d5VlN1OGVfZFplSVVKZi1MUjNDV19SSjMyazJpYTFNZWtlZXNhVmtqNm1ER29WMWhGMWJWd2FmTl9MOTgyOEt4ZHc9PQ" alt="复古圆框眼镜-图1">
+                        <div class="image-caption">图1：创意设计/科技精英/艺术鉴赏/休闲都市风</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/OMcf9Ci8?token=Z0FBQUFBQnBYYzlDOUxnMGlPZV9haVJtTDhkNzVQdlZ0bVhwM1NGMHdLbTVnbnhzR1lNc1JLVHl6WGo0Mm5McW42VVplcGdGZTdEcmdXLTNuS25IakxMRTFIREEtNEtMal9hbzRzbVdUWmM3NDk5dFBQZFhVM3VTczcwaGFOYzk1TXRmQXlLU1RQejNPUFByakN6aXNkWlNtTk01MEs4MlVNcE5rNGREdWxaa3BLcXdLa0M2NTNabFFYbUFwOXRFcEgxT000MWJRS0hRTjhyQ3JucjlRQ0k1TEgwU19nVVN5V29OLUt5OHdDSkZ0ZjFFRVgyZ1JtS0hEREdGN1RMT1VmVFJZa2ZKZ2xFeDlNTlJyY2poMmNLUmR4M1d1M0ROVXc9PQ" alt="复古圆框眼镜-图2">
+                        <div class="image-caption">图2：多场景展示效果</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用场景：</strong>艺术展、设计工作室、科技公司、城市街头<br>
+                    <strong>风格特点：</strong>复古、文艺、个性、时尚
+                </p>
+            </div>
+
+            <!-- 案例3：飞行员太阳镜 -->
+            <div class="case-section">
+                <h3>案例 3️⃣：飞行员太阳镜 - 酷感十足</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/fpyXhQ8L?token=Z0FBQUFBQnBYZEJfN05KaUVqajk4eEVnX0VuQ3ktVDh4NTYtdnBmLXJ0VTdBckJia2t4TnhMXzdFSC10cWgwTzBGUmxIZW5NNFQybFBjVWRTVEJTOEdBWC01OXNTVUkwVnBkdHdXQm9hVmZhRlBnYzJPTWZtVzNkQkE2NnVRalIwdG96RHhKMUo3RnNoUkdXcy04T2RDVlZRcE1LQlVvcm9ubFNwcEVfSjNoSVFaVmM5NFBjOEZiemI2aFNETGhselRSWGtoVElicUR4aTdfZktza29VOFBQMmpRUWFKOUVQYUJxNHdUbEFaaGkwMVlEWnJHbFBnb0VYdHA3TE91akZGSEJlR21kOXd5WjBqSno0d1JYSEhTeHlPNjJfc3lIeWc9PQ" alt="飞行员太阳镜-图1">
+                        <div class="image-caption">图1：海滩度假/公路驾驶/音乐节潮流/游艇派对风</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/ixqapvPF?token=Z0FBQUFBQnBYZEJfUi03VGExT3F1Tkw4aU8wTzVsOGdWQ256WTJfODd5TlhhdDFTcDJXSlBwSUdqRS1Qd29aUy1zRHhjVjNtTmxOZzcwUXIzWEoxYlMtSVRVM2ZXd09ST0tacHNZbkJNOWQ2OUltM3ZTTUJJZDBVbXFQLXEzOGFVWUkxTGpKdnljSncwUUZoTFdwejd0Zkg3eUU4YnhIdWZYNThHbFJncGZhWXc5T2JfdnE0NDBIOFNZdjBCVDUtV2ZmN0dxSkJkYm5NdFFOY0gzemtDUTUtWEtWWXpQX3JlTG8taXRCOGV4c05nZl9rVXlyMDgyckZEUThndTBSbXZ6ZjhVd2dXUS1ZeTlkM3JKbHBCNU1KX2xFcHJiZlFrSWc9PQ" alt="飞行员太阳镜-图2">
+                        <div class="image-caption">图2：多场景展示效果</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用场景：</strong>海滩、驾车、音乐节、派对<br>
+                    <strong>风格特点：</strong>经典、帅气、酷炫、自信
+                </p>
+            </div>
+
+            <!-- 案例4：猫眼太阳镜 -->
+            <div class="case-section">
+                <h3>案例 4️⃣：猫眼太阳镜 - 优雅魅力</h3>
+                <div class="image-grid">
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/AgOVaeQV?token=Z0FBQUFBQnBYZEJfQlBtMDgtaV8tZDY3MzRLVVBBQTQ0Qy1hZ05zWVFuejJBc3Exa0Vvd2w1SXVvY1MyQXdQRkpGbFdaRWZWT3BRNkZGVG5pR2tOcUJvNzNSZlQxMEY5alZYWm52dkxDM1otek42TTVkMEY3VWx5QlQyREU5V2xlZnNOUGlBOVRkZ3A3UGhYeVZxamhsOUpXMFFFcWw0b3Y0WVhPcHN3d1VFQjBfSUJ1V0o0RkJkTDNHakxSbTZmTGxDZUhVRFd4QnpuSjJzUW1ibmd1VkJiTFkzSlBwS0dtNGFWY1FGSnRtUmNXRVVZYmhKa25Ma1FPU0RZeHpodzlGc2JGWENrN1A0U1hMM184akRXVndpdjVPbXNwMExYblE9PQ" alt="猫眼太阳镜-图1">
+                        <div class="image-caption">图1：巴黎街拍/艺术展开幕/屋顶酒吧/精品店购物风</div>
+                    </div>
+                    <div class="image-item">
+                        <img src="https://www.genspark.ai/api/files/s/R6LVUfTw?token=Z0FBQUFBQnBYZEJfb2FDWTdDenNWWXBzMWViTlcxTWdXRlpKZnpQamdZUXVDX1NhVU1Oekl1U09zeEpZd0wxZjVGdjAzU0RjR2htb0hHcDUybHp3dTg4RjlHUzZNaDA0Z3FUTGJZZVRBR0ZIZ1Q2SGhVQm8zZzNVY3RKdWI4V3lYNVdaZjZWeFBRRlV6TmZKNE9yU1JiZXFpQVNBSVVKZGdqMVVUa1hIcUlxV3ZMSC1Ud3RXQW91Ti1GWmFJR2FESS1yMXR6QUJyRFgtdDd0S19rajktUXNDTy1meWpuUklQRFl1WEotMXJVa2ZZMDNOT0s1Qkp1NVhFbEdTU3NuQ1gzSnM3WXU4aVFTZkFmcjBIRy1kcVFNMzhFLUxWSVFCZHc9PQ" alt="猫眼太阳镜-图2">
+                        <div class="image-caption">图2：多场景展示效果</div>
+                    </div>
+                </div>
+                <p style="margin-top: 20px; font-size: 18px;">
+                    <strong>适用场景：</strong>街拍、艺术活动、高端社交、时尚购物<br>
+                    <strong>风格特点：</strong>优雅、复古、女性化、高贵
+                </p>
+            </div>
+
+            <h2><span class="icon">⚖️</span> 传统方案 vs AI方案对比</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>对比维度</th>
+                        <th>传统拍摄方案</th>
+                        <th>AI虚拟试戴方案</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>成本</strong></td>
+                        <td>单款3-5万元（模特、摄影师、场地、后期）</td>
+                        <td><strong style="color: #667eea;">每款仅需200-500元</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>周期</strong></td>
+                        <td>15-30天（预约档期、拍摄、后期）</td>
+                        <td><strong style="color: #667eea;">10分钟生成</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>场景数量</strong></td>
+                        <td>1-2个场景（成本限制）</td>
+                        <td><strong style="color: #667eea;">无限场景，随时更换</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>灵活性</strong></td>
+                        <td>需重新拍摄，无法快速调整</td>
+                        <td><strong style="color: #667eea;">秒级调整，支持A/B测试</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>新品上市</strong></td>
+                        <td>需提前1个月准备视觉素材</td>
+                        <td><strong style="color: #667eea;">与产品同步上线</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>退货率</strong></td>
+                        <td>40-45%（无试戴，仅靠想象）</td>
+                        <td><strong style="color: #667eea;">15-20%（直观展示效果）</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2><span class="icon">💰</span> 商业价值</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">95%↓</div>
+                    <div class="stat-label">成本节省</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98%↓</div>
+                    <div class="stat-label">时间节省</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">180%↑</div>
+                    <div class="stat-label">转化率提升</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">55%↓</div>
+                    <div class="stat-label">退货率降低</div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 50px;">
+                <h2><span class="icon">🎯</span> 适用场景</h2>
+                <ul style="font-size: 18px; line-height: 2;">
+                    <li><strong>电商平台：</strong>淘宝、京东、拼多多等商品详情页展示</li>
+                    <li><strong>品牌官网：</strong>提升产品页面吸引力和转化率</li>
+                    <li><strong>社交媒体：</strong>小红书、抖音等种草内容制作</li>
+                    <li><strong>线下门店：</strong>数字屏幕展示，辅助销售决策</li>
+                    <li><strong>新品发布：</strong>快速生成多场景宣传素材</li>
+                    <li><strong>营销活动：</strong>季节性、节日主题场景定制</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

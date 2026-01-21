@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品集优化方案 - 横排克制版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", -apple-system, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* 顶部导航 */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #e5e5e5;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1a1a1a;
+        }
+
+        /* Hero 区域 - 横排布局 */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 0;
+            background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 600px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        .hero-image img.loaded {
+            opacity: 1;
+        }
+
+        /* 图片加载占位符 */
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e5e5e5;
+            border-top-color: #666;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .hero-content {
+            padding: 2rem 0;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .hero-features {
+            display: flex;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .feature-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .feature-label {
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: #1a1a1a;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            background: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .hero-cta svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* 作品网格 - 极简白色背景 */
+        .portfolio-section {
+            padding: 6rem 0;
+            background: #ffffff;
+        }
+
+        .section-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            background: #fafafa;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 320px;
+            background: #e5e5e5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .card-image img.loaded {
+            opacity: 1;
+        }
+
+        .card-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 懒加载占位符 */
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            border: 2px solid #ccc;
+            border-top-color: #999;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 0.75rem;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 响应式 */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* 方案对比标签 */
+        .comparison-badge {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #FF6B35;
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">陈群超</div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#portfolio">作品集</a></li>
+                <li><a href="#about">关于</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero 区域 - 横排布局 -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <!-- 左侧：图片 -->
+            <div class="hero-image">
+                <img data-src="https://www.genspark.ai/api/files/s/6nm117sO" alt="陈群超作品集">
+            </div>
+
+            <!-- 右侧:横排文案 -->
+            <div class="hero-content">
+                <span class="hero-tag">开放全职机会</span>
+                <h1 class="hero-title">三维渲染<br>电商视觉设计师</h1>
+                <p class="hero-desc">
+                    6年专业经验 · 杭州鸿雁电器（央企）设计师<br>
+                    专注产品级3D渲染 × 电商详情页设计 × AI工具流
+                </p>
+
+                <div class="hero-features">
+                    <div class="feature-item">
+                        <span class="feature-value">6年</span>
+                        <span class="feature-label">行业经验</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-value">3D</span>
+                        <span class="feature-label">渲染专家</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-value">AI</span>
+                        <span class="feature-label">工具流</span>
+                    </div>
+                </div>
+
+                <a href="#portfolio" class="hero-cta">
+                    查看作品集
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品集网格 -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">精选作品</h2>
+                <p class="section-subtitle">商业项目案例展示</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- 作品 1 -->
+                <div class="portfolio-card">
+                    <div class="card-image">
+                        <img data-src="https://www.genspark.ai/api/files/s/HDlWQKEF" alt="玄星X2">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">电商详情页</span>
+                        <h3 class="card-title">恒林·玄星X2人体工学椅</h3>
+                        <p class="card-desc">六维调节系统，200kg承重能力</p>
+                    </div>
+                </div>
+
+                <!-- 作品 2 -->
+                <div class="portfolio-card">
+                    <div class="card-image">
+                        <img data-src="https://www.genspark.ai/api/files/s/gvr7VU9E" alt="孤勇者">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">3D渲染</span>
+                        <h3 class="card-title">孤勇者人体工学椅</h3>
+                        <p class="card-desc">产品级别3D渲染与场景搭建</p>
+                    </div>
+                </div>
+
+                <!-- 作品 3 -->
+                <div class="portfolio-card">
+                    <div class="card-image">
+                        <img data-src="https://www.genspark.ai/api/files/s/xTcxXkHZ" alt="云犀直播">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">品牌视觉</span>
+                        <h3 class="card-title">云犀直播设备</h3>
+                        <p class="card-desc">AI追踪摄像头品牌视觉设计</p>
+                    </div>
+                </div>
+
+                <!-- 作品 4 -->
+                <div class="portfolio-card">
+                    <div class="card-image">
+                        <img data-src="https://www.genspark.ai/api/files/s/Sh8hIcQA" alt="办公椅渲染">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">3D渲染</span>
+                        <h3 class="card-title">办公椅渲染作品</h3>
+                        <p class="card-desc">写实风格产品3D建模与渲染</p>
+                    </div>
+                </div>
+
+                <!-- 作品 5 -->
+                <div class="portfolio-card">
+                    <div class="card-image">
+                        <img data-src="https://www.genspark.ai/api/files/s/ldf4ddwY" alt="产品设计">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">电商设计</span>
+                        <h3 class="card-title">产品详情页设计</h3>
+                        <p class="card-desc">电商视觉设计与排版优化</p>
+                    </div>
+                </div>
+
+                <!-- 作品 6 -->
+                <div class="portfolio-card">
+                    <div class="card-image">
+                        <img data-src="https://www.genspark.ai/api/files/s/5Ge4XR60" alt="办公空间">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">场景设计</span>
+                        <h3 class="card-title">办公空间场景渲染</h3>
+                        <p class="card-desc">环境光照与氛围营造</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 优化标识 -->
+    <div class="comparison-badge">
+        ✨ 优化预览版
+    </div>
+
+    <!-- 懒加载脚本 -->
+    <script>
+        // Intersection Observer 懒加载
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    const src = img.getAttribute('data-src');
+                    
+                    if (src) {
+                        img.src = src;
+                        img.onload = () => {
+                            img.classList.add('loaded');
+                        };
+                        observer.unobserve(img);
+                    }
+                }
+            });
+        }, {
+            rootMargin: '50px' // 提前50px开始加载
+        });
+
+        // 观察所有带 data-src 的图片
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

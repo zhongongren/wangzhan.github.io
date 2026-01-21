@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载页面 - 横排克制版</title>
+    <link rel="stylesheet" href="css/portfolio-loader-horizontal.css">
+</head>
+<body>
+    <!-- 作品集加载动画 - 横排克制版 -->
+    <div class="portfolio-loader">
+        <!-- 图片拼贴背景网格 -->
+        <div class="loader-gallery-grid">
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/Sh8hIcQA" alt="作品1"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/ldf4ddwY" alt="作品2"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/xTcxXkHZ" alt="作品3"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/5Ge4XR60" alt="作品4"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/3Hv41M7s" alt="作品5"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/dj2k5mZA" alt="作品6"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/HDlWQKEF" alt="作品7"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/gvr7VU9E" alt="作品8"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/8GSMNLUp" alt="作品9"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/oLiy233S" alt="作品10"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/Sh8hIcQA" alt="作品11"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/ldf4ddwY" alt="作品12"></div>
+        </div>
+        
+        <!-- 遮罩层 -->
+        <div class="loader-overlay"></div>
+        
+        <!-- 内容区 - 横排克制版 -->
+        <div class="loader-content">
+            <!-- 横排文案 - 一行显示,无颜色 -->
+            <div class="slogan-horizontal">
+                用3D重塑产品价值 × AI加速创意落地
+            </div>
+            
+            <!-- 进度条 -->
+            <div class="loader-progress-bar">
+                <div class="loader-progress-fill"></div>
+            </div>
+            <div class="loader-progress-text">0%</div>
+        </div>
+    </div>
+
+    <!-- 加载进度脚本 -->
+    <script>
+        // 模拟加载进度
+        let progress = 0;
+        const progressBar = document.querySelector('.loader-progress-fill');
+        const progressText = document.querySelector('.loader-progress-text');
+        const loader = document.querySelector('.portfolio-loader');
+
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                
+                // 加载完成后淡出
+                setTimeout(() => {
+                    loader.classList.add('loaded');
+                }, 500);
+            }
+            
+            progressBar.style.width = progress + '%';
+            progressText.textContent = Math.floor(progress) + '%';
+        }, 200);
+    </script>
+</body>
+</html>

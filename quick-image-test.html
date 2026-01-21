@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快速图片测试</title>
+    <style>
+        body {
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+            font-family: sans-serif;
+        }
+        h1 { color: #FF6B35; }
+        .test-box {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+        img {
+            max-width: 400px;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+            border: 2px solid #444;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .loading { background: #ffc107; color: #000; }
+        .success { background: #28a745; }
+        .error { background: #dc3545; }
+    </style>
+</head>
+<body>
+    <h1>🔍 AI云盘图片快速测试</h1>
+    
+    <div class="test-box">
+        <h2>测试1: 玄星详情页图片</h2>
+        <div class="status loading" id="status1">⏳ 加载中...</div>
+        <img id="img1" 
+             src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_01.jpg" 
+             alt="玄星_01">
+    </div>
+    
+    <div class="test-box">
+        <h2>测试2: 玄星详情页图片2</h2>
+        <div class="status loading" id="status2">⏳ 加载中...</div>
+        <img id="img2" 
+             src="https://www.genspark.ai/api/files/v1/download?file_id=玄星详情页/玄星_08.jpg" 
+             alt="玄星_08">
+    </div>
+    
+    <div class="test-box">
+        <h2>测试3: 孤勇者详情页（测试路径1）</h2>
+        <div class="status loading" id="status3">⏳ 加载中...</div>
+        <img id="img3" 
+             src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_01.jpg" 
+             alt="孤勇者_01（不带2）">
+    </div>
+    
+    <div class="test-box">
+        <h2>测试4: 孤勇者详情页2（测试路径2）</h2>
+        <div class="status loading" id="status4">⏳ 加载中...</div>
+        <img id="img4" 
+             src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页2/孤勇者_01.jpg" 
+             alt="孤勇者_01（带2）">
+    </div>
+
+    <script>
+        function test(imgId, statusId) {
+            const img = document.getElementById(imgId);
+            const status = document.getElementById(statusId);
+            
+            img.onload = () => {
+                status.className = 'status success';
+                status.innerHTML = '✅ 加载成功！尺寸: ' + img.naturalWidth + 'x' + img.naturalHeight;
+            };
+            
+            img.onerror = () => {
+                status.className = 'status error';
+                status.innerHTML = '❌ 加载失败';
+            };
+            
+            setTimeout(() => {
+                if (status.className === 'status loading') {
+                    status.className = 'status error';
+                    status.innerHTML = '❌ 超时';
+                }
+            }, 8000);
+        }
+        
+        test('img1', 'status1');
+        test('img2', 'status2');
+        test('img3', 'status3');
+        test('img4', 'status4');
+    </script>
+    
+    <div class="test-box">
+        <h2>📋 结果判断</h2>
+        <ul>
+            <li>✅ 测试1和2成功 → 玄星路径正确</li>
+            <li>✅ 测试3成功 → 孤勇者用 "孤勇者详情页/" 路径</li>
+            <li>✅ 测试4成功 → 孤勇者用 "孤勇者详情页2/" 路径</li>
+            <li>❌ 全失败 → 需要检查AI云盘设置</li>
+        </ul>
+    </div>
+</body>
+</html>

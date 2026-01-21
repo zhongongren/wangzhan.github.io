@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孤勇者 · 恒林人体工学椅 - 电商详情页设计案例 | 转化率提升42%</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1f1f1f 100%);
+            color: #e0e0e0;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* 头部标题区 */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 56px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        
+        .header .subtitle {
+            font-size: 24px;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+        
+        .header .tags {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #FF6B35;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        /* 核心数据展示区 */
+        .data-highlight {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .data-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .data-card .number {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .data-card .label {
+            font-size: 16px;
+            color: #a0a0a0;
+        }
+        
+        /* 精选作品展示区 - 大图模式 */
+        .featured-works {
+            margin-bottom: 100px;
+        }
+        
+        .featured-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .featured-subtitle {
+            font-size: 18px;
+            color: #a0a0a0;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .featured-grid {
+            display: grid;
+            gap: 40px;
+        }
+        
+        .featured-item {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .featured-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.4);
+            border-color: #FF6B35;
+        }
+        
+        .featured-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        
+        .featured-item:hover img {
+            transform: scale(1.03);
+        }
+        
+        .featured-caption {
+            padding: 30px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%);
+        }
+        
+        .featured-caption h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .featured-caption p {
+            font-size: 16px;
+            color: #b0b0b0;
+            line-height: 1.8;
+        }
+        
+        .featured-caption .highlight {
+            color: #FF6B35;
+            font-weight: 600;
+        }
+        
+        /* 查看更多按钮 */
+        .view-more-btn {
+            text-align: center;
+            margin: 60px 0 80px 0;
+        }
+        
+        .view-more-btn button {
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+            color: #fff;
+            border: none;
+            padding: 18px 50px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        .view-more-btn button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+        
+        /* 章节标题 */
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 5px solid #FF6B35;
+        }
+        
+        /* 视觉化信息卡片 */
+        .visual-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .visual-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .visual-card-title {
+            font-size: 28px;
+            color: #fff;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .visual-card-icon {
+            font-size: 64px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        /* 对比表格 - 视觉化 */
+        .comparison-visual {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .comparison-side {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .comparison-side.bad {
+            border-color: #f5576c;
+        }
+        
+        .comparison-side.good {
+            border-color: #4ade80;
+        }
+        
+        .comparison-side h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        
+        .comparison-side.bad h4 {
+            background: rgba(245, 87, 108, 0.2);
+            color: #f5576c;
+        }
+        
+        .comparison-side.good h4 {
+            background: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+        }
+        
+        .comparison-side p {
+            color: #c0c0c0;
+            line-height: 2;
+            font-size: 16px;
+        }
+        
+        /* 流程图 */
+        .process-flow {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .process-step {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-5px);
+            border-color: #FF6B35;
+            background: rgba(102, 126, 234, 0.2);
+        }
+        
+        .process-step .step-number {
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .process-step .step-title {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .process-step .step-desc {
+            font-size: 13px;
+            color: #a0a0a0;
+        }
+        
+        /* 竞品对比 */
+        .competitor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .competitor-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .competitor-card:hover {
+            transform: translateY(-5px);
+            border-color: #FF6B35;
+        }
+        
+        .competitor-card.highlight {
+            border-color: #4ade80;
+            background: linear-gradient(135deg, rgba(74, 222, 128, 0.1) 0%, rgba(74, 222, 128, 0.05) 100%);
+        }
+        
+        .competitor-card h4 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .competitor-card .score-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        
+        .competitor-card .score-item .label {
+            color: #a0a0a0;
+        }
+        
+        .competitor-card .score-item .value {
+            color: #FF6B35;
+            font-weight: 600;
+        }
+        
+        .competitor-card .score-item .value.high {
+            color: #4ade80;
+        }
+        
+        .competitor-card .score-item .value.low {
+            color: #f5576c;
+        }
+        
+        /* 用户调研 */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .research-card {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .research-card:hover {
+            transform: translateY(-5px);
+            border-color: #f5576c;
+        }
+        
+        .research-card .icon {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .research-card h4 {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .research-card .stat {
+            font-size: 36px;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .research-card p {
+            color: #a0a0a0;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        /* 引用框 */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+            border-left: 5px solid #f5576c;
+            padding: 25px 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-style: italic;
+        }
+        
+        .quote-box .quote-text {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        .quote-box .quote-author {
+            font-size: 13px;
+            color: #a0a0a0;
+            text-align: right;
+        }
+        
+        /* 图片展示区 */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .image-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+            border-color: #FF6B35;
+        }
+        
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .image-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-card .caption {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        
+        .image-card .caption h4 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .image-card .caption p {
+            font-size: 14px;
+            color: #a0a0a0;
+            line-height: 1.6;
+        }
+        
+        /* IDCMA时间轴 */
+        .idcma-timeline {
+            position: relative;
+            padding: 40px 0;
+            margin: 40px 0;
+        }
+        
+        .idcma-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            transform: translateX(-50%);
+        }
+        
+        .idcma-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .idcma-item:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .idcma-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .idcma-content {
+            flex: 1;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 0 30px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .idcma-content h4 {
+            font-size: 20px;
+            color: #FF6B35;
+            margin-bottom: 10px;
+        }
+        
+        .idcma-content p {
+            color: #c0c0c0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .idcma-dot {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #fff;
+            font-size: 18px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 40px;
+            }
+            
+            .image-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .process-flow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 32px;
+            }
+            
+            .featured-title {
+                font-size: 32px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-flow {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-visual {
+                grid-template-columns: 1fr;
+            }
+            
+            .idcma-timeline::before {
+                left: 20px;
+            }
+            
+            .idcma-item {
+                flex-direction: row !important;
+            }
+            
+            .idcma-content {
+                margin-left: 60px;
+                margin-right: 0;
+            }
+        }
+        
+        /* 模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            position: relative;
+            margin: 2% auto;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close:hover {
+            background: rgba(245, 87, 108, 0.8);
+        }
+        
+        /* 隐藏内容 */
+        .hidden-content {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>孤勇者 · 恒林人体工学椅详情页设计</h1>
+            <div class="subtitle">基于用户调研的电商详情页优化实战案例</div>
+            <div class="tags">
+                <span class="tag">电商视觉设计</span>
+                <span class="tag">用户体验优化</span>
+                <span class="tag">转化率提升42%</span>
+                <span class="tag">竞品分析</span>
+                <span class="tag">数据驱动设计</span>
+            </div>
+        </div>
+
+        <!-- 核心数据展示 -->
+        <div class="data-highlight">
+            <div class="data-card">
+                <div class="number">+42%</div>
+                <div class="label">详情页转化率提升</div>
+            </div>
+            <div class="data-card">
+                <div class="number">+68%</div>
+                <div class="label">页面停留时长增长</div>
+            </div>
+            <div class="data-card">
+                <div class="number">-35%</div>
+                <div class="label">跳出率下降</div>
+            </div>
+            <div class="data-card">
+                <div class="number">20+</div>
+                <div class="label">用户深度访谈</div>
+            </div>
+        </div>
+
+        <!-- 🔥 精选作品展示（新增！） -->
+        <div class="featured-works">
+            <h2 class="featured-title">✨ 精选设计作品</h2>
+            <p class="featured-subtitle">先睹为快：5个核心页面展示完整设计思路</p>
+            
+            <div class="featured-grid">
+                <!-- 精选作品1 -->
+                <div class="featured-item" onclick="openModal('https://www.genspark.ai/api/files/s/HXlLE6r5')">
+                    <img src="https://www.genspark.ai/api/files/s/HXlLE6r5" alt="首屏设计">
+                    <div class="featured-caption">
+                        <h3>首屏设计：150°大仰角场景化呈现</h3>
+                        <p><span class="highlight">核心策略：</span>用"商务舱随时在身边"替代技术术语，真人躺姿直击痛点，3秒抓住用户注意力</p>
+                    </div>
+                </div>
+
+                <!-- 精选作品2 -->
+                <div class="featured-item" onclick="openModal('https://www.genspark.ai/api/files/s/3Um2lVAN')">
+                    <img src="https://www.genspark.ai/api/files/s/3Um2lVAN" alt="痛点场景">
+                    <div class="featured-caption">
+                        <h3>痛点场景：长时间开会腰部压力无处释放</h3>
+                        <p><span class="highlight">设计亮点：</span>插画+场景化文案，用户调研显示85%商务人士最关心"会议中能随时躺下缓解"</p>
+                    </div>
+                </div>
+
+                <!-- 精选作品3 -->
+                <div class="featured-item" onclick="openModal('https://www.genspark.ai/api/files/s/bv9frfAu')">
+                    <img src="https://www.genspark.ai/api/files/s/bv9frfAu" alt="9大调节系统">
+                    <div class="featured-caption">
+                        <h3>技术可视化：9大调节系统图标化展示</h3>
+                        <p><span class="highlight">优化策略：</span>用图标+简洁文案替代参数堆砌，每个调节点配动态GIF演示，降低理解门槛</p>
+                    </div>
+                </div>
+
+                <!-- 精选作品4 -->
+                <div class="featured-item" onclick="openModal('https://www.genspark.ai/api/files/s/gWVjXm1H')">
+                    <img src="https://www.genspark.ai/api/files/s/gWVjXm1H" alt="竞品对比">
+                    <div class="featured-caption">
+                        <h4>对比测试：腰部压力降低37%数据化呈现</h4>
+                        <p><span class="highlight">信任建立：</span>与竞品实测对比数据，用可视化图表让"人体工学"从概念变成真实体验</p>
+                    </div>
+                </div>
+
+                <!-- 精选作品5 -->
+                <div class="featured-item" onclick="openModal('https://www.genspark.ai/api/files/s/wpYv7R2k')">
+                    <img src="https://www.genspark.ai/api/files/s/wpYv7R2k" alt="180天试用">
+                    <div class="featured-caption">
+                        <h3>消除疑虑：180天试用保障阶梯式引导</h3>
+                        <p><span class="highlight">转化优化：</span>借鉴床垫案例（转化率+55%），用"免费试用"降低决策风险，阶梯式CTA提升42%转化</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 查看更多按钮 -->
+        <div class="view-more-btn">
+            <button onclick="showFullGallery()">查看完整20屏设计详解 ↓</button>
+        </div>
+
+        <!-- 以下内容初始隐藏 -->
+        <div id="fullContent" class="hidden-content">
+            
+            <!-- 项目背景 -->
+            <div class="section">
+                <h2 class="section-title">01 项目挑战</h2>
+                
+                <div class="visual-card">
+                    <div class="visual-card-icon">⚠️</div>
+                    <h3 class="visual-card-title">避免"自我视角陷阱"</h3>
+                    <div class="quote-box">
+                        <div class="quote-text">
+                            某智能床垫详情页因技术参数堆砌，跳出率飙升35%。<strong>68%用户担忧"功能是否实用"，82%最关心"腰不酸背不痛"</strong>，而非技术细节。
+                        </div>
+                        <div class="quote-author">—— 行业真实案例</div>
+                    </div>
+                </div>
+
+                <div class="comparison-visual">
+                    <div class="comparison-side bad">
+                        <h4>❌ 常见问题</h4>
+                        <p>• 过度强调技术参数<br>
+                        • "9大调节系统"用户不理解<br>
+                        • 缺乏场景化呈现<br>
+                        • 转化率低、跳出率高</p>
+                    </div>
+                    <div class="comparison-side good">
+                        <h4>✓ 我们的策略</h4>
+                        <p>• 体验语言替代技术术语<br>
+                        • "150°躺姿缓解腰部"直击痛点<br>
+                        • 三大场景插画具象化<br>
+                        • 阶梯式引导降低门槛</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 竞品分析 -->
+            <div class="section">
+                <h2 class="section-title">02 竞品分析</h2>
+                
+                <div class="competitor-grid">
+                    <div class="competitor-card">
+                        <h4>永艺 Flow360</h4>
+                        <div class="score-item">
+                            <span class="label">首屏卖点</span>
+                            <span class="value low">"动态撑腰科技"</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">痛点呈现</span>
+                            <span class="value low">无场景化</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">技术说明</span>
+                            <span class="value low">术语过多</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">信任背书</span>
+                            <span class="value">品牌历史</span>
+                        </div>
+                    </div>
+                    
+                    <div class="competitor-card">
+                        <h4>西昊 C300</h4>
+                        <div class="score-item">
+                            <span class="label">首屏卖点</span>
+                            <span class="value low">"人体工学专利"</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">痛点呈现</span>
+                            <span class="value low">仅文字描述</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">技术说明</span>
+                            <span class="value low">参数堆砌</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">信任背书</span>
+                            <span class="value">专利证书</span>
+                        </div>
+                    </div>
+                    
+                    <div class="competitor-card">
+                        <h4>黑白调 E3 Pro</h4>
+                        <div class="score-item">
+                            <span class="label">首屏卖点</span>
+                            <span class="value low">"麦肯基疗法"</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">痛点呈现</span>
+                            <span class="value">有腰部场景</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">技术说明</span>
+                            <span class="value low">概念晦涩</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">信任背书</span>
+                            <span class="value high">医学合作</span>
+                        </div>
+                    </div>
+                    
+                    <div class="competitor-card highlight">
+                        <h4>孤勇者（我们）</h4>
+                        <div class="score-item">
+                            <span class="label">首屏卖点</span>
+                            <span class="value high">"商务舱随时在身边"</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">痛点呈现</span>
+                            <span class="value high">三大场景插画</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">技术说明</span>
+                            <span class="value high">动态GIF演示</span>
+                        </div>
+                        <div class="score-item">
+                            <span class="label">信任背书</span>
+                            <span class="value high">3000+用户选择</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 用户调研 -->
+            <div class="section">
+                <h2 class="section-title">03 用户调研</h2>
+                
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="icon">📋</div>
+                        <h4>线上问卷</h4>
+                        <div class="stat">50份</div>
+                        <p>筛选170-190cm<br>商务白领</p>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="icon">🎤</div>
+                        <h4>深度访谈</h4>
+                        <div class="stat">20例</div>
+                        <p>每人30分钟<br>挖掘真实痛点</p>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="icon">📊</div>
+                        <h4>评价分析</h4>
+                        <div class="stat">1500条</div>
+                        <p>三大品牌用户评价<br>提取高频词</p>
+                    </div>
+                </div>
+
+                <div class="visual-card">
+                    <div class="visual-card-icon">💡</div>
+                    <h3 class="visual-card-title">核心洞察</h3>
+                    <div class="quote-box">
+                        <div class="quote-text">
+                            "我每天开会4-6小时，最怕腰疼到坐不住。如果能<strong>随时躺下缓解腰部压力</strong>，比什么9大调节都管用。"
+                        </div>
+                        <div class="quote-author">—— 产品总监，32岁，185cm</div>
+                    </div>
+                    
+                    <div class="comparison-visual" style="margin-top: 30px;">
+                        <div class="comparison-side bad">
+                            <h4>设计师预设</h4>
+                            <p>• "9大智能调节系统"<br>
+                            • "航空级铝合金材质"<br>
+                            • "人体工学曲线设计"<br>
+                            • "4D扶手调节"</p>
+                        </div>
+                        <div class="comparison-side good">
+                            <h4>用户真实需求</h4>
+                            <p>• "随时躺下缓解腰部" <strong>85%</strong><br>
+                            • "至少用5年不坏" <strong>78%</strong><br>
+                            • "坐8小时腰不酸" <strong>92%</strong><br>
+                            • "手肘有地方放" <strong>65%</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 设计策略 -->
+            <div class="section">
+                <h2 class="section-title">04 设计策略</h2>
+                
+                <div class="process-flow">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <div class="step-title">痛点场景化</div>
+                        <div class="step-desc">三大场景插画呈现</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <div class="step-title">技术可视化</div>
+                        <div class="step-desc">动态GIF替代术语</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <div class="step-title">信任前置化</div>
+                        <div class="step-desc">前3屏突出证言</div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <div class="step-title">转化阶梯化</div>
+                        <div class="step-desc">降低决策门槛</div>
+                    </div>
+                </div>
+
+                <div class="visual-card">
+                    <div class="visual-card-icon">📐</div>
+                    <h3 class="visual-card-title">IDCMA 黄金法则</h3>
+                    
+                    <div class="idcma-timeline">
+                        <div class="idcma-item">
+                            <div class="idcma-content">
+                                <h4>I - Interest 引起兴趣</h4>
+                                <p>第1-3屏：150°大仰角真人场景 + "商务舱随时在身边"</p>
+                            </div>
+                            <div class="idcma-dot">I</div>
+                            <div style="flex: 1;"></div>
+                        </div>
+                        
+                        <div class="idcma-item">
+                            <div style="flex: 1;"></div>
+                            <div class="idcma-dot">D</div>
+                            <div class="idcma-content">
+                                <h4>D - Demand 激发需求</h4>
+                                <p>第4-7屏：三大痛点场景插画 + 用户证言</p>
+                            </div>
+                        </div>
+                        
+                        <div class="idcma-item">
+                            <div class="idcma-content">
+                                <h4>C - Confidence 建立信任</h4>
+                                <p>第8-13屏：9大调节系统可视化 + 材质工艺细节</p>
+                            </div>
+                            <div class="idcma-dot">C</div>
+                            <div style="flex: 1;"></div>
+                        </div>
+                        
+                        <div class="idcma-item">
+                            <div style="flex: 1;"></div>
+                            <div class="idcma-dot">M</div>
+                            <div class="idcma-content">
+                                <h4>M - Misgiving 消除疑虑</h4>
+                                <p>第14-17屏：对比测试数据 + "180天试用保障"</p>
+                            </div>
+                        </div>
+                        
+                        <div class="idcma-item">
+                            <div class="idcma-content">
+                                <h4>A - Action 促成行动</h4>
+                                <p>第18-20屏：阶梯式CTA + 限时优惠</p>
+                            </div>
+                            <div class="idcma-dot">A</div>
+                            <div style="flex: 1;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 完整20屏展示 -->
+            <div class="section">
+                <h2 class="section-title">05 完整20屏设计展示</h2>
+                
+                <h3 style="color: #667eea; font-size: 24px; margin: 40px 0 20px 0;">📱 第一版设计（1-11屏）</h3>
+                <div class="image-gallery">
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/HXlLE6r5')">
+                        <img src="https://www.genspark.ai/api/files/s/HXlLE6r5" alt="第1屏">
+                        <div class="caption">
+                            <h4>第1屏 - Interest</h4>
+                            <p>150°大仰角场景</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/gxm2lVAN')">
+                        <img src="https://www.genspark.ai/api/files/s/gxm2lVAN" alt="第2屏">
+                        <div class="caption">
+                            <h4>第2屏 - Interest</h4>
+                            <p>3000+用户选择</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/3Um2lVAN')">
+                        <img src="https://www.genspark.ai/api/files/s/3Um2lVAN" alt="第3屏">
+                        <div class="caption">
+                            <h4>第3屏 - Demand</h4>
+                            <p>长时间开会场景</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/FO1irMKl')">
+                        <img src="https://www.genspark.ai/api/files/s/FO1irMKl" alt="第4屏">
+                        <div class="caption">
+                            <h4>第4屏 - Demand</h4>
+                            <p>深夜加班场景</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/JW6eGs9p')">
+                        <img src="https://www.genspark.ai/api/files/s/JW6eGs9p" alt="第5屏">
+                        <div class="caption">
+                            <h4>第5屏 - Demand</h4>
+                            <p>午休小憩场景</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/akucCFRs')">
+                        <img src="https://www.genspark.ai/api/files/s/akucCFRs" alt="第6屏">
+                        <div class="caption">
+                            <h4>第6屏 - Confidence</h4>
+                            <p>150°技术原理</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/bv9frfAu')">
+                        <img src="https://www.genspark.ai/api/files/s/bv9frfAu" alt="第7屏">
+                        <div class="caption">
+                            <h4>第7屏 - Confidence</h4>
+                            <p>9大调节系统</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/lb2DjYyD')">
+                        <img src="https://www.genspark.ai/api/files/s/lb2DjYyD" alt="第8屏">
+                        <div class="caption">
+                            <h4>第8屏 - Confidence</h4>
+                            <p>材质工艺细节</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/mdKzlWxG')">
+                        <img src="https://www.genspark.ai/api/files/s/mdKzlWxG" alt="第9屏">
+                        <div class="caption">
+                            <h4>第9屏 - Confidence</h4>
+                            <p>动态腰托演示</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/gWVjXm1H')">
+                        <img src="https://www.genspark.ai/api/files/s/gWVjXm1H" alt="第10屏">
+                        <div class="caption">
+                            <h4>第10屏 - Misgiving</h4>
+                            <p>对比测试数据</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/x63POUkC')">
+                        <img src="https://www.genspark.ai/api/files/s/x63POUkC" alt="第11屏">
+                        <div class="caption">
+                            <h4>第11屏 - Misgiving</h4>
+                            <p>真实用户评价</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="color: #667eea; font-size: 24px; margin: 60px 0 20px 0;">📱 第二版优化（12-20屏）</h3>
+                <div class="image-gallery">
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/cPB8qlzE')">
+                        <img src="https://www.genspark.ai/api/files/s/cPB8qlzE" alt="第12屏">
+                        <div class="caption">
+                            <h4>第12屏</h4>
+                            <p>品牌升级版首屏</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/rVvkXGZs')">
+                        <img src="https://www.genspark.ai/api/files/s/rVvkXGZs" alt="第13屏">
+                        <div class="caption">
+                            <h4>第13屏</h4>
+                            <p>核心卖点强化</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/6CYEDlRE')">
+                        <img src="https://www.genspark.ai/api/files/s/6CYEDlRE" alt="第14屏">
+                        <div class="caption">
+                            <h4>第14屏</h4>
+                            <p>技术原理深化</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/BHGEr5gT')">
+                        <img src="https://www.genspark.ai/api/files/s/BHGEr5gT" alt="第15屏">
+                        <div class="caption">
+                            <h4>第15屏</h4>
+                            <p>使用场景拓展</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/oYbOlKCG')">
+                        <img src="https://www.genspark.ai/api/files/s/oYbOlKCG" alt="第16屏">
+                        <div class="caption">
+                            <h4>第16屏</h4>
+                            <p>材质升级说明</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/d4RLsprl')">
+                        <img src="https://www.genspark.ai/api/files/s/d4RLsprl" alt="第17屏">
+                        <div class="caption">
+                            <h4>第17屏</h4>
+                            <p>安装与售后</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/wpYv7R2k')">
+                        <img src="https://www.genspark.ai/api/files/s/wpYv7R2k" alt="第18屏">
+                        <div class="caption">
+                            <h4>第18屏 - Action</h4>
+                            <p>180天试用保障</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/S1DhITJV')">
+                        <img src="https://www.genspark.ai/api/files/s/S1DhITJV" alt="第19屏">
+                        <div class="caption">
+                            <h4>第19屏 - Action</h4>
+                            <p>限时优惠</p>
+                        </div>
+                    </div>
+                    <div class="image-card" onclick="openModal('https://www.genspark.ai/api/files/s/zhrvRjy8')">
+                        <img src="https://www.genspark.ai/api/files/s/zhrvRjy8" alt="第20屏">
+                        <div class="caption">
+                            <h4>第20屏 - Action</h4>
+                            <p>阶梯式CTA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 项目成果 -->
+            <div class="section">
+                <h2 class="section-title">06 项目成果</h2>
+                
+                <div class="research-grid">
+                    <div class="research-card">
+                        <div class="icon">⏱️</div>
+                        <h4>停留时长</h4>
+                        <div class="stat">+68%</div>
+                        <p>从2分15秒提升至3分48秒</p>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="icon">💰</div>
+                        <h4>转化率</h4>
+                        <div class="stat">+42%</div>
+                        <p>从2.8%提升至3.98%</p>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="icon">📉</div>
+                        <h4>跳出率</h4>
+                        <div class="stat">-35%</div>
+                        <p>从58%下降至37.7%</p>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="icon">🛒</div>
+                        <h4>加购率</h4>
+                        <div class="stat">+67%</div>
+                        <p>从8.5%提升至14.2%</p>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="icon">💬</div>
+                        <h4>咨询量</h4>
+                        <div class="stat">+79%</div>
+                        <p>从120次/天增至215次/天</p>
+                    </div>
+                    
+                    <div class="research-card">
+                        <div class="icon">📈</div>
+                        <h4>月GMV</h4>
+                        <div class="stat">+67%</div>
+                        <p>从85万增长至142万</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 页脚 -->
+        <div style="text-align: center; margin-top: 80px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); color: #888;">
+            <p style="font-size: 14px;">完整设计流程：竞品分析 → 用户调研 → 策略制定 → 视觉执行 → 数据验证</p>
+            <p style="font-size: 14px; margin-top: 10px;">体现了商业思维、用户洞察力和数据驱动能力</p>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImg" src="" alt="大图">
+        </div>
+    </div>
+
+    <script>
+        function openModal(imgSrc) {
+            document.getElementById("myModal").style.display = "block";
+            document.getElementById("modalImg").src = imgSrc;
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        function showFullGallery() {
+            document.getElementById("fullContent").classList.remove("hidden-content");
+            document.querySelector(".view-more-btn").style.display = "none";
+            // 平滑滚动到详细内容
+            document.getElementById("fullContent").scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") closeModal();
+        });
+
+        var images = [
+            'https://www.genspark.ai/api/files/s/HXlLE6r5',
+            'https://www.genspark.ai/api/files/s/gxm2lVAN',
+            'https://www.genspark.ai/api/files/s/3Um2lVAN',
+            'https://www.genspark.ai/api/files/s/FO1irMKl',
+            'https://www.genspark.ai/api/files/s/JW6eGs9p',
+            'https://www.genspark.ai/api/files/s/akucCFRs',
+            'https://www.genspark.ai/api/files/s/bv9frfAu',
+            'https://www.genspark.ai/api/files/s/lb2DjYyD',
+            'https://www.genspark.ai/api/files/s/mdKzlWxG',
+            'https://www.genspark.ai/api/files/s/gWVjXm1H',
+            'https://www.genspark.ai/api/files/s/x63POUkC',
+            'https://www.genspark.ai/api/files/s/cPB8qlzE',
+            'https://www.genspark.ai/api/files/s/rVvkXGZs',
+            'https://www.genspark.ai/api/files/s/6CYEDlRE',
+            'https://www.genspark.ai/api/files/s/BHGEr5gT',
+            'https://www.genspark.ai/api/files/s/oYbOlKCG',
+            'https://www.genspark.ai/api/files/s/d4RLsprl',
+            'https://www.genspark.ai/api/files/s/wpYv7R2k',
+            'https://www.genspark.ai/api/files/s/S1DhITJV',
+            'https://www.genspark.ai/api/files/s/zhrvRjy8'
+        ];
+        
+        var currentIndex = 0;
+        
+        document.addEventListener('keydown', function(event) {
+            var modal = document.getElementById("myModal");
+            if (modal.style.display === "block") {
+                if (event.key === "ArrowRight" && currentIndex < images.length - 1) {
+                    currentIndex++;
+                    document.getElementById("modalImg").src = images[currentIndex];
+                } else if (event.key === "ArrowLeft" && currentIndex > 0) {
+                    currentIndex--;
+                    document.getElementById("modalImg").src = images[currentIndex];
+                }
+            }
+        });
+        
+        window.openModal = function(imgSrc) {
+            currentIndex = images.indexOf(imgSrc);
+            openModal(imgSrc);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载页面设计方案 - 点击切换查看</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Hiragino Sans GB", sans-serif;
+            overflow: hidden;
+        }
+
+        /* 方案容器 */
+        .design-option {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .design-option.active {
+            display: block;
+        }
+
+        /* ========== 方案1: 纯色渐变背景 ========== */
+        .option-1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-1 .content {
+            text-align: center;
+            color: #fff;
+        }
+
+        .option-1 .title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 0.05em;
+        }
+
+        .option-1 .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 50px;
+        }
+
+        .option-1 .progress-bar {
+            width: 400px;
+            height: 3px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .option-1 .progress-fill {
+            height: 100%;
+            width: 60%;
+            background: #fff;
+            border-radius: 10px;
+        }
+
+        .option-1 .progress-text {
+            font-size: 14px;
+            opacity: 0.8;
+            letter-spacing: 0.2em;
+        }
+
+        /* ========== 方案2: 深色极简 ========== */
+        .option-2 {
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-2 .content {
+            text-align: center;
+            color: #fff;
+        }
+
+        .option-2 .logo {
+            font-size: 80px;
+            font-weight: 900;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .option-2 .title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .option-2 .subtitle {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 50px;
+        }
+
+        .option-2 .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #667eea;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .option-2 .progress-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.3em;
+        }
+
+        /* ========== 方案3: 模糊大图背景 ========== */
+        .option-3 {
+            position: relative;
+            background: #000;
+        }
+
+        .option-3 .bg-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(20px) brightness(0.4);
+        }
+
+        .option-3 .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .option-3 .content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .option-3 .title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .option-3 .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 50px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .option-3 .progress-bar {
+            width: 400px;
+            height: 3px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .option-3 .progress-fill {
+            height: 100%;
+            width: 60%;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .option-3 .progress-text {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* ========== 方案4: 单色+图形装饰 ========== */
+        .option-4 {
+            background: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-4 .decoration {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(102,126,234,0.15) 0%, transparent 70%);
+        }
+
+        .option-4 .decoration-1 {
+            top: -200px;
+            left: -200px;
+        }
+
+        .option-4 .decoration-2 {
+            bottom: -200px;
+            right: -200px;
+            background: radial-gradient(circle, rgba(118,75,162,0.15) 0%, transparent 70%);
+        }
+
+        .option-4 .content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        .option-4 .title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .option-4 .subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 50px;
+        }
+
+        .option-4 .progress-bar {
+            width: 400px;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .option-4 .progress-fill {
+            height: 100%;
+            width: 60%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .option-4 .progress-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* ========== 方案5: 白色极简 ========== */
+        .option-5 {
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .option-5 .content {
+            text-align: center;
+            color: #1a1a1a;
+        }
+
+        .option-5 .logo {
+            font-size: 60px;
+            font-weight: 900;
+            margin-bottom: 40px;
+            color: #1a1a1a;
+        }
+
+        .option-5 .title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .option-5 .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        .option-5 .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f0f0f0;
+            border-top-color: #1a1a1a;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        .option-5 .progress-text {
+            font-size: 14px;
+            color: #999;
+        }
+
+        /* 切换按钮 */
+        .switcher {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .switcher button {
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .switcher button:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .switcher button.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .switcher-label {
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            align-self: center;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 方案1: 紫色渐变 -->
+    <div class="design-option option-1 active">
+        <div class="content">
+            <h1 class="title">作品集加载中...</h1>
+            <p class="subtitle">6年专业经验，用3D设计重塑产品价值</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="progress-text">60%</div>
+        </div>
+    </div>
+
+    <!-- 方案2: 深色极简 -->
+    <div class="design-option option-2">
+        <div class="content">
+            <div class="logo">CQC</div>
+            <h1 class="title">作品集加载中...</h1>
+            <p class="subtitle">6年专业经验，用3D设计重塑产品价值</p>
+            <div class="spinner"></div>
+            <div class="progress-text">60%</div>
+        </div>
+    </div>
+
+    <!-- 方案3: 模糊大图 -->
+    <div class="design-option option-3">
+        <img src="https://www.genspark.ai/api/files/s/lrUrtKQF" class="bg-image" alt="背景">
+        <div class="overlay"></div>
+        <div class="content">
+            <div>
+                <h1 class="title">作品集加载中...</h1>
+                <p class="subtitle">6年专业经验，用3D设计重塑产品价值</p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">60%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 方案4: 深色+装饰 -->
+    <div class="design-option option-4">
+        <div class="decoration decoration-1"></div>
+        <div class="decoration decoration-2"></div>
+        <div class="content">
+            <div>
+                <h1 class="title">作品集加载中...</h1>
+                <p class="subtitle">6年专业经验，用3D设计重塑产品价值</p>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-text">60%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 方案5: 白色极简 -->
+    <div class="design-option option-5">
+        <div class="content">
+            <div class="logo">陈群超</div>
+            <h1 class="title">作品集加载中...</h1>
+            <p class="subtitle">6年专业经验，用3D设计重塑产品价值</p>
+            <div class="spinner"></div>
+            <div class="progress-text">60%</div>
+        </div>
+    </div>
+
+    <!-- 切换器 -->
+    <div class="switcher">
+        <span class="switcher-label">方案选择:</span>
+        <button class="active" onclick="switchDesign(1)">1</button>
+        <button onclick="switchDesign(2)">2</button>
+        <button onclick="switchDesign(3)">3</button>
+        <button onclick="switchDesign(4)">4</button>
+        <button onclick="switchDesign(5)">5</button>
+    </div>
+
+    <script>
+        function switchDesign(num) {
+            // 隐藏所有方案
+            document.querySelectorAll('.design-option').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // 显示选中方案
+            document.querySelector(`.option-${num}`).classList.add('active');
+            
+            // 更新按钮状态
+            document.querySelectorAll('.switcher button').forEach((btn, index) => {
+                btn.classList.toggle('active', index + 1 === num);
+            });
+        }
+    </script>
+</body>
+</html>

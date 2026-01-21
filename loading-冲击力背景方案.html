@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载背景优化方案 - 更有冲击力的展示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: #000;
+            color: #fff;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .intro {
+            text-align: center;
+            color: #999;
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+        
+        .styles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .style-card {
+            background: #111;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid #222;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .style-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 107, 53, 0.3);
+            border-color: #FF6B35;
+        }
+        
+        .preview {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .preview-label {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 107, 53, 0.95);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+        
+        .style-info {
+            padding: 30px;
+        }
+        
+        .style-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        
+        .style-desc {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .feature-tag {
+            background: rgba(255, 107, 53, 0.15);
+            color: #FF6B35;
+            padding: 6px 14px;
+            border-radius: 18px;
+            font-size: 12px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+        
+        /* 通用文字内容 */
+        .common-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 5;
+            width: 90%;
+            max-width: 600px;
+        }
+        
+        .common-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 12px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+        
+        .common-subtitle {
+            font-size: 16px;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 30px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+        }
+        
+        .common-bar {
+            width: 100%;
+            max-width: 400px;
+            height: 3px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto 10px;
+        }
+        
+        .common-fill {
+            width: 70%;
+            height: 100%;
+            background: linear-gradient(90deg, #FF6B35, #F7931E);
+            box-shadow: 0 0 20px rgba(255,107,53,0.6);
+        }
+        
+        .common-percent {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+            letter-spacing: 0.1em;
+        }
+        
+        /* ========== 方案1: 3x2网格拼贴 ========== */
+        .style1-bg {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 3px;
+            background: #000;
+            position: relative;
+        }
+        
+        .style1-item {
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.7) saturate(1.1);
+            transition: all 0.5s ease;
+            animation: itemPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes itemPulse {
+            0%, 100% { filter: brightness(0.7) saturate(1.1); }
+            50% { filter: brightness(0.85) saturate(1.3); }
+        }
+        
+        .style1-item:nth-child(1) { animation-delay: 0s; }
+        .style1-item:nth-child(2) { animation-delay: 0.5s; }
+        .style1-item:nth-child(3) { animation-delay: 1s; }
+        .style1-item:nth-child(4) { animation-delay: 1.5s; }
+        .style1-item:nth-child(5) { animation-delay: 2s; }
+        .style1-item:nth-child(6) { animation-delay: 2.5s; }
+        
+        .style1-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 2;
+        }
+        
+        /* ========== 方案2: 大图+小图组合 ========== */
+        .style2-bg {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 3px;
+            background: #000;
+            position: relative;
+        }
+        
+        .style2-main {
+            grid-row: span 2;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.75);
+        }
+        
+        .style2-small {
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.7);
+        }
+        
+        .style2-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.75) 100%);
+            z-index: 2;
+        }
+        
+        /* ========== 方案3: 对角线分割双图 ========== */
+        .style3-bg {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .style3-left {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.genspark.ai/api/files/s/lrUrtKQF') center/cover no-repeat;
+            clip-path: polygon(0 0, 60% 0, 40% 100%, 0 100%);
+            filter: brightness(0.8);
+        }
+        
+        .style3-right {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.genspark.ai/api/files/s/wkfp3D7S') center/cover no-repeat;
+            clip-path: polygon(60% 0, 100% 0, 100% 100%, 40% 100%);
+            filter: brightness(0.75);
+        }
+        
+        .style3-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%);
+            z-index: 2;
+        }
+        
+        /* ========== 方案4: 轮播切换 ========== */
+        .style4-bg {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .style4-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+            filter: brightness(0.75);
+        }
+        
+        .style4-slide.active {
+            opacity: 1;
+        }
+        
+        .style4-slide:nth-child(1) { animation: slideShow 9s infinite; }
+        .style4-slide:nth-child(2) { animation: slideShow 9s 3s infinite; }
+        .style4-slide:nth-child(3) { animation: slideShow 9s 6s infinite; }
+        
+        @keyframes slideShow {
+            0%, 33.33% { opacity: 1; }
+            36.66%, 100% { opacity: 0; }
+        }
+        
+        .style4-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%);
+            z-index: 2;
+        }
+        
+        .recommendation {
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .recommendation h2 {
+            color: #FF6B35;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .recommendation p {
+            color: #aaa;
+            line-height: 2;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 1024px) {
+            .styles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 加载背景优化方案 - 更有冲击力</h1>
+        <p class="intro">
+            4个方案，展示多个作品集合，视觉冲击力更强<br>
+            选择您最喜欢的风格
+        </p>
+        
+        <div class="styles-grid">
+            <!-- 方案1: 3x2网格拼贴 -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">推荐 ⭐</div>
+                    <div class="style1-bg">
+                        <div class="style1-item" style="background-image: url('https://www.genspark.ai/api/files/s/lrUrtKQF')"></div>
+                        <div class="style1-item" style="background-image: url('https://www.genspark.ai/api/files/s/wkfp3D7S')"></div>
+                        <div class="style1-item" style="background-image: url('https://www.genspark.ai/api/files/s/cvwgMTXe')"></div>
+                        <div class="style1-item" style="background-image: url('https://www.genspark.ai/api/files/s/UkBEYfaF')"></div>
+                        <div class="style1-item" style="background-image: url('https://www.genspark.ai/api/files/s/RsdS9NmR')"></div>
+                        <div class="style1-item" style="background-image: url('https://www.genspark.ai/api/files/s/qPcauPyY')"></div>
+                        <div class="style1-overlay"></div>
+                    </div>
+                    <div class="common-content">
+                        <div class="common-title">作品集加载中...</div>
+                        <div class="common-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="common-bar">
+                            <div class="common-fill"></div>
+                        </div>
+                        <div class="common-percent">70%</div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案1: 3x2网格拼贴 ⭐ 最推荐</div>
+                    <div class="style-desc">
+                        6张作品网格排列，清晰展示多个项目。每张图有微妙的呼吸动画，整体有冲击力又不过分杂乱。径向遮罩让中心文字清晰可读。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">💥 冲击力强</span>
+                        <span class="feature-tag">🎨 展示多作品</span>
+                        <span class="feature-tag">📐 平衡美观</span>
+                        <span class="feature-tag">✨ 推荐</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案2: 大图+小图组合 -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">大气</div>
+                    <div class="style2-bg">
+                        <div class="style2-main" style="background-image: url('https://www.genspark.ai/api/files/s/lrUrtKQF')"></div>
+                        <div class="style2-small" style="background-image: url('https://www.genspark.ai/api/files/s/wkfp3D7S')"></div>
+                        <div class="style2-small" style="background-image: url('https://www.genspark.ai/api/files/s/cvwgMTXe')"></div>
+                        <div class="style2-overlay"></div>
+                    </div>
+                    <div class="common-content">
+                        <div class="common-title">作品集加载中...</div>
+                        <div class="common-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="common-bar">
+                            <div class="common-fill"></div>
+                        </div>
+                        <div class="common-percent">70%</div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案2: 大图+小图组合</div>
+                    <div class="style-desc">
+                        1张主要作品占据左侧2/3，2张辅助作品在右侧。主次分明，既有视觉焦点又展示多样性。适合有一张特别满意的代表作。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">🎯 主次分明</span>
+                        <span class="feature-tag">💼 专业</span>
+                        <span class="feature-tag">📸 3作品</span>
+                        <span class="feature-tag">💎 大气</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案3: 对角线分割双图 -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">创意</div>
+                    <div class="style3-bg">
+                        <div class="style3-left"></div>
+                        <div class="style3-right"></div>
+                        <div class="style3-overlay"></div>
+                    </div>
+                    <div class="common-content">
+                        <div class="common-title">作品集加载中...</div>
+                        <div class="common-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="common-bar">
+                            <div class="common-fill"></div>
+                        </div>
+                        <div class="common-percent">70%</div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案3: 对角线分割双图</div>
+                    <div class="style-desc">
+                        2张作品以对角线方式分割屏幕，动感十足。非对称构图有设计感和创意，展示2个代表性作品。适合追求视觉创新的设计师。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">🎨 创意十足</span>
+                        <span class="feature-tag">💫 动感</span>
+                        <span class="feature-tag">📸 2作品</span>
+                        <span class="feature-tag">🎭 独特</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 方案4: 轮播切换 -->
+            <div class="style-card">
+                <div class="preview">
+                    <div class="preview-label">动态</div>
+                    <div class="style4-bg">
+                        <div class="style4-slide active" style="background-image: url('https://www.genspark.ai/api/files/s/lrUrtKQF')"></div>
+                        <div class="style4-slide" style="background-image: url('https://www.genspark.ai/api/files/s/wkfp3D7S')"></div>
+                        <div class="style4-slide" style="background-image: url('https://www.genspark.ai/api/files/s/cvwgMTXe')"></div>
+                        <div class="style4-overlay"></div>
+                    </div>
+                    <div class="common-content">
+                        <div class="common-title">作品集加载中...</div>
+                        <div class="common-subtitle">6年专业经验，用3D设计重塑产品价值</div>
+                        <div class="common-bar">
+                            <div class="common-fill"></div>
+                        </div>
+                        <div class="common-percent">70%</div>
+                    </div>
+                </div>
+                <div class="style-info">
+                    <div class="style-title">方案4: 轮播切换</div>
+                    <div class="style-desc">
+                        3张作品自动轮播切换，每张全屏展示3秒。动态效果吸引眼球，可以展示更多作品。适合想让观众看到多个项目的设计师。
+                    </div>
+                    <div class="features">
+                        <span class="feature-tag">🔄 动态轮播</span>
+                        <span class="feature-tag">📸 多作品</span>
+                        <span class="feature-tag">✨ 吸引眼球</span>
+                        <span class="feature-tag">🎪 有趣</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="recommendation">
+            <h2>💡 我的推荐</h2>
+            <p>
+                <strong>🏆 最推荐：方案1（3x2网格拼贴）</strong><br>
+                6张作品网格排列，冲击力强，展示多样性，平衡美观<br>
+                每张图有呼吸动画，整体效果专业大气<br><br>
+                
+                <strong>💎 次推荐：方案2（大图+小图）</strong><br>
+                1大2小的组合，主次分明，突出代表作的同时展示多样性<br>
+                适合有1张特别满意的作品想重点展示<br><br>
+                
+                <strong>🎨 创意之选：方案3（对角线分割）</strong><br>
+                2张作品对角线分割，视觉冲击力强，有设计感<br>
+                适合想展现创意思维和视觉表现力<br><br>
+                
+                <strong>🔄 动态之选：方案4（轮播切换）</strong><br>
+                3张作品轮播展示，动态效果吸引眼球<br>
+                适合想展示更多作品，让每张都全屏呈现
+            </p>
+        </div>
+    </div>
+</body>
+</html>

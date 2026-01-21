@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片加载调试</title>
+    <style>
+        body {
+            padding: 30px;
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        .test-section h2 {
+            color: #FF6B35;
+            margin: 0 0 15px 0;
+        }
+        .image-container {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px 0;
+            border: 2px solid #444;
+            border-radius: 4px;
+        }
+        .status {
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .success { background: #28a745; color: #fff; }
+        .error { background: #dc3545; color: #fff; }
+        .loading { background: #ffc107; color: #000; }
+        .url-display {
+            background: #2d2d2d;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 12px;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 孤勇者详情页图片加载调试</h1>
+    
+    <div class="test-section">
+        <h2>测试1: 原始路径（中文）</h2>
+        <div class="url-display">https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页2/孤勇者_01.jpg</div>
+        <div class="image-container">
+            <div class="status loading" id="status1">⏳ 加载中...</div>
+            <img id="img1" src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页2/孤勇者_01.jpg" alt="测试1">
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>测试2: URL编码路径</h2>
+        <div class="url-display">https://www.genspark.ai/api/files/v1/download?file_id=%E5%AD%A4%E5%8B%87%E8%80%85%E8%AF%A6%E6%83%85%E9%A1%B52%2F%E5%AD%A4%E5%8B%87%E8%80%85_01.jpg</div>
+        <div class="image-container">
+            <div class="status loading" id="status2">⏳ 加载中...</div>
+            <img id="img2" src="https://www.genspark.ai/api/files/v1/download?file_id=%E5%AD%A4%E5%8B%87%E8%80%85%E8%AF%A6%E6%83%85%E9%A1%B52%2F%E5%AD%A4%E5%8B%87%E8%80%85_01.jpg" alt="测试2">
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>测试3: 旧路径（不带2）</h2>
+        <div class="url-display">https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_01.jpg</div>
+        <div class="image-container">
+            <div class="status loading" id="status3">⏳ 加载中...</div>
+            <img id="img3" src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页/孤勇者_01.jpg" alt="测试3">
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>测试4: 斜杠反转</h2>
+        <div class="url-display">https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页2\孤勇者_01.jpg</div>
+        <div class="image-container">
+            <div class="status loading" id="status4">⏳ 加载中...</div>
+            <img id="img4" src="https://www.genspark.ai/api/files/v1/download?file_id=孤勇者详情页2\孤勇者_01.jpg" alt="测试4">
+        </div>
+    </div>
+
+    <script>
+        function setupImageTest(imgId, statusId) {
+            const img = document.getElementById(imgId);
+            const status = document.getElementById(statusId);
+            
+            img.onload = function() {
+                status.className = 'status success';
+                status.innerHTML = '✅ 加载成功！尺寸: ' + img.naturalWidth + ' x ' + img.naturalHeight;
+            };
+            
+            img.onerror = function() {
+                status.className = 'status error';
+                status.innerHTML = '❌ 加载失败';
+            };
+            
+            // 超时检测
+            setTimeout(() => {
+                if (status.className === 'status loading') {
+                    status.className = 'status error';
+                    status.innerHTML = '❌ 加载超时（5秒）';
+                }
+            }, 5000);
+        }
+        
+        setupImageTest('img1', 'status1');
+        setupImageTest('img2', 'status2');
+        setupImageTest('img3', 'status3');
+        setupImageTest('img4', 'status4');
+    </script>
+    
+    <div class="test-section">
+        <h2>📋 诊断指南</h2>
+        <ul>
+            <li><strong>测试1成功</strong> → 当前路径正确，无需修改</li>
+            <li><strong>测试2成功</strong> → 需要URL编码，我会批量替换</li>
+            <li><strong>测试3成功</strong> → 需要改回旧路径（去掉"2"）</li>
+            <li><strong>测试4成功</strong> → 斜杠方向问题</li>
+            <li><strong>全部失败</strong> → 需要检查AI云盘文件夹名称或重新上传图片</li>
+        </ul>
+        
+        <h3>⚠️ 如果全部失败，请确认：</h3>
+        <ol>
+            <li>AI云盘中文件夹名称是否为：<code>孤勇者详情页2</code></li>
+            <li>文件夹中是否有文件：<code>孤勇者_01.jpg</code></li>
+            <li>文件权限是否设置为"公开访问"</li>
+        </ol>
+    </div>
+</body>
+</html>

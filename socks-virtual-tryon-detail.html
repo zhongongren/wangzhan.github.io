@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案例2：袜子虚拟试穿 - AI多场景展示解决方案</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .header .subtitle {
+            font-size: 24px;
+            opacity: 0.95;
+        }
+        .value-prop {
+            background: #fff5f9;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 3px solid #f093fb;
+        }
+        .value-prop h2 {
+            font-size: 32px;
+            color: #f5576c;
+            margin-bottom: 20px;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .stat-item {
+            text-align: center;
+            margin: 20px;
+        }
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #f5576c;
+            display: block;
+        }
+        .stat-label {
+            font-size: 18px;
+            color: #666;
+            margin-top: 10px;
+        }
+        .section {
+            padding: 60px 40px;
+        }
+        .section-title {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #f093fb, #f5576c);
+            border-radius: 2px;
+        }
+        .pain-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .pain-card {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .pain-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.2);
+            border-color: #f5576c;
+        }
+        .pain-card h3 {
+            font-size: 22px;
+            color: #f5576c;
+            margin-bottom: 15px;
+        }
+        .pain-card p {
+            color: #666;
+            font-size: 16px;
+        }
+        .case-item {
+            background: #fff5f9;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .case-title {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 5px solid #f5576c;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .image-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .image-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .image-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .image-label {
+            padding: 15px;
+            background: #f5576c;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .comparison-table th {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            font-size: 20px;
+            text-align: left;
+        }
+        .comparison-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 16px;
+        }
+        .comparison-table tr:hover {
+            background: #fff5f9;
+        }
+        .traditional {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .ai-solution {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+        .footer p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 32px; }
+            .section { padding: 40px 20px; }
+            .image-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" style="font-size: 1.3rem; font-weight: 700; color: #FF6B35; text-decoration: none; transition: all 0.3s;">陈群超</a>
+            <ul style="list-style: none; display: flex; gap: 40px; margin: 0; padding: 0;">
+                <li><a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s;">首页</a></li>
+                <li><a href="index.html#about" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s;">关于</a></li>
+                <li><a href="portfolio.html" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s;">作品集</a></li>
+                <li><a href="index.html#contact" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s;">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div style="height: 80px;"></div> <!-- 导航栏占位 -->
+    
+    <div class="container">
+        <div class="header">
+            <h1>🧦 案例2：袜子虚拟试穿</h1>
+            <div class="subtitle">AI多场景展示解决方案</div>
+        </div>
+
+        <div class="value-prop">
+            <h2>🎯 核心价值主张</h2>
+            <p style="font-size: 20px; color: #666; margin-top: 20px;">
+                让小小袜子在真实场景中展示上脚效果，提升转化率
+            </p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">95%</span>
+                    <span class="stat-label">成本节省</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10秒</span>
+                    <span class="stat-label">生成时间</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">60%</span>
+                    <span class="stat-label">退货率降低</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">无限</span>
+                    <span class="stat-label">场景数量</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">😰 袜子行业痛点</h2>
+            <div class="pain-points">
+                <div class="pain-card">
+                    <h3>❌ 平铺照片无吸引力</h3>
+                    <p>只能展示平铺效果，客户无法想象上脚穿着效果。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>💸 真人拍摄成本高</h3>
+                    <p>需要真人模特拍摄上脚照，成本高且效率低。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>🎨 场景单一</h3>
+                    <p>传统拍摄只能展示1-2个场景，无法体现多样搭配。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>📦 退货率高</h3>
+                    <p>因为看不到实际上脚效果，退货率达30-40%。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>⏱️ 更新周期长</h3>
+                    <p>新品上线需要重新安排模特拍摄，耗时2-3周。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>🔄 搭配展示困难</h3>
+                    <p>无法展示袜子与不同鞋子、服装的搭配效果。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="background: #fff5f9;">
+            <h2 class="section-title">🚀 传统方式 vs AI解决方案</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>对比维度</th>
+                        <th>传统拍摄</th>
+                        <th>AI虚拟试穿</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>成本</strong></td>
+                        <td class="traditional">2000-8000元/天</td>
+                        <td class="ai-solution">≈0元（仅AI生成费）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>时间周期</strong></td>
+                        <td class="traditional">2-3周（约拍、拍摄、修图）</td>
+                        <td class="ai-solution">10秒/场景</td>
+                    </tr>
+                    <tr>
+                        <td><strong>场景数量</strong></td>
+                        <td class="traditional">1-2个场景</td>
+                        <td class="ai-solution">无限场景</td>
+                    </tr>
+                    <tr>
+                        <td><strong>退货率</strong></td>
+                        <td class="traditional">30-40%</td>
+                        <td class="ai-solution">降低60%（12-16%）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>搭配展示</strong></td>
+                        <td class="traditional">有限搭配</td>
+                        <td class="ai-solution">无限搭配组合</td>
+                    </tr>
+                    <tr>
+                        <td><strong>更新灵活性</strong></td>
+                        <td class="traditional">需重新拍摄</td>
+                        <td class="ai-solution">随时更新场景</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">✨ 真实案例展示</h2>
+
+            <!-- 案例1: 黑色中筒袜 -->
+            <div class="case-item">
+                <h3 class="case-title">1️⃣ 黑色中筒袜 - 多场景穿搭</h3>
+                <div class="image-grid">
+                    <div class="image-card">
+                        <div class="image-label">图1：职场通勤/运动健身/街头休闲/时尚咖啡风</div>
+                        <img src="https://www.genspark.ai/api/files/s/kkc44BFh" alt="黑色中筒袜-图1">
+                    </div>
+                    <div class="image-card">
+                        <div class="image-label">图2：商务正装/文艺优雅/居家舒适/约会甜美风</div>
+                        <img src="https://www.genspark.ai/api/files/s/1ddBj5HT" alt="黑色中筒袜-图2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 案例2: 白色运动袜 -->
+            <div class="case-item">
+                <h3 class="case-title">2️⃣ 白色运动袜 - 运动专属</h3>
+                <div class="image-grid">
+                    <div class="image-card">
+                        <div class="image-label">图1：跑步/篮球/网球/健身训练风</div>
+                        <img src="https://www.genspark.ai/api/files/s/H6tfPALx" alt="白色运动袜-图1">
+                    </div>
+                    <div class="image-card">
+                        <div class="image-label">图2：滑板街头/户外徒步/足球/休闲运动风</div>
+                        <img src="https://www.genspark.ai/api/files/s/KhwbZmzO" alt="白色运动袜-图2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 案例3: 彩色条纹长筒袜 -->
+            <div class="case-item">
+                <h3 class="case-title">3️⃣ 彩色条纹长筒袜 - 时尚潮流</h3>
+                <div class="image-grid">
+                    <div class="image-card">
+                        <div class="image-label">图1：校园青春/街拍潮流/咖啡厅文艺/运动活力风</div>
+                        <img src="https://www.genspark.ai/api/files/s/Zaaj83wI" alt="彩色条纹长筒袜-图1">
+                    </div>
+                    <div class="image-card">
+                        <div class="image-label">图2：朋克街头/艺术文艺/音乐节潮流/运动休闲风</div>
+                        <img src="https://www.genspark.ai/api/files/s/AdFJAKOB" alt="彩色条纹长筒袜-图2">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="background: #fff5f9;">
+            <h2 class="section-title">💎 商业价值</h2>
+            <div class="pain-points">
+                <div class="pain-card">
+                    <h3>💰 大幅降低成本</h3>
+                    <p>无需真人模特，节省95%拍摄费用。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>📉 减少退货损失</h3>
+                    <p>客户提前看到上脚效果，退货率降低60%。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>🎨 展示搭配效果</h3>
+                    <p>同一款袜子可以展示与不同鞋子、服装的搭配。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>🌈 多场景应用</h3>
+                    <p>展示运动、休闲、职场等不同场景的穿着效果。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>⚡ 极速上新</h3>
+                    <p>新品10秒生成多场景展示图，快速占领市场。</p>
+                </div>
+                <div class="pain-card">
+                    <h3>🎯 精准营销</h3>
+                    <p>针对不同人群定制化场景，提升转化率。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📊 总案例数：3款袜子</p>
+            <p>📷 总图片数：6张（每款2张）</p>
+            <p>🎯 总场景数：24个场景</p>
+            <p>✅ 所有标签：100%中文</p>
+            <p style="margin-top: 30px; opacity: 0.8;">AI虚拟试穿解决方案 © 2026</p>
+        </div>
+    </div>
+</body>
+</html>

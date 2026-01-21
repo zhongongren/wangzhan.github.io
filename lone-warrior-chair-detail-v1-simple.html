@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孤勇者 · 恒林人体工学椅 - 电商视觉设计作品集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1f1f1f 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .meta-item {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 12px 24px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .meta-label {
+            font-size: 0.9em;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        .meta-value {
+            font-size: 1.1em;
+            color: #FF6B35;
+            font-weight: 600;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #FF6B35;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: "";
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(180deg, #FF6B35, #FF8C42);
+            border-radius: 3px;
+        }
+
+        /* 图片展示区 */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .image-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .image-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(96, 165, 250, 0.3);
+            border-color: rgba(96, 165, 250, 0.5);
+        }
+
+        .image-wrapper {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            position: relative;
+            background: #1e293b;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .image-card:hover .image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            padding: 20px;
+        }
+
+        .image-title {
+            font-size: 1.2em;
+            color: #FF6B35;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .image-desc {
+            font-size: 0.95em;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* 设计分析卡片 */
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .analysis-card {
+            background: rgba(96, 165, 250, 0.08);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(96, 165, 250, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .analysis-card:hover {
+            background: rgba(96, 165, 250, 0.12);
+            transform: translateY(-5px);
+        }
+
+        .analysis-card h3 {
+            color: #FF6B35;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .analysis-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .analysis-card li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #cbd5e1;
+        }
+
+        .analysis-card li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #FF6B35;
+        }
+
+        /* 面试话术区 */
+        .interview-section {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.1) 0%, rgba(167, 139, 250, 0.1) 100%);
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px solid rgba(96, 165, 250, 0.3);
+            margin-top: 30px;
+        }
+
+        .interview-title {
+            font-size: 1.5em;
+            color: #FF8C42;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .interview-content {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #FF6B35;
+        }
+
+        .interview-content p {
+            margin-bottom: 15px;
+            color: #e2e8f0;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .interview-content strong {
+            color: #FF6B35;
+        }
+
+        /* 技能标签 */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-tag {
+            background: rgba(167, 139, 250, 0.15);
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 1px solid rgba(167, 139, 250, 0.3);
+            color: #FF8C42;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(167, 139, 250, 0.25);
+            transform: scale(1.05);
+        }
+
+        /* 高亮文本 */
+        .highlight {
+            background: rgba(96, 165, 250, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #FF6B35;
+            font-weight: 600;
+        }
+
+        /* 底部总结 */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.15) 0%, rgba(167, 139, 250, 0.15) 100%);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid rgba(96, 165, 250, 0.4);
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .summary-box h2 {
+            font-size: 2em;
+            color: #FF6B35;
+            margin-bottom: 20px;
+        }
+
+        .summary-box p {
+            font-size: 1.15em;
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .image-wrapper {
+                height: 300px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+        }
+
+        /* 加载动画 */
+        .image-wrapper::after {
+            content: "加载中...";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FF6B35;
+            font-size: 1.1em;
+        }
+
+        .image-wrapper img[src] + *::after {
+            display: none;
+        }
+
+        /* 模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🪑 孤勇者 · 恒林人体工学椅详情页设计</h1>
+            <div class="subtitle">恒林家居 · 高端人体工学椅 · 电商视觉全案</div>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">项目类型</div>
+                    <div class="meta-value">电商详情页设计</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">品牌定位</div>
+                    <div class="meta-value">高端商务办公</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">设计时间</div>
+                    <div class="meta-value">2024</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">页面数量</div>
+                    <div class="meta-value">20+ 模块</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 项目概述 -->
+        <section class="section">
+            <h2 class="section-title">📋 项目概述</h2>
+            <p style="font-size: 1.15em; color: #cbd5e1; line-height: 1.8;">
+                这是一套为<span class="highlight">恒林家居</span>品牌设计的高端人体工学办公椅天猫详情页全案设计。
+                产品核心卖点是<span class="highlight">150°大仰角躺姿</span> + <span class="highlight">9大智能调节系统</span>。
+                设计挑战在于如何通过视觉化信息架构，让用户在3秒内理解产品价值，并在滚动浏览中逐步建立购买信心。
+            </p>
+            
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h3>🎯 设计目标</h3>
+                    <ul>
+                        <li>3秒抓住注意力（头图视觉钩子）</li>
+                        <li>理性说服层（功能可视化展示）</li>
+                        <li>情感共鸣层（场景化代入感）</li>
+                        <li>降低决策成本（对比+数据背书）</li>
+                    </ul>
+                </div>
+                <div class="analysis-card">
+                    <h3>👥 目标用户</h3>
+                    <ul>
+                        <li>身高170-190cm商务人士</li>
+                        <li>久坐办公室（程序员/设计师）</li>
+                        <li>关注健康的高知群体</li>
+                        <li>追求品质感的中高端消费者</li>
+                    </ul>
+                </div>
+                <div class="analysis-card">
+                    <h3>💡 核心卖点</h3>
+                    <ul>
+                        <li>150°大仰角零重力躺姿</li>
+                        <li>双驱动随动脊柱技术</li>
+                        <li>9大智能调节系统</li>
+                        <li>弹性网布 + 200kg承重</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 详情页完整展示 -->
+        <section class="section">
+            <h2 class="section-title">🖼️ 详情页完整设计（前5屏核心模块）</h2>
+            
+            <div class="image-gallery">
+                <div class="image-card" onclick="openModal(this)">
+                    <div class="image-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/HXlLE6r5" alt="头图主视觉" loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <div class="image-title">📍 模块1：头图主视觉（第一屏）</div>
+                        <div class="image-desc">
+                            <strong>设计策略：</strong>用"人物使用场景"替代纯产品图，降低商业感，提升代入感。<br>
+                            <strong>视觉元素：</strong>150°大字号 + 蓝白渐变背景（科技感+放松感）<br>
+                            <strong>信息层级：</strong>核心卖点（150°躺姿）> 适配人群（170-190cm/200kg）> 品牌Logo
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-card" onclick="openModal(this)">
+                    <div class="image-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/jTcDPYTk" alt="功能解析" loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <div class="image-title">📍 模块2：功能解析图（第二屏）</div>
+                        <div class="image-desc">
+                            <strong>设计策略：</strong>用"技术拆解图"强化专业性，打消用户对功能的质疑。<br>
+                            <strong>视觉技巧：</strong>标注式设计（箭头+文字说明）+ 侧视角展示结构<br>
+                            <strong>卖点传达：</strong>根据国人体型设计 + 双驱动背部技术 + 无重力控制
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-card" onclick="openModal(this)">
+                    <div class="image-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/3Um2lVAN" alt="9大调节系统" loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <div class="image-title">📍 模块3：9大智能调节系统（第三屏）</div>
+                        <div class="image-desc">
+                            <strong>设计策略：</strong>用"信息图表化"让复杂功能一目了然。<br>
+                            <strong>视觉组织：</strong>网格布局 + 图标化设计（3D头枕/360°扶手/坐深调节）<br>
+                            <strong>心理暗示：</strong>9个调节点 = 精密感 = 高端产品 = 值得购买
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-card" onclick="openModal(this)">
+                    <div class="image-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/FO1irMKl" alt="角度对比" loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <div class="image-title">📍 模块4：躺姿角度对比（第四屏）</div>
+                        <div class="image-desc">
+                            <strong>设计策略：</strong>用"对比图"制造认知落差，强化产品优势。<br>
+                            <strong>视觉手法：</strong>左右对比（普通椅135° vs 孤勇者150°）+ 对称式构图<br>
+                            <strong>文案配合：</strong>"躺倒更彻底，休息更充分" —— 直击痛点
+                        </div>
+                    </div>
+                </div>
+
+                <div class="image-card" onclick="openModal(this)">
+                    <div class="image-wrapper">
+                        <img src="https://www.genspark.ai/api/files/s/JW6eGs9p" alt="四段式躺姿" loading="lazy">
+                    </div>
+                    <div class="image-caption">
+                        <div class="image-title">📍 模块5：四段式躺姿调节（第五屏）</div>
+                        <div class="image-desc">
+                            <strong>设计策略：</strong>用"渐进式展示"让用户想象使用场景。<br>
+                            <strong>视觉符号：</strong>蓝色弧线（水波纹隐喻流畅+舒适）+ 四个角度标注（95°/115°/135°/150°）<br>
+                            <strong>情感层：</strong>"穿云悬停坐感" —— 诗意化描述提升品牌调性
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 设计能力分析 -->
+        <section class="section">
+            <h2 class="section-title">🎨 设计能力体现</h2>
+            
+            <div class="analysis-grid">
+                <div class="analysis-card">
+                    <h3>🧠 商业设计思维</h3>
+                    <ul>
+                        <li><strong>用户心理路径设计：</strong>视觉钩子 → 理性说服 → 情感共鸣 → 消除顾虑</li>
+                        <li><strong>信息层级规划：</strong>F型视觉流 + 渐进式信息密度</li>
+                        <li><strong>转化率优化：</strong>每屏设计都有明确的说服任务</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>🎨 视觉表现能力</h3>
+                    <ul>
+                        <li><strong>配色系统：</strong>蓝白主色调（科技+信任）+ 金色强调色（高端感）</li>
+                        <li><strong>排版技巧：</strong>网格系统 + 黄金分割 + 视觉留白</li>
+                        <li><strong>字体层级：</strong>3级字号体系（核心卖点/说明文字/辅助信息）</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>📊 信息架构能力</h3>
+                    <ul>
+                        <li><strong>9大功能可视化：</strong>复杂信息的图标化处理</li>
+                        <li><strong>对比式说服：</strong>用图表强化产品优势认知</li>
+                        <li><strong>渐进式展示：</strong>从整体到细节的叙事逻辑</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-card">
+                    <h3>⚙️ 技术实现能力</h3>
+                    <ul>
+                        <li><strong>C4D产品建模：</strong>多角度产品渲染图</li>
+                        <li><strong>PS合成能力：</strong>场景化氛围营造</li>
+                        <li><strong>标准化输出：</strong>天猫750px宽度适配</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 面试话术 -->
+        <section class="section">
+            <h2 class="section-title">💼 面试时如何讲述这个项目</h2>
+            
+            <div class="interview-section">
+                <div class="interview-title">🎤 开场（30秒）</div>
+                <div class="interview-content">
+                    <p>
+                        "这是我为<strong>恒林家居品牌</strong>设计的一套<strong>天猫详情页全案</strong>。产品是一款高端人体工学办公椅，核心卖点是<strong>150°大仰角躺姿</strong>和<strong>9大智能调节系统</strong>。"
+                    </p>
+                    <p>
+                        "项目最大的挑战是：<strong>如何在3秒内抓住用户注意力</strong>，并在页面滚动过程中<strong>逐步建立购买信心</strong>。我的解决方案是设计了一套<strong>'视觉钩子 + 理性说服 + 情感共鸣'</strong>的三层说服架构。"
+                    </p>
+                </div>
+            </div>
+
+            <div class="interview-section">
+                <div class="interview-title">🎯 设计思路（1-2分钟）</div>
+                <div class="interview-content">
+                    <p><strong>第一层：视觉钩子（头图策略）</strong></p>
+                    <p>• 用"真人使用场景"替代纯产品图，降低商业感<br>
+                    • 150°大字号占据视觉中心，3秒传达核心卖点<br>
+                    • 蓝白渐变背景营造"科技+放松"的双重心理暗示</p>
+                    
+                    <p><strong>第二层：理性说服（功能可视化）</strong></p>
+                    <p>• 技术拆解图：用标注式设计让用户理解"为什么舒服"<br>
+                    • 9大调节系统图表化：复杂功能通过图标+网格布局一目了然<br>
+                    • 角度对比图：用数据和图表强化产品优势认知</p>
+                    
+                    <p><strong>第三层：情感共鸣（场景化代入）</strong></p>
+                    <p>• 四段式躺姿展示：让用户想象"我也能这样舒服地工作"<br>
+                    • 诗意化文案："穿云悬停坐感" —— 提升品牌调性<br>
+                    • 水波纹视觉符号：隐喻流畅和舒适的使用体验</p>
+                </div>
+            </div>
+
+            <div class="interview-section">
+                <div class="interview-title">⚙️ 技术实现（30秒）</div>
+                <div class="interview-content">
+                    <p>
+                        <strong>工具链：</strong>C4D建模 + OctaneRender渲染 + Photoshop后期合成<br>
+                        <strong>输出规格：</strong>天猫标准750px宽度，单图控制在500KB以内保证加载速度<br>
+                        <strong>设计周期：</strong>从产品调研到最终交付约2周
+                    </p>
+                </div>
+            </div>
+
+            <div class="interview-section">
+                <div class="interview-title">📊 项目成果（如果有数据）</div>
+                <div class="interview-content">
+                    <p>
+                        💡 <strong>如果有真实数据：</strong>"详情页上线后，<span class="highlight">页面停留时长提升XX%</span>，<span class="highlight">转化率提升XX%</span>，动态GIF模块点击率达XX%"
+                    </p>
+                    <p>
+                        💡 <strong>如果是学生作品/练习项目：</strong>"这个项目让我深入理解了<span class="highlight">电商设计的底层逻辑</span> —— 不是做好看的海报，而是设计一条高效的<span class="highlight">'销售漏斗'</span>。每一屏都要回答用户心中的一个问题，最终引导到购买决策。"
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技能标签 -->
+        <section class="section">
+            <h2 class="section-title">🛠️ 核心技能展示</h2>
+            <div class="skills-container">
+                <div class="skill-tag">🎨 电商视觉设计</div>
+                <div class="skill-tag">🧠 用户心理洞察</div>
+                <div class="skill-tag">📊 信息架构设计</div>
+                <div class="skill-tag">🎯 转化率优化</div>
+                <div class="skill-tag">🖥️ C4D产品建模</div>
+                <div class="skill-tag">✨ OctaneRender渲染</div>
+                <div class="skill-tag">🎨 Photoshop合成</div>
+                <div class="skill-tag">📐 版式设计</div>
+                <div class="skill-tag">🎨 配色系统搭建</div>
+                <div class="skill-tag">📱 响应式设计思维</div>
+            </div>
+        </section>
+
+        <!-- 项目价值总结 -->
+        <section class="summary-box">
+            <h2>🎯 这个项目在作品集中的价值</h2>
+            <p>
+                这套详情页设计<strong>不仅仅是视觉作品</strong>，更是一次<strong>商业问题的系统性解决方案</strong>。<br>
+                它证明了我具备：<span class="highlight">商业思维</span>（理解用户心理路径）、<span class="highlight">视觉表现</span>（高品质渲染+排版）、<span class="highlight">信息架构</span>（复杂功能可视化）、<span class="highlight">技术实现</span>（C4D+OC+PS全流程）。<br><br>
+                <strong>这是一个完整的"从商业目标到视觉落地"的能力证明体系。</strong>
+            </p>
+        </section>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="myModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        function openModal(card) {
+            const modal = document.getElementById('myModal');
+            const modalImg = document.getElementById('modalImg');
+            const img = card.querySelector('img');
+            
+            modal.style.display = 'flex';
+            modalImg.src = img.src;
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

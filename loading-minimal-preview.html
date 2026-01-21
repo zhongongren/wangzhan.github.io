@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>加载页面 - 极简版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 加载容器 */
+        .portfolio-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* 图片网格背景 */
+        .loader-gallery-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0;
+            z-index: 1;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3) grayscale(0.2);
+            opacity: 0;
+            animation: itemFadeIn 1s ease forwards;
+        }
+
+        /* 随机延迟 */
+        .gallery-item:nth-child(1) img { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) img { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) img { animation-delay: 0.15s; }
+        .gallery-item:nth-child(4) img { animation-delay: 0.3s; }
+        .gallery-item:nth-child(5) img { animation-delay: 0.25s; }
+        .gallery-item:nth-child(6) img { animation-delay: 0.35s; }
+        .gallery-item:nth-child(7) img { animation-delay: 0.2s; }
+        .gallery-item:nth-child(8) img { animation-delay: 0.4s; }
+        .gallery-item:nth-child(9) img { animation-delay: 0.3s; }
+        .gallery-item:nth-child(10) img { animation-delay: 0.45s; }
+        .gallery-item:nth-child(11) img { animation-delay: 0.35s; }
+        .gallery-item:nth-child(12) img { animation-delay: 0.5s; }
+
+        @keyframes itemFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 遮罩层 */
+        .loader-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.9) 100%);
+            z-index: 2;
+        }
+
+        /* 内容容器 */
+        .loader-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 90%;
+            opacity: 0;
+            animation: contentFadeIn 1s ease 0.8s forwards;
+        }
+
+        @keyframes contentFadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* 横排文案 - 极简版 */
+        .slogan-text {
+            font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 400;
+            color: #ffffff;
+            line-height: 1.8;
+            letter-spacing: 0.5em;
+            margin-bottom: 60px;
+            white-space: nowrap;
+        }
+
+        /* 进度条 */
+        .loader-progress-bar {
+            width: 100%;
+            max-width: 400px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+        }
+
+        .loader-progress-fill {
+            height: 100%;
+            background: #ffffff;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+
+        .loader-progress-text {
+            font-family: "DIN Pro", "Helvetica Neue", sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.2em;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .slogan-text {
+                font-size: 1.2rem;
+                letter-spacing: 0.3em;
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slogan-text {
+                font-size: 1rem;
+                letter-spacing: 0.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载页面 -->
+    <div class="portfolio-loader">
+        <!-- 图片网格背景 -->
+        <div class="loader-gallery-grid">
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/Sh8hIcQA" alt="1"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/ldf4ddwY" alt="2"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/xTcxXkHZ" alt="3"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/5Ge4XR60" alt="4"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/3Hv41M7s" alt="5"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/dj2k5mZA" alt="6"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/HDlWQKEF" alt="7"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/gvr7VU9E" alt="8"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/8GSMNLUp" alt="9"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/oLiy233S" alt="10"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/Sh8hIcQA" alt="11"></div>
+            <div class="gallery-item"><img src="https://www.genspark.ai/api/files/s/ldf4ddwY" alt="12"></div>
+        </div>
+        
+        <!-- 遮罩层 -->
+        <div class="loader-overlay"></div>
+        
+        <!-- 内容区 -->
+        <div class="loader-content">
+            <!-- 横排文案 - 一段字 -->
+            <div class="slogan-text">
+                3D渲染  电商设计  AI工具流
+            </div>
+            
+            <!-- 进度条 -->
+            <div class="loader-progress-bar">
+                <div class="loader-progress-fill"></div>
+            </div>
+            <div class="loader-progress-text">0%</div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟加载进度
+        let progress = 0;
+        const progressBar = document.querySelector('.loader-progress-fill');
+        const progressText = document.querySelector('.loader-progress-text');
+
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+            }
+            
+            progressBar.style.width = progress + '%';
+            progressText.textContent = Math.floor(progress) + '%';
+        }, 200);
+    </script>
+</body>
+</html>

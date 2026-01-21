@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo设计方案 - 三选一</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 60px;
+            font-size: 1.1rem;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .option-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+        
+        .option-card:hover {
+            border-color: #FF6B35;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(255, 107, 53, 0.2);
+        }
+        
+        .option-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #FF6B35;
+        }
+        
+        .option-desc {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .demo-navbar {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 20px 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 方案1：专业职位版 */
+        .logo-v1 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-v1 .logo-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.05em;
+        }
+        
+        .logo-v1 .logo-divider {
+            width: 2px;
+            height: 24px;
+            background: linear-gradient(180deg, #FF6B35, #F7931E);
+            border-radius: 2px;
+        }
+        
+        .logo-v1 .logo-title {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+        
+        /* 方案2：图标+文字版 */
+        .logo-v2 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-v2 .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .logo-v2 .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        
+        .logo-v2 .logo-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+        
+        .logo-v2 .logo-subtitle {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.1em;
+        }
+        
+        /* 方案3：极简专业版 */
+        .logo-v3 {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .logo-v3 .logo-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.1em;
+        }
+        
+        .logo-v3 .logo-tag {
+            font-size: 0.7rem;
+            color: #FF6B35;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        
+        .features {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        .feature-item::before {
+            content: "✓";
+            color: #FF6B35;
+            font-weight: 700;
+        }
+        
+        .recommend-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Logo设计方案</h1>
+        <p class="subtitle">请选择一个最适合你的方案，我会立即应用到网站</p>
+        
+        <div class="options-grid">
+            
+            <!-- 方案1：专业职位版 -->
+            <div class="option-card">
+                <span class="recommend-badge">⭐ 推荐</span>
+                <h3 class="option-title">方案1：专业职位版</h3>
+                <p class="option-desc">清晰展示个人品牌和职位定位，适合求职简历</p>
+                
+                <div class="demo-navbar">
+                    <div class="logo-v1">
+                        <div class="logo-name">陈群超</div>
+                        <div class="logo-divider"></div>
+                        <div class="logo-title">视觉设计师</div>
+                    </div>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-item">职位明确，一目了然</div>
+                    <div class="feature-item">渐变分隔线增加设计感</div>
+                    <div class="feature-item">适合求职/面试展示</div>
+                    <div class="feature-item">专业且简洁</div>
+                </div>
+            </div>
+            
+            <!-- 方案2：图标+文字版 -->
+            <div class="option-card">
+                <h3 class="option-title">方案2：品牌图标版</h3>
+                <p class="option-desc">个人品牌标识化，增强视觉记忆点</p>
+                
+                <div class="demo-navbar">
+                    <div class="logo-v2">
+                        <div class="logo-icon">CQ</div>
+                        <div class="logo-text">
+                            <div class="logo-name">陈群超</div>
+                            <div class="logo-subtitle">VISUAL DESIGNER</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-item">品牌化设计，更具辨识度</div>
+                    <div class="feature-item">图标可独立使用</div>
+                    <div class="feature-item">适合个人品牌建设</div>
+                    <div class="feature-item">视觉冲击力强</div>
+                </div>
+            </div>
+            
+            <!-- 方案3：极简专业版 -->
+            <div class="option-card">
+                <h3 class="option-title">方案3：极简标签版</h3>
+                <p class="option-desc">克制优雅，突出专业身份</p>
+                
+                <div class="demo-navbar">
+                    <div class="logo-v3">
+                        <div class="logo-name">陈群超</div>
+                        <div class="logo-tag">3D Designer</div>
+                    </div>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-item">极简主义设计</div>
+                    <div class="feature-item">突出3D专业技能</div>
+                    <div class="feature-item">时尚且现代</div>
+                    <div class="feature-item">适合创意行业</div>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div style="text-align: center; padding: 40px; background: rgba(255,107,53,0.05); border-radius: 16px; border: 1px solid rgba(255,107,53,0.2);">
+            <h2 style="margin-bottom: 20px; color: #FF6B35;">📢 告诉我你的选择</h2>
+            <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem;">
+                直接回复："方案1" / "方案2" / "方案3"<br>
+                我会立即应用到你的网站！
+            </p>
+        </div>
+    </div>
+</body>
+</html>

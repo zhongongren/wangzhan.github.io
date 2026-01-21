@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地毯类目AI场景铺装预览 - 陈群超作品集</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        /* 头部标题 */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 56px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 24px;
+            opacity: 0.95;
+            margin-bottom: 15px;
+        }
+
+        .header .description {
+            font-size: 18px;
+            opacity: 0.85;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* 快速导航 */
+        .quick-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .quick-nav a {
+            padding: 12px 30px;
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .quick-nav a:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        /* 痛点分析区域 */
+        .pain-points {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .pain-points h2 {
+            font-size: 42px;
+            color: #667eea;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .pain-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .pain-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .pain-item h3 {
+            font-size: 24px;
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+
+        .pain-item p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* 对比表格 */
+        .comparison-table {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .comparison-table h2 {
+            font-size: 42px;
+            color: #667eea;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 18px;
+        }
+
+        .traditional {
+            background: #ffe6e6;
+            color: #c62828;
+        }
+
+        .ai-solution {
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-weight: bold;
+        }
+
+        /* 案例展示区域 */
+        .cases-section {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .cases-section h2 {
+            font-size: 42px;
+            color: #667eea;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .cases-intro {
+            font-size: 18px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .case-item {
+            margin-bottom: 80px;
+            background: #f9f9f9;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .case-item:hover {
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            transform: translateY(-8px);
+        }
+
+        .case-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+        }
+
+        .case-header h3 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .case-header p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        .case-content {
+            padding: 40px;
+        }
+
+        .image-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .image-wrapper {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            max-width: 100%;
+        }
+
+        .image-wrapper:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* 商业价值 */
+        .business-value {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .business-value h2 {
+            font-size: 42px;
+            color: #667eea;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            transition: transform 0.3s;
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .value-item h3 {
+            font-size: 22px;
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+
+        .value-item p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* 数据统计 */
+        .statistics {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 60px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .statistics h2 {
+            font-size: 42px;
+            color: #667eea;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            font-size: 16px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 36px;
+            }
+
+            .header .subtitle {
+                font-size: 18px;
+            }
+
+            .pain-points h2,
+            .comparison-table h2,
+            .cases-section h2,
+            .business-value h2,
+            .statistics h2 {
+                font-size: 32px;
+            }
+
+            .pain-grid,
+            .value-grid,
+            .stats-grid,
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+
+        /* 图片放大效果 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal img {
+            max-width: 95%;
+            max-height: 95%;
+            border-radius: 10px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            z-index: 10000;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0;">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 30px; display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" style="font-size: 1.3rem; font-weight: 700; color: #FF6B35; text-decoration: none; transition: all 0.3s;">陈群超</a>
+            <ul style="list-style: none; display: flex; gap: 40px; margin: 0; padding: 0;">
+                <li><a href="index.html" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s;">首页</a></li>
+                <li><a href="index.html#about" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s;">关于</a></li>
+                <li><a href="portfolio.html" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s;">作品集</a></li>
+                <li><a href="index.html#contact" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 1rem; font-weight: 500; transition: all 0.3s;">联系</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="margin-top: 80px;">
+        <!-- 头部 -->
+        <div class="header">
+            <h1>🏠 装修行业痛点解决方案 | AI场景预览</h1>
+            <p class="subtitle">小样品看不出效果？AI 10秒生成真实铺装场景</p>
+            <p class="description">从20cm×20cm小样品到真实场景预览，让客户10秒看到铺装效果，降低99%成本，提升80%转化率</p>
+            
+            <!-- 快速导航 -->
+            <div class="quick-nav">
+                <a href="#pain-points">行业痛点</a>
+                <a href="#comparison">方案对比</a>
+                <a href="#cases">案例展示</a>
+                <a href="#tech">技术实现</a>
+            </div>
+        </div>
+
+        <!-- 痛点分析 -->
+        <div class="pain-points" id="pain-points">
+            <h2>🔴 行业核心痛点</h2>
+            <div class="pain-grid">
+                <div class="pain-item">
+                    <h3>❌ 小样品无法展示效果</h3>
+                    <p>客户只能看到20cm×20cm的小样品，完全无法想象大面积铺装后的实际效果，导致购买犹豫不决。</p>
+                </div>
+                <div class="pain-item">
+                    <h3>💸 传统实景成本极高</h3>
+                    <p>搭建一个展示场景需要3-10万元，周期15-30天，只能展示有限的几种风格，成本压力巨大。</p>
+                </div>
+                <div class="pain-item">
+                    <h3>📉 高退货率</h3>
+                    <p>因为铺装后与预期不符，退货率高达30-40%，造成巨大的物流和库存损失。</p>
+                </div>
+                <div class="pain-item">
+                    <h3>⏱️ 决策周期长</h3>
+                    <p>客户需要反复对比、想象、犹豫，平均决策周期长达2-4周，严重影响销售效率。</p>
+                </div>
+                <div class="pain-item">
+                    <h3>🏢 场景局限性</h3>
+                    <p>传统展厅空间有限，无法展示所有可能的应用场景，客户难以找到匹配自己需求的参考。</p>
+                </div>
+                <div class="pain-item">
+                    <h3>🌐 远程销售困难</h3>
+                    <p>线上销售只能依靠图片和文字描述，客户无法获得沉浸式体验，转化率极低。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 对比表格 -->
+        <div class="comparison-table" id="comparison">
+            <h2>⚖️ 传统方式 VS AI解决方案</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>对比维度</th>
+                        <th>传统方式</th>
+                        <th>AI多场景预览</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>展示成本</strong></td>
+                        <td class="traditional">¥30,000 - ¥100,000/场景</td>
+                        <td class="ai-solution">接近¥0（一次样品拍摄）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>制作周期</strong></td>
+                        <td class="traditional">15 - 30天</td>
+                        <td class="ai-solution">10秒即时生成</td>
+                    </tr>
+                    <tr>
+                        <td><strong>场景数量</strong></td>
+                        <td class="traditional">3 - 5个场景</td>
+                        <td class="ai-solution">无限场景</td>
+                    </tr>
+                    <tr>
+                        <td><strong>退货率</strong></td>
+                        <td class="traditional">30% - 40%</td>
+                        <td class="ai-solution">6% - 8%（降低80%）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>决策周期</strong></td>
+                        <td class="traditional">2 - 4周</td>
+                        <td class="ai-solution">3 - 7天</td>
+                    </tr>
+                    <tr>
+                        <td><strong>更新灵活性</strong></td>
+                        <td class="traditional">需重新搭建场景</td>
+                        <td class="ai-solution">10秒更新</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 数据统计 -->
+        <div class="statistics">
+            <h2>📊 核心数据表现</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">成本节省</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99%</div>
+                    <div class="stat-label">时间节省</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">80%</div>
+                    <div class="stat-label">退货率降低</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10秒</div>
+                    <div class="stat-label">即时预览</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 案例展示 -->
+        <div class="cases-section" id="cases">
+            <h2>🎯 真实案例展示</h2>
+            <p class="cases-intro">
+                以下是5个真实产品的多场景预览案例，每个产品展示3种不同的场景应用效果，
+                帮助客户直观了解产品在不同空间的实际表现。
+            </p>
+
+            <!-- 案例1：红金波斯复古地毯 -->
+            <div class="case-item">
+                <div class="case-header">
+                    <h3>案例1：红金波斯复古地毯</h3>
+                    <p>奢华古典风格，适合高端场所和传统装修风格</p>
+                </div>
+                <div class="case-content">
+                    <p><strong>产品特点：</strong>红金配色，波斯传统图案，复古奢华</p>
+                    <p><strong>适用场景：</strong>古典书房、中式客厅、欧式客厅、极简办公室、卧室、豪华酒店大堂等</p>
+                    <div class="image-grid">
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/kTltOoR2?cache_control=3600" alt="红金波斯地毯-场景组1">
+                            <div class="image-label">场景组1：巴洛克宫殿等高端场景</div>
+                        </div>
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/pUvhVGtI?cache_control=3600" alt="红金波斯地毯-场景组2">
+                            <div class="image-label">场景组2：当代博物馆等文化空间</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 案例2：田园小碎花墙纸 -->
+            <div class="case-item">
+                <div class="case-header">
+                    <h3>案例2：田园小碎花墙纸</h3>
+                    <p>清新自然风格，适合温馨家居和休闲空间</p>
+                </div>
+                <div class="case-content">
+                    <p><strong>产品特点：</strong>小碎花图案，田园风格，清新淡雅</p>
+                    <p><strong>适用场景：</strong>卧室主墙、餐厅、儿童房、书房、入户玄关、阳台等</p>
+                    <div class="image-grid">
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/HjB46teJ?cache_control=3600" alt="田园小碎花墙纸-场景组1">
+                            <div class="image-label">场景组1：花园阳光房等休闲空间</div>
+                        </div>
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/fUo6VTp6?cache_control=3600" alt="田园小碎花墙纸-场景组2">
+                            <div class="image-label">场景组2：手工作坊等功能空间</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 案例3：白色金纹大理石地砖 -->
+            <div class="case-item">
+                <div class="case-header">
+                    <h3>案例3：白色金纹大理石地砖</h3>
+                    <p>现代奢华风格，适合高端住宅和商业空间</p>
+                </div>
+                <div class="case-content">
+                    <p><strong>产品特点：</strong>白色底色，金色纹理，大理石质感，高端大气</p>
+                    <p><strong>适用场景：</strong>客厅地面、厨房地面、卫生间地面、阳台地面、入户玄关、餐厅地面等</p>
+                    <div class="image-grid">
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/9xenosnX?cache_control=3600" alt="白色大理石地砖-场景组1">
+                            <div class="image-label">场景组1：酒店大堂等高端空间</div>
+                        </div>
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/waXTLlVI?cache_control=3600" alt="白色大理石地砖-场景组2">
+                            <div class="image-label">场景组2：顶层公寓等豪华空间</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 案例4：蓝金几何现代地毯 -->
+            <div class="case-item">
+                <div class="case-header">
+                    <h3>案例4：蓝金几何现代地毯</h3>
+                    <p>现代时尚风格，适合都市年轻人和创意空间</p>
+                </div>
+                <div class="case-content">
+                    <p><strong>产品特点：</strong>蓝金配色，几何图案，现代简约</p>
+                    <p><strong>适用场景：</strong>北欧风客厅、现代客厅、工业风阁楼、奢华公寓等</p>
+                    <div class="image-grid">
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/hSRGkMIN?cache_control=3600" alt="蓝金几何地毯-场景组1">
+                            <div class="image-label">场景组1：科技公司等办公空间</div>
+                        </div>
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/8bAT2FWp?cache_control=3600" alt="蓝金几何地毯-场景组2">
+                            <div class="image-label">场景组2：设计工作室等创意空间</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 案例5：灰色几何墙纸 -->
+            <div class="case-item">
+                <div class="case-header">
+                    <h3>案例5：灰色几何墙纸</h3>
+                    <p>极简现代风格，适合现代简约和办公空间</p>
+                </div>
+                <div class="case-content">
+                    <p><strong>产品特点：</strong>灰色调，几何图案，现代极简</p>
+                    <p><strong>适用场景：</strong>现代客厅、极简卧室、办公室、会客厅、走廊等</p>
+                    <div class="image-grid">
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/WbkOFM39?cache_control=3600" alt="灰色几何墙纸-场景组1">
+                            <div class="image-label">场景组1：极简卧室等家居空间</div>
+                        </div>
+                        <div class="image-wrapper" onclick="openModal(this)">
+                            <img src="https://www.genspark.ai/api/files/s/4hjzeLdn?cache_control=3600" alt="灰色几何墙纸-场景组2">
+                            <div class="image-label">场景组2：办公空间等商业空间</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 商业价值 -->
+        <div class="business-value">
+            <h2>💎 核心商业价值</h2>
+            <div class="value-grid">
+                <div class="value-item">
+                    <div class="value-icon">⚡</div>
+                    <h3>加速销售转化</h3>
+                    <p>客户10秒看到真实效果，购买决策更快，转化率提升60%以上</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">💰</div>
+                    <h3>降低运营成本</h3>
+                    <p>无需搭建实体场景，节省99%展示成本，资金周转更灵活</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">📉</div>
+                    <h3>减少退货损失</h3>
+                    <p>客户提前看到效果，退货率从30%降至8%，大幅减少损失</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🌍</div>
+                    <h3>支持远程销售</h3>
+                    <p>突破地域限制，线上客户也能获得沉浸式体验，拓展市场边界</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">🚀</div>
+                    <h3>快速响应市场</h3>
+                    <p>新品上市10秒生成场景图，快速测试市场反应，抢占先机</p>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">♻️</div>
+                    <h3>无限场景复用</h3>
+                    <p>一次投入，无限场景，所有产品都能展示，边际成本接近零</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer">
+            <p>© 2026 AI多场景铺装预览解决方案 | 革命性解决装修行业痛点</p>
+            <p style="margin-top: 15px; opacity: 0.8;">让每一个20cm×20cm的样品，都能展现出无限可能</p>
+        </div>
+    </div>
+
+    <!-- 图片放大模态框 -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <img id="modalImage" src="" alt="放大图片">
+    </div>
+
+    <script>
+        // 图片点击放大功能
+        function openModal(element) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const img = element.querySelector('img');
+            
+            modal.classList.add('active');
+            modalImg.src = img.src;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+        }
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

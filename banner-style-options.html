@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banner排版方案选择</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .intro {
+            text-align: center;
+            color: #888;
+            margin-bottom: 60px;
+            font-size: 18px;
+        }
+        
+        .options-grid {
+            display: grid;
+            gap: 40px;
+        }
+        
+        .option {
+            background: #1a1a1a;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid #2a2a2a;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+        
+        .option-header {
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .option-title {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .option-desc {
+            color: #888;
+            font-size: 16px;
+        }
+        
+        .option-preview {
+            padding: 40px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            position: relative;
+        }
+        
+        .option-features {
+            padding: 30px;
+            background: #1a1a1a;
+        }
+        
+        .option-features h4 {
+            margin-bottom: 15px;
+            color: #667eea;
+        }
+        
+        .option-features ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .option-features li {
+            padding: 8px 0;
+            color: #ccc;
+        }
+        
+        .option-features li::before {
+            content: "✓ ";
+            color: #4ade80;
+            margin-right: 10px;
+        }
+        
+        .choose-btn {
+            display: block;
+            width: calc(100% - 60px);
+            margin: 0 30px 30px 30px;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .choose-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* 方案1：极简左对齐 */
+        .style1-card {
+            max-width: 500px;
+            text-align: left;
+        }
+        
+        .style1-card .tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .style1-card h2 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+        
+        .style1-card p {
+            font-size: 18px;
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .style1-card .stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .style1-card .stat-item {
+            border-left: 3px solid #667eea;
+            padding-left: 15px;
+        }
+        
+        .style1-card .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+        
+        .style1-card .stat-label {
+            font-size: 14px;
+            color: #888;
+        }
+        
+        .style1-card .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: white;
+            color: #000;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* 方案2：居中大标题 */
+        .style2-card {
+            text-align: center;
+            max-width: 700px;
+        }
+        
+        .style2-card .tag {
+            display: inline-block;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            font-size: 14px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        .style2-card h2 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            font-weight: 900;
+        }
+        
+        .style2-card p {
+            font-size: 20px;
+            color: #aaa;
+            margin-bottom: 40px;
+        }
+        
+        .style2-card .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+        
+        .style2-card .stat-item {
+            text-align: center;
+        }
+        
+        .style2-card .stat-value {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .style2-card .stat-label {
+            font-size: 14px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .style2-card .cta {
+            display: inline-block;
+            padding: 18px 40px;
+            background: white;
+            color: #000;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        /* 方案3：分栏布局 */
+        .style3-card {
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .style3-left .tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.5);
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+        
+        .style3-left h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .style3-left p {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .style3-left .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .style3-right {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .style3-stat {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .style3-stat .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .style3-stat .label {
+            font-size: 13px;
+            color: #888;
+        }
+        
+        /* 方案4：卡片叠加 */
+        .style4-container {
+            position: relative;
+            max-width: 600px;
+        }
+        
+        .style4-card {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .style4-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        .style4-card .tag {
+            display: inline-block;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 15px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .style4-card h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .style4-card p {
+            font-size: 16px;
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .style4-stats {
+            display: flex;
+            gap: 30px;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .style4-stats .stat {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .style4-stats .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .style4-stats .label {
+            font-size: 12px;
+            color: #888;
+            text-transform: uppercase;
+        }
+        
+        .style4-card .cta {
+            display: inline-block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 选择您喜欢的Banner排版</h1>
+        <p class="intro">我为您准备了4种精美的排版方案，点击"选择此方案"即可应用</p>
+        
+        <div class="options-grid">
+            
+            <!-- 方案1：极简左对齐 -->
+            <div class="option">
+                <div class="option-header">
+                    <h3 class="option-title">方案1：极简左对齐</h3>
+                    <p class="option-desc">现代简约风格，信息清晰易读，适合专业展示</p>
+                </div>
+                <div class="option-preview">
+                    <div class="style1-card">
+                        <span class="tag">商业项目 · 电商详情页</span>
+                        <h2>恒林·孤勇者<br>人体工学椅</h2>
+                        <p>让办公椅讲故事，转化率提升60%</p>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span class="stat-value">+60%</span>
+                                <span class="stat-label">转化率</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">+180%</span>
+                                <span class="stat-label">停留时长</span>
+                            </div>
+                        </div>
+                        <a href="#" class="cta">查看案例 →</a>
+                    </div>
+                </div>
+                <div class="option-features">
+                    <h4>特点：</h4>
+                    <ul>
+                        <li>左对齐排版，视觉流畅</li>
+                        <li>数据可视化展示清晰</li>
+                        <li>白色按钮突出醒目</li>
+                        <li>适合专业商务场景</li>
+                    </ul>
+                </div>
+                <a href="#" class="choose-btn" onclick="alert('方案1：极简左对齐\n\n我将为您应用此方案！'); return false;">✓ 选择此方案</a>
+            </div>
+            
+            <!-- 方案2：居中大标题 -->
+            <div class="option">
+                <div class="option-header">
+                    <h3 class="option-title">方案2：居中大标题</h3>
+                    <p class="option-desc">震撼视觉冲击力，适合品牌展示和作品集</p>
+                </div>
+                <div class="option-preview">
+                    <div class="style2-card">
+                        <span class="tag">商业项目·电商详情页</span>
+                        <h2>恒林·孤勇者</h2>
+                        <p>让办公椅讲故事，转化率提升60%</p>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span class="stat-value">+60%</span>
+                                <span class="stat-label">转化率</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-value">+180%</span>
+                                <span class="stat-label">停留时长</span>
+                            </div>
+                        </div>
+                        <a href="#" class="cta">查看完整案例</a>
+                    </div>
+                </div>
+                <div class="option-features">
+                    <h4>特点：</h4>
+                    <ul>
+                        <li>居中对称，视觉平衡</li>
+                        <li>超大标题，震撼力强</li>
+                        <li>渐变数据，高级感足</li>
+                        <li>适合作品集展示</li>
+                    </ul>
+                </div>
+                <a href="#" class="choose-btn" onclick="alert('方案2：居中大标题\n\n我将为您应用此方案！'); return false;">✓ 选择此方案</a>
+            </div>
+            
+            <!-- 方案3：分栏布局 -->
+            <div class="option">
+                <div class="option-header">
+                    <h3 class="option-title">方案3：分栏布局</h3>
+                    <p class="option-desc">左右分栏设计，信息层次分明，现代感十足</p>
+                </div>
+                <div class="option-preview">
+                    <div class="style3-card">
+                        <div class="style3-left">
+                            <span class="tag">商业项目·电商详情页</span>
+                            <h2>恒林·孤勇者人体工学椅</h2>
+                            <p>让办公椅讲故事，用数据说话，转化率提升60%</p>
+                            <a href="#" class="cta">查看案例 →</a>
+                        </div>
+                        <div class="style3-right">
+                            <div class="style3-stat">
+                                <span class="value">+60%</span>
+                                <span class="label">转化率提升</span>
+                            </div>
+                            <div class="style3-stat">
+                                <span class="value">+180%</span>
+                                <span class="label">停留时长</span>
+                            </div>
+                            <div class="style3-stat">
+                                <span class="value">200+</span>
+                                <span class="label">用户好评</span>
+                            </div>
+                            <div class="style3-stat">
+                                <span class="value">3天</span>
+                                <span class="label">完成周期</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="option-features">
+                    <h4>特点：</h4>
+                    <ul>
+                        <li>左右分栏，信息丰富</li>
+                        <li>数据卡片式展示</li>
+                        <li>层次分明，易于阅读</li>
+                        <li>适合数据较多的项目</li>
+                    </ul>
+                </div>
+                <a href="#" class="choose-btn" onclick="alert('方案3：分栏布局\n\n我将为您应用此方案！'); return false;">✓ 选择此方案</a>
+            </div>
+            
+            <!-- 方案4：卡片叠加 -->
+            <div class="option">
+                <div class="option-header">
+                    <h3 class="option-title">方案4：卡片叠加</h3>
+                    <p class="option-desc">玻璃拟态设计，科技感强，适合高端项目展示</p>
+                </div>
+                <div class="option-preview">
+                    <div class="style4-container">
+                        <div class="style4-card">
+                            <span class="tag">商业项目·电商详情页</span>
+                            <h2>恒林·孤勇者人体工学椅</h2>
+                            <p>让办公椅讲故事，转化率提升60%</p>
+                            <div class="style4-stats">
+                                <div class="stat">
+                                    <span class="value">+60%</span>
+                                    <span class="label">转化率</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="value">+180%</span>
+                                    <span class="label">停留时长</span>
+                                </div>
+                            </div>
+                            <a href="#" class="cta">查看完整案例</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="option-features">
+                    <h4>特点：</h4>
+                    <ul>
+                        <li>玻璃拟态毛玻璃效果</li>
+                        <li>渐变边框，科技感强</li>
+                        <li>信息分区明确</li>
+                        <li>适合高端品牌展示</li>
+                    </ul>
+                </div>
+                <a href="#" class="choose-btn" onclick="alert('方案4：卡片叠加\n\n我将为您应用此方案！'); return false;">✓ 选择此方案</a>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

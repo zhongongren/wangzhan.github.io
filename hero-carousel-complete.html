@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero 完整内容轮播示例</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/hero-carousel.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Hero 完整内容轮播系统 -->
+    <div class="hero-carousel-wrapper">
+        
+        <!-- ==================== Slide 1: 个人展示（原Hero内容） ==================== -->
+        <div class="hero-carousel-slide active">
+            <section class="hero hero-magazine hero-entrance">
+                <!-- 动态背景 + 冲击装饰 -->
+                <div class="hero-bg">
+                    <div class="bg-shape shape-1"></div>
+                    <div class="bg-shape shape-2"></div>
+                    <div style="position: absolute; top: 15%; right: 10%; font-size: 20rem; font-weight: 900; color: rgba(255, 107, 53, 0.03); line-height: 1; pointer-events: none; z-index: 0;">3D</div>
+                    <div style="position: absolute; top: 20%; left: 15%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(40px); animation: pulse 4s ease-in-out infinite;"></div>
+                    <div style="position: absolute; bottom: 30%; right: 20%; width: 150px; height: 150px; background: radial-gradient(circle, rgba(255, 140, 90, 0.1) 0%, transparent 70%); border-radius: 50%; filter: blur(30px); animation: pulse 3s ease-in-out infinite 1s;"></div>
+                </div>
+
+                <div class="hero-magazine-container">
+                    <!-- 顶部状态栏 -->
+                    <div class="hero-status animate-on-scroll hero-status-entrance">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Open to Opportunities · 开放全职机会 / 商业合作</span>
+                        <span class="status-line"></span>
+                    </div>
+
+                    <!-- 主内容区 -->
+                    <div class="hero-main-content">
+                        <div class="hero-title-section">
+                            <h1 class="hero-mega-title animate-on-scroll hero-title-entrance">
+                                <span class="title-line" style="position: relative;">
+                                    三维渲染 &
+                                    <span style="position: absolute; top: -10px; right: -30px; font-size: 0.3em; color: #FF6B35; opacity: 0.6; font-weight: 900;">3D</span>
+                                </span>
+                                <span class="title-line" style="position: relative;">
+                                    电商视觉设计师
+                                    <span style="position: absolute; bottom: -5px; right: 0; font-size: 0.25em; color: rgba(255,255,255,0.4); letter-spacing: 0.2em; font-weight: 500;">VISUAL DESIGNER</span>
+                                </span>
+                            </h1>
+                            
+                            <div class="hero-subtitle animate-on-scroll" style="position: relative;">
+                                <div style="position: absolute; left: 0; top: 50%; width: 4px; height: 60%; background: linear-gradient(180deg, #FF6B35, transparent); transform: translateY(-50%);"></div>
+                                <p class="subtitle-main" style="font-size: 1.2rem; font-weight: 500; line-height: 1.8; color: rgba(255,255,255,0.9); padding-left: 20px;">
+                                    <span style="color: #FF6B35; font-weight: 600;">产品级</span>3D渲染 · 
+                                    <span style="color: #FF6B35; font-weight: 600;">电商</span>详情页 · 
+                                    <span style="color: #FF6B35; font-weight: 600;">AI</span>模特生成
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="hero-portrait-magazine animate-on-scroll hero-portrait-entrance">
+                            <div class="portrait-frame">
+                                <img src="images/hero-magazine-b-nobg.png" alt="Designer" class="portrait-magazine-img">
+                                <div class="portrait-accent"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hero-cta-section animate-on-scroll" style="text-align: center; margin-top: 50px; position: relative; z-index: 100;">
+                        <div class="hero-cta-entrance" style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; padding: 20px 0; position: relative;">
+                            <a href="portfolio.html" class="btn-hero-primary" style="padding: 16px 40px; font-size: 1rem; font-weight: 700; box-shadow: 0 10px 40px rgba(255, 107, 53, 0.4);">
+                                <span>查看作品集</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="margin-left: 10px; vertical-align: middle;">
+                                    <path d="M4 10h12m0 0l-4 4m4-4l-4-4" stroke="currentColor" stroke-width="2.5"/>
+                                </svg>
+                            </a>
+                            <a href="#contact" class="btn-hero-secondary" style="padding: 16px 40px; font-size: 1rem;">
+                                下载简历
+                            </a>
+                            <a href="#contact" class="btn-hero-ghost" style="padding: 16px 40px; font-size: 1rem;">
+                                联系合作
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="skill-tags-centered animate-on-scroll" style="text-align: center; margin-top: 35px;">
+                        <span class="skill-tag-item" style="opacity: 0.5; font-size: 0.9rem;">平面设计</span>
+                        <span class="skill-separator" style="opacity: 0.3;">·</span>
+                        <span class="skill-tag-item skill-highlight" style="font-size: 0.9rem;">三维渲染</span>
+                        <span class="skill-separator" style="opacity: 0.3;">·</span>
+                        <span class="skill-tag-item" style="opacity: 0.5; font-size: 0.9rem;">动画制作</span>
+                        <span class="skill-separator" style="opacity: 0.3;">·</span>
+                        <span class="skill-tag-item skill-highlight" style="font-size: 0.9rem;">AI工具流</span>
+                    </div>
+                </div>
+
+                <div class="hero-works-preview">
+                    <div class="works-preview-container">
+                        <div class="preview-label">
+                            <span class="label-text">精选作品</span>
+                        </div>
+                        <div class="preview-images">
+                            <div class="preview-item preview-item-1">
+                                <img src="images/jewelry-ai-cases.jpg" alt="AI珠宝首饰真实案例" class="preview-img">
+                                <div class="preview-overlay">
+                                    <span class="preview-count">真实案例 · 产品一致</span>
+                                </div>
+                            </div>
+                            <a href="#works" class="preview-cta">
+                                <span>查看全部</span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M3 8h10m0 0l-3 3m3-3l-3-3" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-scroll">
+                    <span class="scroll-text">向下查看更多作品</span>
+                    <div class="scroll-line"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== Slide 2: 玄星X2产品 ==================== -->
+        <div class="hero-carousel-slide">
+            <section class="hero hero-magazine">
+                <img src="https://www.genspark.ai/api/files/s/gkOIfl3R" alt="玄星X2" class="product-slide-bg">
+                <div class="product-slide-overlay"></div>
+                
+                <div class="product-slide-content">
+                    <span class="product-tag">商业项目 · 电商详情页</span>
+                    <h2 class="product-title">恒林 · 玄星X2<br>人体工学椅</h2>
+                    <p class="product-desc">六维调节系统，200kg承重能力，如坐云端的自由支撑体验</p>
+                    
+                    <div class="product-features">
+                        <div class="product-feature">
+                            <span class="feature-value">200kg</span>
+                            <span class="feature-label">最大承重</span>
+                        </div>
+                        <div class="product-feature">
+                            <span class="feature-value">6维</span>
+                            <span class="feature-label">自由调节</span>
+                        </div>
+                        <div class="product-feature">
+                            <span class="feature-value">16屏</span>
+                            <span class="feature-label">完整展示</span>
+                        </div>
+                    </div>
+                    
+                    <a href="玄星详情页_展示版.html" class="product-cta">
+                        查看完整详情页
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== Slide 3: 孤勇者产品 ==================== -->
+        <div class="hero-carousel-slide">
+            <section class="hero hero-magazine">
+                <img src="https://www.genspark.ai/api/files/s/3pNKQPop" alt="孤勇者办公椅" class="product-slide-bg">
+                <div class="product-slide-overlay"></div>
+                
+                <div class="product-slide-content">
+                    <span class="product-tag">商业项目 · 电商详情页</span>
+                    <h2 class="product-title">恒林 · 孤勇者<br>人体工学椅</h2>
+                    <p class="product-desc">让办公椅讲故事，转化率提升60%，用设计创造商业价值</p>
+                    
+                    <div class="product-features">
+                        <div class="product-feature">
+                            <span class="feature-value">+60%</span>
+                            <span class="feature-label">转化率提升</span>
+                        </div>
+                        <div class="product-feature">
+                            <span class="feature-value">+180%</span>
+                            <span class="feature-label">停留时长</span>
+                        </div>
+                        <div class="product-feature">
+                            <span class="feature-value">150°</span>
+                            <span class="feature-label">躺卧角度</span>
+                        </div>
+                    </div>
+                    
+                    <a href="lone-warrior-chair-detail.html" class="product-cta">
+                        查看完整案例
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== Slide 4: 功能展示 ==================== -->
+        <div class="hero-carousel-slide">
+            <section class="hero hero-magazine">
+                <img src="https://www.genspark.ai/api/files/s/xtCu0V4F" alt="功能展示" class="product-slide-bg">
+                <div class="product-slide-overlay"></div>
+                
+                <div class="product-slide-content">
+                    <span class="product-tag">设计亮点 · 功能可视化</span>
+                    <h2 class="product-title">多角度<br>功能展示设计</h2>
+                    <p class="product-desc">通过3D渲染和信息图设计，让复杂的人体工学特性一目了然</p>
+                    
+                    <div class="product-features">
+                        <div class="product-feature">
+                            <span class="feature-value">3D</span>
+                            <span class="feature-label">渲染制作</span>
+                        </div>
+                        <div class="product-feature">
+                            <span class="feature-value">多角度</span>
+                            <span class="feature-label">细节展示</span>
+                        </div>
+                        <div class="product-feature">
+                            <span class="feature-value">可视化</span>
+                            <span class="feature-label">信息设计</span>
+                        </div>
+                    </div>
+                    
+                    <a href="portfolio.html" class="product-cta">
+                        查看更多作品
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== Slide 5: 舒适体验 ==================== -->
+        <div class="hero-carousel-slide">
+            <section class="hero hero-magazine">
+                <img src="https://www.genspark.ai/api/files/s/72KrwFKP" alt="舒适体验" class="product-slide-bg">
+                <div class="product-slide-overlay"></div>
+                
+                <div class="product-slide-content">
+                    <span class="product-tag">用户体验 · 场景化设计</span>
+                    <h2 class="product-title">沉浸式<br>舒适体验展示</h2>
+                    <p class="product-desc">通过场景化设计语言，传达产品带来的舒适感受和使用体验</p>
+                    
+                    <div class="product-features">
+                        <div class="product-feature">
+                            <span class="feature-value">场景化</span>
+                            <span class="feature-label">设计语言</span>
+                        </div>
+                        <div class="product-feature">
+                            <span class="feature-value">沉浸式</span>
+                            <span class="feature-label">视觉体验</span>
+                        </div>
+                        <div class="product-feature">
+                            <span class="feature-value">情感化</span>
+                            <span class="feature-label">内容传达</span>
+                        </div>
+                    </div>
+                    
+                    <a href="portfolio.html" class="product-cta">
+                        探索全部案例
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- ==================== 轮播控制器 ==================== -->
+        
+        <!-- 左右箭头 -->
+        <button class="hero-carousel-control prev" aria-label="上一张">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+        <button class="hero-carousel-control next" aria-label="下一张">
+            <svg viewBox="0 0 24 24" fill="none">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+
+        <!-- 底部指示器 -->
+        <div class="hero-carousel-indicators">
+            <button class="hero-indicator active" aria-label="个人展示"></button>
+            <button class="hero-indicator" aria-label="玄星X2"></button>
+            <button class="hero-indicator" aria-label="孤勇者"></button>
+            <button class="hero-indicator" aria-label="功能展示"></button>
+            <button class="hero-indicator" aria-label="舒适体验"></button>
+        </div>
+
+        <!-- 暂停/播放按钮 -->
+        <button class="hero-carousel-pause" aria-label="暂停自动播放">
+            <svg class="pause-icon" viewBox="0 0 24 24">
+                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+            </svg>
+            <svg class="play-icon" viewBox="0 0 24 24" style="display: none;">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        </button>
+
+    </div>
+
+    <script src="js/hero-carousel.js"></script>
+</body>
+</html>

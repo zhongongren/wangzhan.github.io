@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>孤勇者 - 人体工学电脑椅设计 | 项目详情</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(180deg, #0a0e27 0%, #1a1f3a 50%, #0a0e27 100%);
+            color: #e0e6ed;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* 头部区域 */
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(138, 99, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            color: #a0aec0;
+            margin-bottom: 40px;
+        }
+
+        .tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .tag {
+            background: rgba(102, 126, 234, 0.15);
+            color: #8a99ff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        /* 数据指标 */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 80px;
+        }
+
+        .metric-card {
+            background: rgba(26, 32, 58, 0.6);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(138, 99, 255, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(138, 99, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(138, 99, 255, 0.2);
+        }
+
+        .metric-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            color: #a0aec0;
+            font-size: 0.95em;
+        }
+
+        /* 章节标题 */
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .section-number {
+            font-size: 1.2em;
+            color: #667eea;
+            font-weight: 700;
+            background: rgba(102, 126, 234, 0.15);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .section-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* 项目概览 - 问题与解决方案 */
+        .overview-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .overview-card {
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px solid;
+        }
+
+        .overview-card.problem {
+            background: rgba(244, 67, 54, 0.05);
+            border-color: rgba(244, 67, 54, 0.3);
+        }
+
+        .overview-card.solution {
+            background: rgba(76, 175, 80, 0.05);
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+
+        .overview-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .overview-card.problem h3 {
+            color: #ff6b6b;
+        }
+
+        .overview-card.solution h3 {
+            color: #51cf66;
+        }
+
+        .overview-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .overview-card li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #cbd5e0;
+            line-height: 1.8;
+        }
+
+        .overview-card.problem li::before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .overview-card.solution li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #51cf66;
+            font-weight: bold;
+        }
+
+        /* 产品特性卡片 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: rgba(26, 32, 58, 0.6);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(138, 99, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(138, 99, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(138, 99, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4em;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: #a0aec0;
+            line-height: 1.8;
+        }
+
+        /* 设计原则 */
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .principle-card {
+            background: rgba(26, 32, 58, 0.6);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(138, 99, 255, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .principle-card:hover {
+            border-color: rgba(138, 99, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(138, 99, 255, 0.2);
+        }
+
+        .principle-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .principle-card h3 {
+            font-size: 1.2em;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .principle-card p {
+            color: #a0aec0;
+            font-size: 0.9em;
+        }
+
+        /* UI设计展示 */
+        .ui-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .ui-item {
+            background: rgba(26, 32, 58, 0.6);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(138, 99, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .ui-item:hover {
+            transform: scale(1.05);
+            border-color: rgba(138, 99, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(138, 99, 255, 0.3);
+        }
+
+        .ui-item img {
+            width: 100%;
+            height: auto;
+            min-height: 200px;
+            object-fit: cover;
+            display: block;
+            background: rgba(138, 99, 255, 0.05);
+        }
+
+        .ui-item-label {
+            padding: 15px;
+            text-align: center;
+            color: #cbd5e0;
+            font-size: 0.9em;
+        }
+
+        /* 项目成果 */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+        }
+
+        .result-card {
+            background: rgba(26, 32, 58, 0.6);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(138, 99, 255, 0.2);
+            text-align: center;
+        }
+
+        .result-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .result-label {
+            color: #a0aec0;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+
+        .result-value {
+            font-size: 2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-value.positive {
+            background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .result-value.negative {
+            background: linear-gradient(135deg, #ff6b6b 0%, #fa5252 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 技术参数表 */
+        .specs-table {
+            background: rgba(26, 32, 58, 0.6);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid rgba(138, 99, 255, 0.2);
+        }
+
+        .specs-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table th,
+        .specs-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(138, 99, 255, 0.1);
+        }
+
+        .specs-table th {
+            color: #8a99ff;
+            font-weight: 600;
+        }
+
+        .specs-table td {
+            color: #cbd5e0;
+        }
+
+        .specs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+
+            .overview-cards,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 警告框样式 */
+        .highlight-box {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+
+        .highlight-box h4 {
+            color: #8a99ff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .highlight-box p {
+            color: #cbd5e0;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>孤勇者 · 人体工学电脑椅设计</h1>
+            <p class="subtitle">专为长时间办公场景打造的智能人体工学座椅解决方案</p>
+            <div class="tags">
+                <span class="tag">产品设计</span>
+                <span class="tag">人体工学</span>
+                <span class="tag">智能家居</span>
+                <span class="tag">办公家具</span>
+                <span class="tag">用户体验</span>
+            </div>
+        </header>
+
+        <!-- 核心数据 -->
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-value">1391项</div>
+                <div class="metric-label">椅业专利技术</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">25年+</div>
+                <div class="metric-label">产品畅销周期</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">20万+</div>
+                <div class="metric-label">服务消费者数量</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">200kg</div>
+                <div class="metric-label">最大承重能力</div>
+            </div>
+        </div>
+
+        <!-- 01 项目概览 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">01</span>
+                <h2 class="section-title">项目概览</h2>
+            </div>
+
+            <div class="highlight-box">
+                <h4>💡 核心设计挑战</h4>
+                <p>如何为长时间办公人群打造一款集舒适性、功能性、耐用性于一体的人体工学座椅，满足办公、娱乐、休息等多场景需求？</p>
+            </div>
+
+            <div class="overview-cards">
+                <div class="overview-card problem">
+                    <h3>🔴 存在问题</h3>
+                    <ul>
+                        <li>传统办公椅缺乏人体工学设计，长时间使用容易疲劳</li>
+                        <li>功能单一，无法满足办公、娱乐、午休等多场景需求</li>
+                        <li>调节机制复杂，用户操作体验差</li>
+                        <li>材质透气性差，夏季使用闷热不适</li>
+                        <li>产品质量参差不齐，耐用性无法保障</li>
+                    </ul>
+                </div>
+
+                <div class="overview-card solution">
+                    <h3>🟢 解决方案</h3>
+                    <ul>
+                        <li>基于东方人体数据进行人体工学优化设计</li>
+                        <li>三档调节机制（95°工作/135°娱乐/150°午休）</li>
+                        <li>360°双轴魔术扶手，多维度自由调节</li>
+                        <li>柔性植织网面，柔软高弹充分释压</li>
+                        <li>通过BIFMA测试和TUV4级安全认证</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 产品视觉展示 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">产品视觉展示</h2>
+            </div>
+
+            <div class="ui-showcase">
+                <div class="ui-item">
+                    <img src="https://www.genspark.ai/api/files/s/nyoTCBJg" alt="柔性植织网面">
+                    <div class="ui-item-label">柔性植织网面 - 柔软高弹释压</div>
+                </div>
+                <div class="ui-item">
+                    <img src="https://www.genspark.ai/api/files/s/XvSQePZ8" alt="加大软手托">
+                    <div class="ui-item-label">360°魔术扶手 - 多维调节</div>
+                </div>
+                <div class="ui-item">
+                    <img src="https://www.genspark.ai/api/files/s/YWLSVQr1" alt="三档场景切换">
+                    <div class="ui-item-label">三档场景切换 - 工作娱乐午休</div>
+                </div>
+                <div class="ui-item">
+                    <img src="https://www.genspark.ai/api/files/s/aIxWLN3o" alt="如意头枕">
+                    <div class="ui-item-label">如意头枕 - 调节自由</div>
+                </div>
+                <div class="ui-item">
+                    <img src="https://www.genspark.ai/api/files/s/xknJEvY4" alt="细节展示">
+                    <div class="ui-item-label">细节彰显能力 - 专业配件</div>
+                </div>
+                <div class="ui-item">
+                    <img src="https://www.genspark.ai/api/files/s/n6D2CN7T" alt="专利认证">
+                    <div class="ui-item-label">1391项专利 - 专业来源于严谨</div>
+                </div>
+                <div class="ui-item">
+                    <img src="https://www.genspark.ai/api/files/s/IUbgJv7L" alt="质量测试">
+                    <div class="ui-item-label">严苛测试 - 行业标杆标准</div>
+                </div>
+                <div class="ui-item">
+                    <img src="https://www.genspark.ai/api/files/s/GdWVHHLX" alt="东方坐感">
+                    <div class="ui-item-label">东方坐感 - 中国恒林</div>
+                </div>
+                <div class="ui-item">
+                    <img src="https://www.genspark.ai/api/files/s/AVx8s2jV" alt="产品参数">
+                    <div class="ui-item-label">产品参数 - 技术规格</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 核心功能特性 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">02</span>
+                <h2 class="section-title">核心功能特性</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🪑</span>
+                    <h3>柔性植织网面</h3>
+                    <p>柔软高弹有韧性，贴合承托充分释压。采用先进的编织工艺，确保长时间坐姿舒适透气，有效缓解腰背压力。</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🤲</span>
+                    <h3>360°双轴魔术扶手</h3>
+                    <p>加大软手托，多维更随心。扶手面360°旋转，8CM升降调节，4CM前后滑动，41°自由旋转，全方位支撑手臂。</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3>三档场景切换</h3>
+                    <p>95°专注工作、135°休闲娱乐、150°沉浸午休。一键切换，满足办公、娱乐、午休时刻的不同姿态需求。</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🧠</span>
+                    <h3>如意头枕调节自由</h3>
+                    <p>5CM升降调节、60°旋转调节、45°倾斜调节。精准贴合颈椎曲线，有效缓解颈部疲劳，提供全方位支撑。</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">⚙️</span>
+                    <h3>细节彰显能力</h3>
+                    <p>电镀轻音轮360°灵活旋转，全钢制五星脚稳固耐用，四级气压杆平稳升降，宽大伸缩脚踏（53mm调节）双脚定点支撑。</p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-icon">🏆</span>
+                    <h3>专业来源于严谨</h3>
+                    <p>1391项椅业专利技术加持。通过12万次椅背疲劳测试、100万次脚轮滑行测试、30万次座位倾仰测试、6万次扶手疲劳测试。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 设计原则 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">04</span>
+                <h2 class="section-title">设计原则</h2>
+            </div>
+
+            <div class="principles-grid">
+                <div class="principle-card">
+                    <span class="principle-icon">👤</span>
+                    <h3>以人为本</h3>
+                    <p>基于东方人体比例数据设计，确保每个细节都符合人体工学原理</p>
+                </div>
+
+                <div class="principle-card">
+                    <span class="principle-icon">🔧</span>
+                    <h3>灵活调节</h3>
+                    <p>多维度调节机制，满足不同身高体重用户的个性化需求</p>
+                </div>
+
+                <div class="principle-card">
+                    <span class="principle-icon">🛡️</span>
+                    <h3>安全耐用</h3>
+                    <p>通过国际权威认证测试，保障产品质量和使用寿命</p>
+                </div>
+
+                <div class="principle-card">
+                    <span class="principle-icon">✨</span>
+                    <h3>品质美学</h3>
+                    <p>极光银、星河金配色方案，科技感与优雅并存</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 产品参数 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">05</span>
+                <h2 class="section-title">产品技术参数</h2>
+            </div>
+
+            <div class="specs-table">
+                <table>
+                    <tr>
+                        <th>参数项</th>
+                        <th>规格说明</th>
+                    </tr>
+                    <tr>
+                        <td>产品名称</td>
+                        <td>孤勇者 人体工学电脑椅</td>
+                    </tr>
+                    <tr>
+                        <td>材质工艺</td>
+                        <td>柔性植织网面 + 全钢五星脚 + 四级气压杆</td>
+                    </tr>
+                    <tr>
+                        <td>调节功能</td>
+                        <td>四档位锁定调节 / 扶手8CM升降 / 头枕5CM升降</td>
+                    </tr>
+                    <tr>
+                        <td>配色方案</td>
+                        <td>极光银 / 星河金</td>
+                    </tr>
+                    <tr>
+                        <td>承重能力</td>
+                        <td>200kg</td>
+                    </tr>
+                    <tr>
+                        <td>安全认证</td>
+                        <td>BIFMA测试 / TUV 4级安全认证</td>
+                    </tr>
+                    <tr>
+                        <td>测量误差</td>
+                        <td>±1-3cm（手工测量）</td>
+                    </tr>
+                    <tr>
+                        <td>品牌历史</td>
+                        <td>中国恒林 / 创立于1998年 / 25年+产品畅销</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- 06 项目成果 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-number">06</span>
+                <h2 class="section-title">项目成果与影响</h2>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <span class="result-icon">📈</span>
+                    <div class="result-label">用户满意度</div>
+                    <div class="result-value positive">95%</div>
+                </div>
+
+                <div class="result-card">
+                    <span class="result-icon">👥</span>
+                    <div class="result-label">服务用户数</div>
+                    <div class="result-value positive">20万+</div>
+                </div>
+
+                <div class="result-card">
+                    <span class="result-icon">🏅</span>
+                    <div class="result-label">专利技术</div>
+                    <div class="result-value positive">1391项</div>
+                </div>
+
+                <div class="result-card">
+                    <span class="result-icon">⏱️</span>
+                    <div class="result-label">畅销周期</div>
+                    <div class="result-value positive">25年+</div>
+                </div>
+
+                <div class="result-card">
+                    <span class="result-icon">🔬</span>
+                    <div class="result-label">质量测试</div>
+                    <div class="result-value positive">100%</div>
+                </div>
+
+                <div class="result-card">
+                    <span class="result-icon">🌟</span>
+                    <div class="result-label">行业标杆</div>
+                    <div class="result-value positive">上市公司</div>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 40px;">
+                <h4>🎯 项目总结</h4>
+                <p>"孤勇者"人体工学电脑椅项目，通过深入的用户研究和创新的工程设计，成功打造了一款集舒适性、功能性、耐用性于一体的办公座椅产品。产品上市后获得市场高度认可，成为行业标杆产品。项目充分体现了"东方坐感"设计理念，以及对用户体验的极致追求。</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

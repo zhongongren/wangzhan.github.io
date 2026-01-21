@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>沉浸式产品轮播Banner - 文案固定不动</title>
+    <link rel="stylesheet" href="css/carousel-banner-immersive.css">
+</head>
+<body>
+    <!-- 全屏轮播 Banner -->
+    <section class="hero-carousel">
+        <!-- 轮播背景容器 - 只切换背景图 -->
+        <div class="carousel-container">
+            
+            <!-- 幻灯片 1 - 孤勇者办公椅 -->
+            <div class="carousel-slide active">
+                <div class="slide-background">
+                    <img src="https://aidisk.genspark.ai/hub/4b02c6c7-55ce-4cad-be67-48f2c54aa5d5/孤勇者_01.jpg" alt="恒林孤勇者办公椅">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+
+            <!-- 幻灯片 2 - 玄星X2 -->
+            <div class="carousel-slide">
+                <div class="slide-background">
+                    <img src="https://aidisk.genspark.ai/hub/4b02c6c7-55ce-4cad-be67-48f2c54aa5d5/玄星_01.jpg" alt="恒林玄星X2人体工学椅">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+
+            <!-- 幻灯片 3 - 孤勇者功能展示 -->
+            <div class="carousel-slide">
+                <div class="slide-background">
+                    <img src="https://aidisk.genspark.ai/hub/4b02c6c7-55ce-4cad-be67-48f2c54aa5d5/孤勇者_03.jpg" alt="人体工学椅功能展示">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+
+            <!-- 幻灯片 4 - 玄星舒适体验 -->
+            <div class="carousel-slide">
+                <div class="slide-background">
+                    <img src="https://aidisk.genspark.ai/hub/4b02c6c7-55ce-4cad-be67-48f2c54aa5d5/玄星_05.jpg" alt="玄星X2舒适体验">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+
+            <!-- 幻灯片 5 - 个人形象展示 -->
+            <div class="carousel-slide">
+                <div class="slide-background">
+                    <img src="https://www.genspark.ai/api/files/s/R1HkX2xL" alt="三维渲染&电商视觉设计师">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 固定文案层 - 始终显示在同一位置 -->
+        <div class="fixed-content">
+            <div class="project-card">
+                <span class="project-tag">商业项目 · 电商详情页</span>
+                <h2 class="project-title">恒林 · 人体工学椅<br>产品系列</h2>
+                <p class="project-desc">让办公椅讲故事，用设计创造价值</p>
+                <div class="project-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">+60%</span>
+                        <span class="stat-label">转化率提升</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">200kg</span>
+                        <span class="stat-label">最大承重</span>
+                    </div>
+                </div>
+                <a href="#projects" class="project-link">
+                    查看全部案例
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- 左右箭头控制 -->
+        <button class="carousel-control prev" aria-label="上一张">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M15 18l-6-6 6-6"/>
+            </svg>
+        </button>
+        <button class="carousel-control next" aria-label="下一张">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 18l6-6-6-6"/>
+            </svg>
+        </button>
+
+        <!-- 底部指示器 -->
+        <div class="carousel-indicators">
+            <button class="indicator active" data-slide="0" aria-label="幻灯片1"></button>
+            <button class="indicator" data-slide="1" aria-label="幻灯片2"></button>
+            <button class="indicator" data-slide="2" aria-label="幻灯片3"></button>
+            <button class="indicator" data-slide="3" aria-label="幻灯片4"></button>
+            <button class="indicator" data-slide="4" aria-label="幻灯片5"></button>
+        </div>
+
+        <!-- 暂停/播放按钮 -->
+        <button class="carousel-pause" aria-label="暂停自动播放">
+            <svg class="pause-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+            </svg>
+            <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        </button>
+    </section>
+
+    <!-- 向下滚动提示 -->
+    <div class="scroll-hint">
+        <div class="scroll-text">向下探索更多</div>
+        <div class="scroll-arrow">↓</div>
+    </div>
+
+    <!-- 下方继续您的原有内容 -->
+    <section id="projects" style="padding: 100px 20px; text-align: center; background: #0a0a0a; color: white;">
+        <h2 style="font-size: 48px; margin-bottom: 20px;">精选作品展示</h2>
+        <p style="font-size: 18px; color: #888; max-width: 600px; margin: 0 auto;">
+            专注于电商详情页设计、3D产品渲染、人体工学椅视觉设计
+        </p>
+    </section>
+
+    <script src="js/carousel-banner.js"></script>
+</body>
+</html>
